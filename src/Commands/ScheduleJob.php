@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Systruss\SchedTransactions\Commands;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use App\Services\Networks\MainnetExt;
 use Illuminate\Database\QueryException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -14,8 +13,9 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use App\Models\Senders;
-use App\Services\SchedTransaction;
+use Systruss\SchedTransactions\Services\Networks\MainnetExt;
+use Systruss\SchedTransactions\Models\Senders;
+use Systruss\SchedTransactionsp\Services\SchedTransaction;
 
 
 // https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json
