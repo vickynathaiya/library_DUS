@@ -13,6 +13,13 @@
             "Systruss\\SchedTransactions\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Systruss\\SchedTransactions\\Providers\\SchedTransactionsServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev",
     "require": {}
 }
