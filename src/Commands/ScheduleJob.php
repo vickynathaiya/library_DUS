@@ -15,7 +15,7 @@ use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
 use Systruss\SchedTransactions\Services\Networks\MainnetExt;
 use Systruss\SchedTransactions\Models\Senders;
-use Systruss\SchedTransactionsp\Services\SchedTransaction;
+use Systruss\SchedTransactions\Services\SchedTransaction;
 
 
 // https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json
