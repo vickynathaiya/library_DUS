@@ -20,6 +20,9 @@
             ]
         }
     },
+    "config": {
+        "discard-changes": true
+    },  
     "minimum-stability": "dev",
     "require": {}
 }
