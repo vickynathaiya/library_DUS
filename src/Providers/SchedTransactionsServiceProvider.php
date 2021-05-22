@@ -30,6 +30,6 @@ class SchedTransactionsServiceProvider extends ServiceProvider
             ]);
         }
         // $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        \Artisan::call('migrate', array('--path' => 'database/migrations','--force' => true)));
+        \Artisan::call('migrate', array('--path' => 'database/migrations','--force' => true));
     }
 }
