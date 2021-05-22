@@ -29,5 +29,7 @@ class SchedTransactionsServiceProvider extends ServiceProvider
                 ScheduleJob::class,
             ]);
         }
+        // $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        \Artisan::call('migrate', array('--path' => 'database/migrations'));
     }
 }
