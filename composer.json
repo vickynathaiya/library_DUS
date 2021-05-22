@@ -1,0 +1,18 @@
+{
+    "name": "systruss/schedtransactions",
+    "description": "transactions Scheduler",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "systruss",
+            "email": "systruss@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Systruss\\SchedTransactions\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
