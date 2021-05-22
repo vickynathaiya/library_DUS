@@ -3,7 +3,7 @@
 namespace Systruss\SchedTransactions\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Systruss\SchedTransactions\Commands\ScheduleJob;
+// use Systruss\SchedTransactions\Commands\ScheduleJob;
 
 class SchedTransactionsServiceProvider extends ServiceProvider
 {
@@ -26,7 +26,7 @@ class SchedTransactionsServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                ScheduleJob::class,
+                Commands\ScheduleJob::class,
             ]);
         }
     }
