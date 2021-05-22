@@ -23,6 +23,10 @@ class SchedTransactionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                ScheduleJob::class,
+            ]);
+        }
     }
 }
