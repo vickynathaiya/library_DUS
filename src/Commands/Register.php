@@ -105,7 +105,7 @@ class Register extends Command
 		}
 		//check if wallet address exist in sender table
 		$sender = Senders::all();
-		if ($sender) {
+		if ($sender->isEmpty()) {
 			//sender exist
 			$this->info("There is already a sender registered!");
 			return;
