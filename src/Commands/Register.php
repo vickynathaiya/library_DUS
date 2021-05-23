@@ -9,6 +9,7 @@ use ArkEcosystem\Crypto\Identities\Address;
 use Systruss\SchedTransactions\Services\Networks\MainnetExt;
 use Systruss\SchedTransactions\Services\SchedTransaction;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Schema;
 use Systruss\SchedTransactions\Models\Senders;
 
 
