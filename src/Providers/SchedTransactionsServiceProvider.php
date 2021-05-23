@@ -32,5 +32,9 @@ class SchedTransactionsServiceProvider extends ServiceProvider
             ]);
         }
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->app->booted(function () {
+            $schedule = app(Schedule::class);
+            $schedule->command('crypto:schedule_job')->hourly();
+        });
     }
 }
