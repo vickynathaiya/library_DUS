@@ -96,7 +96,7 @@ class Register extends Command
 		// migrate senders table
 		$this->info("doing senders table migration");
 		\Artisan::call('migrate', array('--path' => 'database/migrations', '--force' => true));
-		var_dump(\Artisan::output);
+		var_dump(\Artisan::output());
 		$this->info("senders migration done");
 
 		//insert wallet into Senders Table
