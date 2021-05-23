@@ -5,7 +5,7 @@ namespace Systruss\SchedTransactions\Providers;
 use Illuminate\Support\ServiceProvider;
 use Systruss\SchedTransactions\Commands\ScheduleJob;
 use Systruss\SchedTransactions\Commands\Register;
-use Illuminate\Console\Scheduling\Schedule;
+
 
 class SchedTransactionsServiceProvider extends ServiceProvider
 {
@@ -33,9 +33,5 @@ class SchedTransactionsServiceProvider extends ServiceProvider
             ]);
         }
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        $this->app->booted(function () {
-            $schedule = app(Schedule::class);
-            $schedule->command('crypto:schedule_job')->hourly();
-        });
     }
 }

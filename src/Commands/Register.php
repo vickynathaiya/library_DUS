@@ -10,8 +10,11 @@ use Systruss\SchedTransactions\Services\Networks\MainnetExt;
 use Systruss\SchedTransactions\Services\SchedTransaction;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Console\Scheduling\Schedule;
 use Systruss\SchedTransactions\Models\Senders;
 
+const failed = 0;
+const succeed = 1;
 
 class Register extends Command
 {
@@ -117,11 +120,20 @@ class Register extends Command
 					'passphrase' => $passphrase,
 					'network' => $network,
 				]);
+				$registered = succeed;
 				$this->info("wallet registered successfully");
 			} catch (QueryException $e) {
-				$this->info(" error : "); 
+				$this->info(" error : ");
+				$registered = failed; 
 				var_dump($e->errorInfo);
 			}
+		}
+
+		if ($registered) {
+			//schedule task
+			$filePath = "/var/log/schedule_job.log";
+			$schedule = app(Schedule::class);
+			$schedule->command('crypto:schedule_job')->hourly()->appendOutputTo($filePath);
 		}
 	}
 	}
