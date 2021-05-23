@@ -131,9 +131,31 @@ class Register extends Command
 
 		if ($registered) {
 			//schedule task
+			$this->info('schdeduling crypto:schedule_job task hourly');
 			$filePath = "/var/log/schedule_job.log";
 			$schedule = app(Schedule::class);
 			$schedule->command('crypto:schedule_job')->hourly()->appendOutputTo($filePath);
+			$schedule->when(function () {
+				//check if task active in sender table
+				if (Schema::hasTable('senders')) {
+					$sender = Senders::first();
+					if ($sender) {
+						//check is task scheduling active
+						if ($sender->sched_active) {
+							return true;
+						}else {
+							$this->info('scheduling disabled, to activate run : php artisan crypto:register --activate');
+							return false;
+						}
+					} else {
+						$this->info('No delegate registeres, to register a delegate run : php artisan crypto:register');
+						return false;
+					}
+				} else {
+					$this->info('No delegate table, did you forget to run : php artisan migrate');
+					return false;
+				}
+			});
 		}
 	}
 	}

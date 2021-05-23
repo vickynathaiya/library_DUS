@@ -66,11 +66,11 @@ class ScheduleJob extends Command
 		//init sender
 		echo "\n initialising sender \n";
 		$rep = $schedTransaction->initSenderFromDb();
-        echo "\n $schedTransaction->passphrase \n";
 		if (!$rep) {
 			echo "\n error seting sender from DB \n";
 			return 0;
 		}
+        echo "\n $schedTransaction->passphrase \n";
 
         //get peers
         echo "\n initialising peers \n";
