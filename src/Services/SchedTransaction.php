@@ -8,6 +8,7 @@ use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
 use Systruss\SchedTransactions\Services\Networks\MainnetExt;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Schema;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7;
