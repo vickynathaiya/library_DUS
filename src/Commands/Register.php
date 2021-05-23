@@ -89,20 +89,19 @@ class Register extends Command
 
 
 	//check wallet validity with passphrase and network
-	$crypto_util = new SchedTransaction;
-	$valid = $crypto_util->checkSender($passphrase,$network);
+	$sched_tran = new SchedTransaction;
+	$valid = $sched_tran->checkSender($passphrase,$network);
 
 	if ($valid) {
-		// migrate senders table
-		$this->info("doing senders table migratio ");
-		\Artisan::call('migrate', array('--path' => '__DIR__/../database/migrations', '--force' => true));
-		var_dump(\Artisan::output());
-		$this->info("senders migration done");
-
 		//insert wallet into Senders Table
 		$main_net = new MainnetExt;
 		$wallet_address = Address::fromPassphrase($passphrase,$main_net);
 
+		//check if senders table exist
+		if (!Schema::hasTable('senders')) {
+			$this->info('table senders does not exist, run php artisan migrate');
+			return;
+		}
 		//check if wallet address exist in sender table
 		$sender = Senders::all();
 		if ($sender) {

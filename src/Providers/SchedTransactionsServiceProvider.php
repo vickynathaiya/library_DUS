@@ -31,6 +31,6 @@ class SchedTransactionsServiceProvider extends ServiceProvider
                 Register::class,
             ]);
         }
-        // $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 }
