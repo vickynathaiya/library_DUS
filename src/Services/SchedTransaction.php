@@ -76,7 +76,7 @@ class SchedTransaction
 			return;
 		}
 		$sender = Senders::first();
-		if (!$sender->isEmpty()) {
+		if ($sender) {
 			//sender exist
 			echo "\n sender exist \n";
 			$this->network = $sender->network;
