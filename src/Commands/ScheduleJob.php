@@ -118,7 +118,8 @@ class ScheduleJob extends Command
         }
         $this->info("transaction initialized successfully \n");
         echo "\n ready to run the folowing transactions : \n";
-        echo json_encode($schedTransaction->transactions );
+        echo json_encode($schedTransaction->transactions);
+        echo "\n";
 
         if (!$disabled) {
             //execute transactions
