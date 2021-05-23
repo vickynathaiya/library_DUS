@@ -27,6 +27,7 @@ class SchedTransactionsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ScheduleJob::class,
+                Register::class,
             ]);
         }
         // $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
