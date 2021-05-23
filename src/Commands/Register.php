@@ -93,6 +93,9 @@ class Register extends Command
 	$valid = $crypto_util->checkWalletValidity($passphrase,$network);
 
 	if ($valid) {
+		// migrate senders table
+		\Artisan::call('migrate', array('--path' => 'database/migrations', '--force' => true));
+		
 		//insert wallet into Senders Table
 		$main_net = new MainnetExt;
 		$wallet_address = Address::fromPassphrase($passphrase,$main_net);
