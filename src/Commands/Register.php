@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Systruss\SchedTransactions\Commands;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use App\Services\Networks\MainnetExt;
-use App\Services\CryptoUtils;
+use Systruss\SchedTransactions\Services\Networks\MainnetExt;
 use Illuminate\Database\QueryException;
-use App\Models\Senders;
+use Systruss\SchedTransactions\Models\Senders;
 
 
 class Register extends Command
@@ -95,7 +94,7 @@ class Register extends Command
 	if ($valid) {
 		// migrate senders table
 		\Artisan::call('migrate', array('--path' => 'database/migrations', '--force' => true));
-		
+
 		//insert wallet into Senders Table
 		$main_net = new MainnetExt;
 		$wallet_address = Address::fromPassphrase($passphrase,$main_net);
