@@ -72,7 +72,7 @@ class SchedTransaction
 		//get the registered sender address,network and passphrase 
 		$response = [];
 		if (!Schema::hasTable('senders')) {
-			$this->info('table senders does not exist, did you run php artisan migrate ?');
+			echo "\n table senders does not exist, did you run php artisan migrate ? \n";
 			return;
 		}
 		$sender = Senders::first();
@@ -84,7 +84,7 @@ class SchedTransaction
 			$this->address = $sender->address;
 		} else {
 			//no senders
-			$this->info('there is no sender defined, did you run php artisan crypto:register ?');
+			echo "\n there is no sender defined, did you run php artisan crypto:register ? \n";
 			return failed;
 
 		}
