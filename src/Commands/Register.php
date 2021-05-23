@@ -94,7 +94,9 @@ class Register extends Command
 
 	if ($valid) {
 		// migrate senders table
+		$this->info("doing senders table migration");
 		\Artisan::call('migrate', array('--path' => 'database/migrations', '--force' => true));
+		$this->info("senders migration done);
 
 		//insert wallet into Senders Table
 		$main_net = new MainnetExt;
