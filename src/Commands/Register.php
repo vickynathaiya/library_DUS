@@ -95,8 +95,7 @@ class Register extends Command
 	if ($valid) {
 		// migrate senders table
 		$this->info("doing senders table migratio ");
-		echo __DIR__;
-		\Artisan::call('migrate', array('--path' => 'database/migrations', '--force' => true));
+		\Artisan::call('migrate', array('--path' => '../database/migrations', '--force' => true));
 		var_dump(\Artisan::output());
 		$this->info("senders migration done");
 
