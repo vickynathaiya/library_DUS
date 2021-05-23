@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
 use Systruss\SchedTransactions\Services\Networks\MainnetExt;
+use Systruss\SchedTransactions\Services\SchedTransaction;
 use Illuminate\Database\QueryException;
 use Systruss\SchedTransactions\Models\Senders;
 
@@ -88,8 +89,8 @@ class Register extends Command
 
 
 	//check wallet validity with passphrase and network
-	$crypto_util = new CryptoUtils;
-	$valid = $crypto_util->checkWalletValidity($passphrase,$network);
+	$crypto_util = new SchedTransaction;
+	$valid = $crypto_util->checkSender($passphrase,$network);
 
 	if ($valid) {
 		// migrate senders table

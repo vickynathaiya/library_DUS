@@ -34,7 +34,7 @@ class SchedTransaction
 	public $nonce;
 	public $balance;
 	public $wallet_valid;
-	public $wallet_address;
+	public $address;
 	public $amount;
 	public $passphrase;
 	public $network;
@@ -45,6 +45,27 @@ class SchedTransaction
 	public $transactions;
 
 
+	public function checkSender($passphrase,$network)
+	{
+		//get the registered sender address,network and passphrase 
+			
+		$this->network = $network;
+		$this->passphrase = $passphrase;
+
+		$rep = $this->initPeers();
+		if ($rep) {
+			$rep = $this->checkSenderValidity();
+			if ($rep) {
+				return succeed;
+			}else{
+				return failed;
+			}
+		}else{
+			return failed;
+		}
+	}
+
+
 	public function initSenderFromDb()
 	{
 		//get the registered sender address,network and passphrase 
@@ -53,9 +74,6 @@ class SchedTransaction
 		if ($sender) {
 			//sender exist
 			echo "\n sender exist \n";
-			$this->wallet_address = $sender->address;
-			$this->network = $sender->network;
-			$this->passphrase = $sender->passphrase;
 			$this->network = $sender->network;
 			$this->passphrase = $sender->passphrase;
 			$this->address = $sender->address;
