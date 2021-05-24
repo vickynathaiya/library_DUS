@@ -12,7 +12,7 @@ class Cron extends Command
      *
      * @var string
      */
-    protected $signature = 'cron:transactions {action}';
+    protected $signature = 'crypto:cron {action}';
 
     /**
      * The console command description.
