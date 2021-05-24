@@ -135,8 +135,9 @@ class Register extends Command
 			$this->info('schdeduling crypto:schedule_job task hourly');
 			$filePath = "/var/log/schedule_job.log";
 			$schedule = app(Schedule::class);
-			$schedule->command('crypto:schedule_job')->hourly()->appendOutputTo($filePath);
-			$schedule->when(function () {
+			$sched_hourly = $schedule->command('crypto:schedule_job')->hourly();
+			$sched_hourly->appendOutputTo($filePath);
+			$sched_hourly->when(function () {
 				//check if task active in sender table
 				if (Schema::hasTable('senders')) {
 					$sender = Senders::first();
