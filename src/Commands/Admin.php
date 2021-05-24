@@ -70,10 +70,10 @@ class Admin extends Command
                 if (Schema::hasTable('senders')) {
                     $sender = Senders::first();
                     if ($sender) {
-                        Sthis->info("network : $sender->network");
-                        Sthis->info("address : $sender->address");
-                        Sthis->info("passphrase : $sender->passphrase");
-                        Sthis->info("sched_active : $sender->sched_active");
+                        Sthis->info("network : " . $sender->network);
+                        Sthis->info("address : " . $sender->address);
+                        Sthis->info("passphrase : " . $sender->passphrase);
+                        Sthis->info("sched_active : " . $sender->sched_active);
                     } else {
                         $this->info("no senders in DB");                        
                     }
@@ -82,7 +82,7 @@ class Admin extends Command
                 }                
                 break;
             default:
-                $this->info('usage : php artisan crypto:admin delete_sender/delete_table ');
+                $this->info('usage : php artisan crypto:admin delete_sender/delete_table/show_sender ');
                 $quit = 0;
             }
         return 0;
