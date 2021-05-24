@@ -58,17 +58,17 @@ class Register extends Command
 		echo "\n";
 		switch ($network) {
   			case "1":
-    				echo "you selected infi\n";
-				$network = 1;
+    			echo "you selected infi\n";
+				$network = 'infi';
 				$quit=1;
     				break;
   			case "2":
-    				echo "you selected Hedge\n";
-				$network = 2;
+    			echo "you selected Hedge\n";
+				$network = 'edge';
 				$quit=1;
     				break;
   			case "q":
-    				echo "you selected to quit\n";
+    			echo "you selected to quit\n";
 				$quit=1;
     				break;
   			default:
