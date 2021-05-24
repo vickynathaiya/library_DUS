@@ -54,7 +54,7 @@ class Cron extends Command
                         $sender->sched_active = false;
                         break;
                     default:
-                        $this->info('usage : php artisan cron:transactions stop/start ');
+                        $this->info('usage : php artisan crypto:cron stop/start ');
                         $quit = 0;
                 }
             } else {
