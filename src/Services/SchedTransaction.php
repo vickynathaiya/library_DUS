@@ -57,12 +57,12 @@ class SchedTransaction
 		if ($rep) {
 			$rep = $this->checkSenderValidity();
 			if ($rep) {
-				return succeed;
+				return true;
 			}else{
-				return failed;
+				return false;
 			}
 		}else{
-			return failed;
+			return false;
 		}
 	}
 
@@ -143,8 +143,7 @@ class SchedTransaction
 			$ip_add = $peer->ip;
 			$port = $peer->ports->{"@arkecosystem/core-wallet-api"};
 			$api_url = "http://$ip_add:$port/api".'/wallets/'.$wallet_address;
-			echo "\n $api_url \n";
-				
+							
 			//get isDelegate, isResigned, nonce and balance
 			try {
 				$client = new Client();
