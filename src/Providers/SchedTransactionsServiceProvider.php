@@ -5,6 +5,8 @@ namespace Systruss\SchedTransactions\Providers;
 use Illuminate\Support\ServiceProvider;
 use Systruss\SchedTransactions\Commands\ScheduleJob;
 use Systruss\SchedTransactions\Commands\Register;
+use Systruss\SchedTransactions\Commands\Admin;
+use Systruss\SchedTransactions\Commands\Cron;
 
 
 class SchedTransactionsServiceProvider extends ServiceProvider
