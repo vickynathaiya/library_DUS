@@ -1,6 +1,6 @@
 <?php
 
-namespace Systruss\SchedTransactions\Console\Commands;
+namespace Systruss\SchedTransactions\Commands;
 
 use Illuminate\Console\Command;
 use Systruss\SchedTransactions\Models\Senders;
