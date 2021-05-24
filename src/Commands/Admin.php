@@ -71,7 +71,7 @@ class Admin extends Command
                     $sender = Senders::first();
                     var_dump($sender);
                     if ($sender) {
-                        Sthis->info("network : " . $sender['network']);
+                        echo "\n network : $sender->network \n";
                         Sthis->info("address : " . $sender->address);
                         Sthis->info("passphrase : " . $sender->passphrase);
                         Sthis->info("sched_active : " . $sender->sched_active);
