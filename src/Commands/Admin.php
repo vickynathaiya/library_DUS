@@ -69,7 +69,6 @@ class Admin extends Command
             case "show_sender":
                 if (Schema::hasTable('senders')) {
                     $sender = Senders::first();
-                    var_dump($sender);
                     if ($sender) {
                         echo "\n network : $sender->network \n";
                         echo "\n address : $sender->address \n";
