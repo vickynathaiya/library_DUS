@@ -159,6 +159,8 @@ class Register extends Command
 				}
 			});
 		}
+	} else {
+		$this->info("this delegate is not valid")
 	}
 	}
 }
