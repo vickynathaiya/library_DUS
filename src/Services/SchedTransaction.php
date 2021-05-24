@@ -182,6 +182,7 @@ class SchedTransaction
 			}
 		}
 		
+		echo "\n wallt valid : $valid \n";
 		$this->wallet_valid = $valid;
 		$this->peer_ip = $ip_add;
 		$this->peer_port = $port;
