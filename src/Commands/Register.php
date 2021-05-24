@@ -58,17 +58,17 @@ class Register extends Command
 		echo "\n";
 		switch ($network) {
   			case "1":
-    			echo "you selected infi\n";
+    				echo "you selected infi\n";
 				$network = 'infi';
 				$quit=1;
     				break;
   			case "2":
-    			echo "you selected Hedge\n";
+    				echo "you selected Hedge\n";
 				$network = 'edge';
 				$quit=1;
     				break;
   			case "q":
-    			echo "you selected to quit\n";
+    				echo "you selected to quit\n";
 				$quit=1;
     				break;
   			default:
@@ -94,8 +94,12 @@ class Register extends Command
 
 	//check wallet validity with passphrase and network
 	$sched_tran = new SchedTransaction;
-	$valid = $sched_tran->checkSender($passphrase,$network);
+	$sched_tran->passphrase = $passphrase;
+	$sched_tran->network = $network;
+	$sched_tran->initPeers();
+	$valid = $sched_tran->checkSenderValidity();
 
+	echo "\n valid : $valid \n";
 	if ($valid) {
 		//insert wallet into Senders Table
 		$main_net = new MainnetExt;
@@ -129,7 +133,7 @@ class Register extends Command
 				var_dump($e->errorInfo);
 			}
 		}
-
+		
 		if ($registered) {
 			//schedule task
 			$this->info('schdeduling crypto:schedule_job task hourly');
@@ -160,7 +164,7 @@ class Register extends Command
 			});
 		}
 	} else {
-		$this->info("this delegate is not valid")
+		$this->info("sender is not valid");
 	}
 	}
 }
