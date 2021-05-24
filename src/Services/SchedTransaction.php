@@ -143,6 +143,7 @@ class SchedTransaction
 			$ip_add = $peer->ip;
 			$port = $peer->ports->{"@arkecosystem/core-wallet-api"};
 			$api_url = "http://$ip_add:$port/api".'/wallets/'.$wallet_address;
+			echo "\n $api_url \n";
 				
 			//get isDelegate, isResigned, nonce and balance
 			try {
@@ -158,12 +159,15 @@ class SchedTransaction
 					if ($isDelegate == 1) {
 						if ($isResigned == 1) {
 							break;
+							$valid = false;
 						}
 					} else {
+						$valid = false;
 						break;
+
 					}
 					// here isDelegate is True and isResigned is False
-					$valid = 1;
+					$valid = true;
 					break;
 				}
 			} catch (ClientException $e) {
@@ -172,7 +176,7 @@ class SchedTransaction
 					$status_code =  json_decode($e->getResponse()->getBody())->statusCode;
 					if ($status_code == "404") 
 					{
-						$valid = 0;
+						$valid = false;
 						break;
 					}
     			}
