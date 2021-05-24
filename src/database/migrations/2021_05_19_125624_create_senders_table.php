@@ -17,6 +17,7 @@ class CreateSendersTable extends Migration
             $table->id();
             $table->string('address');
             $table->string('passphrase');
+            $table->boolean('sched_active',false);
             $table->enum('network',['infi','edge']);
             $table->timestamps();
         });
