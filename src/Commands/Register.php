@@ -119,6 +119,7 @@ class Register extends Command
 					'address' => $wallet_address,
 					'passphrase' => $passphrase,
 					'network' => $network,
+					'sched_active' => false,
 				]);
 				$registered = succeed;
 				$this->info("wallet registered successfully");
