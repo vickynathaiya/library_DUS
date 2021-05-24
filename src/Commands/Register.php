@@ -99,7 +99,6 @@ class Register extends Command
 	$sched_tran->initPeers();
 	$valid = $sched_tran->checkSenderValidity();
 
-	echo "\n valid : $valid \n";
 	if ($valid) {
 		//insert wallet into Senders Table
 		$main_net = new MainnetExt;
