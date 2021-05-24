@@ -30,6 +30,9 @@ class SchedTransactionsServiceProvider extends ServiceProvider
             $this->commands([
                 ScheduleJob::class,
                 Register::class,
+                Admin::class,
+                Cron::class,
+
             ]);
         }
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
