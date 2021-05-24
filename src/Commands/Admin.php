@@ -69,8 +69,9 @@ class Admin extends Command
             case "show_sender":
                 if (Schema::hasTable('senders')) {
                     $sender = Senders::first();
+                    var_dump($sender);
                     if ($sender) {
-                        Sthis->info("network : " . $sender->network);
+                        Sthis->info("network : " . $sender['network']);
                         Sthis->info("address : " . $sender->address);
                         Sthis->info("passphrase : " . $sender->passphrase);
                         Sthis->info("sched_active : " . $sender->sched_active);
