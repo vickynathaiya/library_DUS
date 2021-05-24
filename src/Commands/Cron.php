@@ -3,6 +3,7 @@
 namespace Systruss\SchedTransactions\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Schema;
 use Systruss\SchedTransactions\Models\Senders;
 
 class Cron extends Command
