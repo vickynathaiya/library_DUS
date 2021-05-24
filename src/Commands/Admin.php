@@ -72,9 +72,9 @@ class Admin extends Command
                     var_dump($sender);
                     if ($sender) {
                         echo "\n network : $sender->network \n";
-                        Sthis->info("address : " . $sender->address);
-                        Sthis->info("passphrase : " . $sender->passphrase);
-                        Sthis->info("sched_active : " . $sender->sched_active);
+                        echo "\n address : $sender->address \n";
+                        echo "\n passphrase : $sender->passphrase \n";
+                        echo "\n sched_active : $sender->sched_active \n";
                     } else {
                         $this->info("no senders in DB");                        
                     }
