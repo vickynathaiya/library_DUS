@@ -5,7 +5,7 @@ namespace Systruss\SchedTransactions\Commands;
 use Illuminate\Console\Command;
 use Systruss\SchedTransactions\Models\Senders;
 
-class cron extends Command
+class Cron extends Command
 {
     /**
      * The name and signature of the console command.
