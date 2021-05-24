@@ -66,6 +66,21 @@ class Admin extends Command
                     $this->info("nothing to delete");
                 }     
                 break;
+            case "show_sender":
+                if (Schema::hasTable('senders')) {
+                    $sender = Senders::first();
+                    if ($sender) {
+                        Sthis->info("network : $sender->network");
+                        Sthis->info("address : $sender->address");
+                        Sthis->info("passphrase : $sender->passphrase");
+                        Sthis->info("sched_active : $sender->sched_active");
+                    } else {
+                        $this->info("no senders in DB");                        
+                    }
+                } else {
+                    $this->info("no senders table exist");
+                }                
+                break;
             default:
                 $this->info('usage : php artisan crypto:admin delete_sender/delete_table ');
                 $quit = 0;
