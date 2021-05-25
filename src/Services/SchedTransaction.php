@@ -21,13 +21,15 @@ use Systruss\SchedTransactions\Services\Server;
 
 const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";
 const api_voters_url = "https://api.infinitysolutions.io/api/delegates/024844fa4b301ae6f9c514c963c18540630f1755dcca02ea9e91bae4b11d3dd1f1/voters";
+const api_delegates_url ="https://api.hedge.infinitysolutions.io/api/delegates";
 
 const FEE = 101000;
+const VoterMinBalance = 1000000;
+const DelegateMinBalance = 1000000;
+const minBalance = 1000000;
 const MAIN_WALLET = "GL9RMRJ7RtANhuu66iq2ZGnP2J9yDWS3xe";
 const failed = 0;
 const succeed = 1;
-
-
 
 class SchedTransaction
 {
@@ -35,9 +37,10 @@ class SchedTransaction
 	public $nonce;
 	public $balance;
 	public $wallet_valid;
+	public $delegateAddress;
 	public $address;
 	public $amount;
-	public $passphrase;
+	public $delegatePassphrase;
 	public $network;
 	public $voters;
 	public $peer_ip;
@@ -51,7 +54,7 @@ class SchedTransaction
 		//get the registered sender address,network and passphrase 
 			
 		$this->network = $network;
-		$this->passphrase = $passphrase;
+		$this->passphrase = $delegatePassphrase;
 
 		$rep = $this->initPeers();
 		if ($rep) {
@@ -75,13 +78,13 @@ class SchedTransaction
 			echo "\n table senders does not exist, did you run php artisan migrate ? \n";
 			return;
 		}
-		$sender = Senders::first();
-		if ($sender) {
+		$delegate = Senders::first();
+		if ($delegate) {
 			//sender exist
 			echo "\n sender exist \n";
-			$this->network = $sender->network;
-			$this->passphrase = $sender->passphrase;
-			$this->address = $sender->address;
+			$this->delegate_network = $delegate->network;
+			$this->delegatePassphrase = $delegate->passphrase;
+			$this->delegateAddress = $delegate->address;
 		} else {
 			//no senders
 			echo "\n there is no sender defined, did you run php artisan crypto:register ? \n";
@@ -135,7 +138,7 @@ class SchedTransaction
 		
 		// Generate wallet address from passphrase
 		$main_net = MainnetExt::new();
-		$wallet_address = Address::fromPassphrase($this->passphrase,$main_net);
+		$wallet_address = Address::fromPassphrase($this->delegatePassphrase,$main_net);
 
 		foreach ($peer_list as $peer) 
 		{
@@ -236,6 +239,95 @@ class SchedTransaction
 		return succeed;
 	}
 
+	public function checkDelegateEligibility() 
+	{
+		$delegates = [];
+		$found = false;
+		// check if delegate balance is grater than the minimum required
+		if ($this->balance < min_balance) {
+			echo "\n insufficient balance \n";
+			return false;
+		}
+		// get list of delegate
+		$client = new Client();
+		$res = $client->get(api_delegates_url);
+		if ($data = $res->getBody()->getContents()) 
+		{
+			$data = json_decode($data);
+			$totalDelegates = $data->meta->totalCount;
+			if ($totalDelegates > 0) {
+				$listDelegates = $data->data;
+				foreach ($listDelegates as $delegate) {
+					if ($delegate->address == $this->delegateAddress) {
+						$rank = $delegate->rank;
+						$found = true;
+						break;
+					}
+				}
+				if ($found) {
+					if ($rank >= min_rank && $rank <= max_rank){
+						return true;
+					}else{
+						return false;
+					}
+				} else {
+					echo "\n delegate not found !!! \n";
+					return false;
+				}
+			} else {
+				echo "\n  number of delegate 0 !!! \n";
+				return false;
+			} 			
+		} else {
+				echo "\n no data returned from the api delagate url !!! \n";
+				return false;
+			}
+	}
+
+	public function setEligibleVoters() 
+	{
+		$eligibleVoters = [];
+		// get fees from api
+		$client = new Client();
+		$res = $client->get(api_voters_url);
+		if ($data = $res->getBody()->getContents()) 
+		{
+			$data = json_decode($data);
+			$totalVoters = $data->meta->totalCount;
+			if ($totalVoters > 0) {
+				$list_voters = $data->data;
+				foreach ($list_voters as $voter) {
+					if ($this->delegateAddress != $voter->address && $voter->balance >= VoterMinBalance) 
+					{
+						$this->eligibleVoters['address'] = $voter->address;
+						$this->eligibleVoters['balance'] = $voter->balance;
+					}
+				}
+			}
+		}
+		return succeed;
+	}
+	
+	public function calculatePortion() {
+		//with eligibleVoters 
+		//proportion (voter balance x 100) % sum of voters balance.
+		
+		$this->portionByVoter = [];
+		//perform sum of eligible voters balance
+		$totalVotersBalance = 0;
+		foreach ($eligibleVoters as $voter) {
+			$totalVotersBalance = $totalVotersBalance + $voter['balance'];
+		}
+
+		//perform portion for each voter
+		foreach ($eligibleVoters as $voter) {
+			$portion = ($voter->balance * 100) / $totalVotersBalance;
+			$this->portionByVoter = array('voter' => $voter->address, 'portion' => $portion);
+		}
+		return true;
+	}
+
+
 	public function buildTransaction()
 	{	
 		$transactions = [];
@@ -263,7 +355,7 @@ class SchedTransaction
 				}
 				$generated = $generated->withFee($this->fee);
 				$generated = $generated->withNonce($this->nonce);
-				$generated = $generated->sign($this->passphrase);
+				$generated = $generated->sign($this->delegatePassphrase);
 				$this->transactions = [ 'transactions' => [$generated->transaction->data] ];
 			} else {
 				// there is no voters

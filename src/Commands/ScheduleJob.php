@@ -61,7 +61,8 @@ class ScheduleJob extends Command
         $disabled = 1;
 		
 		//get wallet address and network from senders table
-		$schedTransaction = new SchedTransaction();
+		$delegate = new Delegate();
+        $delegate->initFromDB();
 
 		//init sender
 		echo "\n initialising sender \n";
