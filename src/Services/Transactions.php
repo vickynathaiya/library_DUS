@@ -149,7 +149,7 @@ class Transactions
 
 			// Generate transaction
 			var_dump($votersList->eligibleVoters);
-			if ($voterList->eligibleVoters)
+			if ($votersList->eligibleVoters)
 			{
 				$generated = MultiPaymentBuilder::new();
 				foreach ($voterList->eligibleVoters as $voter) {
