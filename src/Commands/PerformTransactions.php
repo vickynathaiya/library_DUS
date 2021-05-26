@@ -85,7 +85,7 @@ class PerformTransactions extends Command
         $this->info("initialising voters");
 		$voters = new voters();
         $voters = $voters->initEligibleVoters($delegate->address);
-		if (!$voters) {
+		if (!($voters->totalVoters > 0)) {
 			echo "\n error while initializing Eligible voters \n";
 			return false;
 		}
@@ -96,7 +96,7 @@ class PerformTransactions extends Command
         //build transactions
         echo "\n initializing transactions \n";
         $transactions = new Transactions();
-        $success = $transactions->buildTransactions();
+        $success = $transactions->buildTransactions($voters,$delegate);
         if (!$success) {
             echo "\n error while building transactions \n";
             return flase;

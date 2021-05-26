@@ -20,19 +20,21 @@ use Systruss\CryptoWallet\Services\Server;
 
 const api_voters_url = "https://api.infinitysolutions.io/api/delegates/024844fa4b301ae6f9c514c963c18540630f1755dcca02ea9e91bae4b11d3dd1f1/voters";
 
-const VoterMinBalance = 1000000;
-const DelegateMinBalance = 1000000;
-const minBalance = 1000000;
+const VoterMinBalance = 100000;
+const DelegateMinBalance = 100000;
+const minBalance = 100000;
 const MAIN_WALLET = "GL9RMRJ7RtANhuu66iq2ZGnP2J9yDWS3xe";
 		
 
 class Voters 
 {
 	public $eligibleVoters;
+	public $totalVoters;
 
 	public function initEligibleVoters($delegateAddress) 
 	{
 		$eligibleVoters = [];
+		$this->totalVoters = 0;
 		// get fees from api
 		$client = new Client();
 		$res = $client->get(api_voters_url);
