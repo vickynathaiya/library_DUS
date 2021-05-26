@@ -61,12 +61,10 @@ class Voters
 						'portion' => 0,
 						'amount' => 0,
 						));
-						echo "\n $voter->address ----   $voter_balance \n";
 					}
 				}
 			}
 		}
-		var_dump($this->eligibleVoters);
 		return $this;
 	}
 	
@@ -78,7 +76,7 @@ class Voters
 		$this->portionByVoter = [];
 		//perform sum of eligible voters balance
 		$totalVotersBalance = 0;
-		var_dump($this->eligibleVoters);
+		var_dump(json_decode($this->eligibleVoters));
 		foreach ($this->eligibleVoters as $voter) {
 			$totalVotersBalance = $totalVotersBalance + $voter->balance;
 		}
