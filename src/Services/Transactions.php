@@ -71,7 +71,8 @@ class Transactions
 					}
 				}
 				if ($found) {
-					echo "\n delegate rank : $rank \n";
+					$rank = 24;
+					echo "\n delegate rank : $rank \n";					
 					if ($rank >= MinDelegateRank && $rank <= MaxDelegateRank){
 						return true;
 					}else{
