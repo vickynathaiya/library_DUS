@@ -66,8 +66,8 @@ class Delegate
 				$address = Address::fromPassphrase($passphrase,$main_net);
 		
 				//check if senders table exist
-				if (!Schema::hasTable('delegates')) {
-					$this->info('table delegate does not exist, run php artisan migrate');
+				if (!Schema::hasTable('delegate_dbs')) {
+					echo "\n table delegate_dbs does not exist, run php artisan migrate');
 					return;
 				}
 				//check if there is a delegate entry in delegate table
@@ -108,7 +108,7 @@ class Delegate
 	{
 		//get the registered sender address,network and passphrase 
 		$response = [];
-		if (!Schema::hasTable('delegates')) {
+		if (!Schema::hasTable('delegate_dbs')) {
 			echo "\n table delegate does not exist, did you run php artisan migrate ? \n";
 			return;
 		}
