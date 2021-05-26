@@ -84,8 +84,8 @@ class PerformTransactions extends Command
         //init voters
         $this->info("initialising voters");
 		$voters = new voters();
-        $success = $voters->initEligibleVoters($delegate->address);
-		if (!$success) {
+        $voters = $voters->initEligibleVoters($delegate->address);
+		if (!$voters) {
 			echo "\n error while initializing Eligible voters \n";
 			return false;
 		}
