@@ -114,7 +114,7 @@ class Transactions
     {
             //schedule task
             echo "\n schdeduling crypto:perform_transactions task hourly \n";
-            $logFile = __DIR__ . "storage/logs/schedule_job.log";
+            $logFile = storage_path() . "/logs/schedule_job.log";
 			echo "\n $logFile \n";
             $schedule = app(Schedule::class);
             $schedule->command('crypto:perform_transactions')->hourly()->appendOutputTo($logFile);
