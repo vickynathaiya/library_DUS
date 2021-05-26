@@ -156,9 +156,8 @@ class Transactions
 			if ($eligibleVoters)
 			{
 				$generated = MultiPaymentBuilder::new();
-				foreach ($eligibleVoters as $voter_json) {
-					$voter = json_decode($voter_json);
-					$generated = $generated->add($voter->address, $voter->amount);
+				foreach ($eligibleVoters as $voter) {
+					$generated = $generated->add($voter['address'], $voter['amount']);
 				}
 				$generated = $generated->withFee($this->fee);
 				$generated = $generated->withNonce($this->nonce);
