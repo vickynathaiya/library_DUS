@@ -99,8 +99,8 @@ class Register extends Command
 			$this->info("Delegate registered Successfuly");
 
 			//initializing scheduler
-			$transactions = new Transactions();
-			$success = $transactions->initScheduler();
+			// $transactions = new Transactions();
+			// $success = $transactions->initScheduler();
 			if (!$success) {
 				$this->info("error while initialising scheduler");
 				return false;
