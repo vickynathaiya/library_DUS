@@ -65,12 +65,13 @@ class Transactions
 				$listDelegates = $data->data;
 				foreach ($listDelegates as $delegate_elem) {
 					if ($delegate_elem->address == $delegate->address) {
-						$rank = $delegate_elem->rank;
+						$rank = (int)$delegate_elem->rank;
 						$found = true;
 						break;
 					}
 				}
 				if ($found) {
+					echo "\n delegate rank : $rank \n";
 					if ($rank >= MinDelegateRank && $rank <= MaxDelegateRank){
 						return true;
 					}else{
