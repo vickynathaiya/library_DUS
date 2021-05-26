@@ -9,6 +9,7 @@ use ArkEcosystem\Crypto\Identities\Address;
 use Systruss\CryptoWallet\Services\Networks\MainnetExt;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Console\Scheduling\Schedule;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7;
