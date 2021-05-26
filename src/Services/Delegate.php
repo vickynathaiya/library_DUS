@@ -15,7 +15,7 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Systruss\CryptoWallet\Models\Delegate;
+use Systruss\CryptoWallet\Models\DelegateDb;
 use Systruss\CryptoWallet\Services\Server;
 
 
@@ -65,12 +65,12 @@ class Delegate
 				$address = Address::fromPassphrase($passphrase,$main_net);
 		
 				//check if senders table exist
-				if (!Schema::hasTable('delegate')) {
+				if (!Schema::hasTable('delegates')) {
 					$this->info('table delegate does not exist, run php artisan migrate');
 					return;
 				}
 				//check if there is a delegate entry in delegate table
-				$delegate = Delegate::all();
+				$delegate = DelegateDb::all();
 				if (!$delegate->isEmpty()) {
 					//delegate exist
 					$this->info("There is already a delegate registered!");
@@ -78,7 +78,7 @@ class Delegate
 				} else {
 					//create delegate
 					try {
-						$delegate = Delegate::create([
+						$delegate = DelegateDb::create([
 							'address' => $address,
 							'passphrase' => $passphrase,
 							'network' => $network,
@@ -106,11 +106,11 @@ class Delegate
 	{
 		//get the registered sender address,network and passphrase 
 		$response = [];
-		if (!Schema::hasTable('delegate')) {
+		if (!Schema::hasTable('delegates')) {
 			echo "\n table delegate does not exist, did you run php artisan migrate ? \n";
 			return;
 		}
-		$delegate = Delegate::first();
+		$delegate = DelegateDb::first();
 		if ($delegate) {
 			//sender exist
 			echo "\n delegate exist \n";
@@ -225,9 +225,4 @@ class Delegate
 		
 		return $valid;
 	}
-
-
-
-	
-	
 }
