@@ -21,12 +21,8 @@ use Systruss\CryptoWallet\Services\Server;
 
 
 const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";
-const api_voters_url = "https://api.infinitysolutions.io/api/delegates/024844fa4b301ae6f9c514c963c18540630f1755dcca02ea9e91bae4b11d3dd1f1/voters";
 const api_delegates_url ="https://api.hedge.infinitysolutions.io/api/delegates";
 
-const DelegateMinBalance = 1000000;
-const minBalance = 1000000;
-const MAIN_WALLET = "GL9RMRJ7RtANhuu66iq2ZGnP2J9yDWS3xe";
 const failed = 0;
 const succeed = 1;
 
