@@ -1,15 +1,15 @@
 <?php
 
-namespace Systruss\CryproWallet\Providers;
+namespace Systruss\CryptoWallet\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Systruss\CryproWallet\Commands\ScheduleJob;
-use Systruss\CryproWallet\Commands\Register;
-use Systruss\CryproWallet\Commands\Admin;
-use Systruss\CryproWallet\Commands\Cron;
+use Systruss\CryptoWallet\Commands\ScheduleJob;
+use Systruss\CryptoWallet\Commands\Register;
+use Systruss\CryptoWallet\Commands\Admin;
+use Systruss\CryptoWallet\Commands\Cron;
 
 
-class CryproWalletServiceProvider extends ServiceProvider
+class CryptoWalletServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

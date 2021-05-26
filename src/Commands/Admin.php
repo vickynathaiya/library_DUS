@@ -1,10 +1,10 @@
 <?php
 
-namespace Systruss\CryproWallet\Commands;
+namespace Systruss\CryptoWallet\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use Systruss\CryproWallet\Models\Senders;
+use Systruss\CryptoWallet\Models\Senders;
 
 class Admin extends Command
 {
