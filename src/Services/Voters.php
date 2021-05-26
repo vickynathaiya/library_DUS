@@ -76,8 +76,10 @@ class Voters
 		$this->portionByVoter = [];
 		//perform sum of eligible voters balance
 		$totalVotersBalance = 0;
-		var_dump(json_decode($this->eligibleVoters));
-		foreach ($this->eligibleVoters as $voter) {
+	
+		foreach ($this->eligibleVoters as $voter_json) {
+			$voter = json_decode($voter_json);
+			var_dump($voter);
 			$totalVotersBalance = $totalVotersBalance + $voter->balance;
 		}
 
