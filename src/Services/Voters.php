@@ -39,8 +39,8 @@ class Voters
 		if ($data = $res->getBody()->getContents()) 
 		{
 			$data = json_decode($data);
-			$totalVoters = $data->meta->totalCount;
-			if ($totalVoters > 0) {
+			$this->totalVoters = $data->meta->totalCount;
+			if ($this->totalVoters > 0) {
 				$list_voters = $data->data;
 				foreach ($list_voters as $voter) {
 					if ($delegateAddress != $voter->address && $voter->balance >= VoterMinBalance) 
@@ -53,7 +53,7 @@ class Voters
 				}
 			}
 		}
-		return true;
+		return $this;
 	}
 	
 	public function calculatePortion($delegateAmount) 
