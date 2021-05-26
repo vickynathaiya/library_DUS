@@ -69,6 +69,7 @@ class PerformTransactions extends Command
         }
 
         //check delegate validity
+        echo "\n perform : $delegate->address \n";
         $delegate = $delegate->checkDelegateValidity();
 
 		// Check Delegate  Vailidity
@@ -84,6 +85,7 @@ class PerformTransactions extends Command
         //init voters
         $this->info("initialising voters");
 		$voters = new voters();
+        echo "\n perform 2 : $delegate->address \n";
         $voters = $voters->initEligibleVoters($delegate->address);
 		if (!($voters->totalVoters > 0)) {
 			echo "\n error while initializing Eligible voters \n";
