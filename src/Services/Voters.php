@@ -85,7 +85,7 @@ class Voters
 		echo "\n total voter balance : $totalVotersBalance \n";
 
 		//perform portion for each voter
-		foreach ($this->eligibleVoters as $voter) {
+		foreach ($this->eligibleVoters as $voter_json) {
 			$voter = json_decode($voter_json);
 			$portion = ($voter->balance * 100) / $totalVotersBalance;
 			$voter->portion = $portion;
