@@ -143,6 +143,9 @@ class Transactions
 			echo "\n fee : $fee \n";
 			
             // calculate voters amount
+			echo "\n --------------------- \n";
+			var_dump($voters->eligibleVoters);
+			echo "\n --------------------- \n";
             $eligibleVoters = $voters->calculatePortion($delegate->balance);
 			
 			
