@@ -13,7 +13,7 @@ class CreateDelegatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('delegates', function (Blueprint $table) {
+        Schema::create('delegate_dbs', function (Blueprint $table) {
             $table->id();
             $table->string('address');
             $table->string('passphrase');
