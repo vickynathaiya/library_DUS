@@ -4,7 +4,7 @@ namespace Systruss\CryptoWallet\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use Systruss\CryptoWallet\Models\Senders;
+use Systruss\CryptoWallet\Models\DelegateDb;
 
 class Admin extends Command
 {
@@ -43,46 +43,46 @@ class Admin extends Command
         
         //check is task scheduling active
         switch ($action) {
-            case "delete_sender":
-                $this->info("deleting sender");
-                if (Schema::hasTable('senders')) {
-                    $sender = Senders::first();
-                    if ($sender) {
-                        Senders::truncate();
-                        $this->info("senders deleted"); 
+            case "delete_delegate":
+                $this->info("deleting delegate");
+                if (Schema::hasTable('delegates_dbs')) {
+                    $delegate = delegates::first();
+                    if ($delegate) {
+                        delegates::truncate();
+                        $this->info("delegate table deleted"); 
                     } else {
-                        $this->info("no senders in DB");                        
+                        $this->info("no delegate in DB");                        
                     }
                 } else {
-                    $this->info("no senders table exist");
+                    $this->info("no delegate table exist");
                 }                
                 break;
             case "delete_table":
-                if (Schema::hasTable('senders')) {
-                    Schema::drop('senders');
-                    DB::table('migrations')->where('migration',"2021_05_19_125624_create_senders_table")->delete();
-                    $this->info("senders table deleted"); 
+                if (Schema::hasTable('delegate_dbs')) {
+                    Schema::drop('delegate_dbs');
+                    DB::table('migrations')->where('migration',"2021_05_25_080651_create_delegate_dbs_table.php")->delete();
+                    $this->info("delegate table deleted"); 
                 } else {
                     $this->info("nothing to delete");
                 }     
                 break;
-            case "show_sender":
-                if (Schema::hasTable('senders')) {
-                    $sender = Senders::first();
-                    if ($sender) {
-                        echo "\n network : $sender->network \n";
-                        echo "\n address : $sender->address \n";
-                        echo "\n passphrase : $sender->passphrase \n";
-                        echo "\n sched_active : $sender->sched_active \n";
+            case "show_delegate":
+                if (Schema::hasTable('delegate_dbs')) {
+                    $delegate = DelegateDb::first();
+                    if ($delegate) {
+                        echo "\n network : $delegate->network \n";
+                        echo "\n address : $delegate->address \n";
+                        echo "\n passphrase : $delegate->passphrase \n";
+                        echo "\n sched_active : $delegate->sched_active \n";
                     } else {
-                        $this->info("no senders in DB");                        
+                        $this->info("no delegate in DB");                        
                     }
                 } else {
-                    $this->info("no senders table exist");
+                    $this->info("no delegate table exist");
                 }                
                 break;
             default:
-                $this->info('usage : php artisan crypto:admin delete_sender/delete_table/show_sender ');
+                $this->info('usage : php artisan crypto:admin delete_delegate/delete_table/show_delegate ');
                 $quit = 0;
             }
         return 0;
