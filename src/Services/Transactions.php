@@ -32,7 +32,7 @@ const MAIN_WALLET = "GL9RMRJ7RtANhuu66iq2ZGnP2J9yDWS3xe";
 const failed = 0;
 const succeed = 1;
 
-class Transaction
+class Transactions
 {
 	public $fee;
 	public $nonce;
