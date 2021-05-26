@@ -88,7 +88,7 @@ class Delegate
 						$registered = succeed;
 						echo "\n Delegate registered successfully \n";
 					} catch (QueryException $e) {
-						echo "\n error : \n");
+						echo "\n error : \n";
 						$registered = failed; 
 						var_dump($e->errorInfo);
 					}
