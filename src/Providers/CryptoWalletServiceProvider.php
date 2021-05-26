@@ -3,6 +3,7 @@
 namespace Systruss\CryptoWallet\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Console\Scheduling\Schedule;
 use Systruss\CryptoWallet\Commands\ScheduleJob;
 use Systruss\CryptoWallet\Commands\Register;
 use Systruss\CryptoWallet\Commands\Admin;
