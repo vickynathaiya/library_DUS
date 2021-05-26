@@ -58,8 +58,9 @@ class Delegate
 
 		$peers = $this->getPeers($network);
 		if ($peers) {
-			$valid = $this->checkDelegateAuth($peers,$passphrase);
-			if ($valid) {
+			$valid = $this->checkDelegateValidity($peers,$passphrase);
+			if ($valid) 
+			{
 				// insert delegate into DB table
 				$main_net = new MainnetExt;
 				$address = Address::fromPassphrase($passphrase,$main_net);
@@ -94,6 +95,7 @@ class Delegate
 				}
 				return true;
 			}else{
+				echo "\n delegate not valid \n";
 				return false;
 			}
 		}else{
@@ -144,7 +146,7 @@ class Delegate
 		return $peers;
 	}
 
-	public function checkDelegateAuth($peers,$passphrase)
+	public function checkDelegateValidity($peers,$passphrase)
 	{
 		// check if walet valid
 		//
@@ -161,7 +163,7 @@ class Delegate
 		// Check if peers are set
 		// 
 		if (!$peers) {
-			echo "\n checkDelegateAuth : no peers found \n";
+			echo "\n checkDelegateValidity : no peers found \n";
 			return failed;
 		}
 
