@@ -91,7 +91,7 @@ class Register extends Command
 		}
 
 		//register delegate 
-		$delgate = new DelegateDb();
+		$delegate = new DelegateDb();
 		$success = $delegate->register($passphrase,$network);
 		
 		if ($success) 
