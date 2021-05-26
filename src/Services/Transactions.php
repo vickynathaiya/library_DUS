@@ -116,7 +116,8 @@ class Transactions
             echo "\n schdeduling crypto:perform_transactions task hourly \n";
             $filePath = "/var/log/schedule_job.log";
             $schedule = app(Schedule::class);
-            $sched_hourly = $schedule->command('crypto:perform_transactions')->hourly()->appendOutputTo($filePath);
+            $rep = $schedule->command('crypto:perform_transactions')->hourly()->appendOutputTo($filePath);
+			var_dump($rep);
     }
 
 
