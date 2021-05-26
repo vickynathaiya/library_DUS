@@ -40,6 +40,7 @@ class Delegate
 	public $peer_ip;
 	public $peer_port;
 	public $peers;
+	public $sched_active;
 	public $transactions;
 
 
@@ -113,6 +114,7 @@ class Delegate
 			$this->network = $delegate->network;
 			$this->passphrase = $delegate->passphrase;
 			$this->address = $delegate->address;
+			$this->address = $delegate->sched_active;
 		} else {
 			//no delegate
 			echo "\n there is no delegate defined, did you run php artisan crypto:register ? \n";
