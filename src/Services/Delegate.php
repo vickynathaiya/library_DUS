@@ -76,6 +76,8 @@ class Delegate
 						'network' => $network,
 						'sched_active' => false,
 					]);
+					$this->address = $address;
+					$this->sched_active = false;
 					$registered = succeed;
 					echo "\n Delegate registered successfully \n";
 				} catch (QueryException $e) {
