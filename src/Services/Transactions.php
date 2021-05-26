@@ -23,9 +23,6 @@ use Systruss\CryptoWallet\Services\Server;
 const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";
 const api_delegates_url ="https://api.hedge.infinitysolutions.io/api/delegates";
 
-const failed = 0;
-const succeed = 1;
-
 class Transactions
 {
 	public $fee;
@@ -156,11 +153,11 @@ class Transactions
                 $this->peer_port = $delegate->peer_port;
 			} else {
 				// there is no voters
-				return failed;	
+				return false;	
 			}
 		} else {
 			//invalid sender
-			return failed;
+			return false;
 		}
 		return $this;
 	}
@@ -192,20 +189,20 @@ class Transactions
 						echo "\n(Failed) Return Funds to Main Wallet";
 						echo "\n(Failed) to connect to the node server.";
 						$this->transaction_result = json_encode($response);
-						return failed;
+						return false;
 					}
 					echo "(success) Return Funds to Main Wallet";
 					echo "Successfully returned the funds to the main wallet";
-					return succeed;
+					return true;
 				}
 			} catch (\Exception $e) {
 				info("(Failed) Return Funds to Main Wallet. Unable to connect to the node.");
 				//echo "\njson_encode($e->getMessage() . $e->getLine() . $e->getFile())\n";
-				return failed;
+				return false;
 			}
 		} else {
 			echo "\n transactions are not set \n";
-			return failed;
+			return false;
 		}
 	}	
 }
