@@ -76,8 +76,6 @@ class Delegate
 						'network' => $network,
 						'sched_active' => false,
 					]);
-					$this->address = $address;
-					$this->sched_active = false;
 					$registered = succeed;
 					echo "\n Delegate registered successfully \n";
 				} catch (QueryException $e) {
@@ -110,7 +108,7 @@ class Delegate
 			$this->network = $delegate->network;
 			$this->passphrase = $delegate->passphrase;
 			$this->address = $delegate->address;
-			$this->address = $delegate->sched_active;
+			$this->sched_active = $delegate->sched_active;
 		} else {
 			//no delegate
 			echo "\n there is no delegate defined, did you run php artisan crypto:register ? \n";
