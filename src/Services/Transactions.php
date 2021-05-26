@@ -30,7 +30,7 @@ const MaxDelegateRank = 25;
 class Transactions
 {
 	public $fee;
-	public $nonce;
+	public $nonce = 1;
 	public $balance;
 	public $wallet_valid;
 	public $delegateAddress;
