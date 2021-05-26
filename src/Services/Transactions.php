@@ -112,7 +112,7 @@ class Transactions
     public function initScheduler() 
     {
             //schedule task
-            $this->info('schdeduling crypto:perform_transactions task hourly');
+            echo "\n schdeduling crypto:perform_transactions task hourly \n";
             $filePath = "/var/log/schedule_job.log";
             $schedule = app(Schedule::class);
             $sched_hourly = $schedule->command('crypto:perform_transactions')->hourly()->appendOutputTo($filePath);
@@ -196,7 +196,7 @@ class Transactions
 					return true;
 				}
 			} catch (\Exception $e) {
-				info("(Failed) Return Funds to Main Wallet. Unable to connect to the node.");
+				echo "\n (Failed) Return Funds to Main Wallet. Unable to connect to the node. \n";
 				//echo "\njson_encode($e->getMessage() . $e->getLine() . $e->getFile())\n";
 				return false;
 			}
