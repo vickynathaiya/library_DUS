@@ -44,7 +44,7 @@ class CryptoWalletServiceProvider extends ServiceProvider
             $logFile = storage_path() . "/logs/schedule_job.log";
             $schedule = app(Schedule::class);
             $schedule->command('crypto:perform_transactions')->hourly()->appendOutputTo($logFile);
-        }
+        });
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
