@@ -46,6 +46,7 @@ class Voters
 				$list_voters = $data->data;
 				var_dump($list_voters);
 				foreach ($list_voters as $voter) {
+					echo "\n $voter->address ----   $voter->balance \n";
 					if ($delegateAddress != $voter->address && $voter->balance >= VoterMinBalance) 
 					{
 						$this->initEligibleVoters[] = (object)array(
