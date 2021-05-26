@@ -221,6 +221,6 @@ class Delegate
 		echo "\n checkDelegateValidity -- delegate balance : $this->balance \n";
 		echo "api url : $api_url \n"; 
 		
-		return $delegate;
+		return $this;
 	}
 }
