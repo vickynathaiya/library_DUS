@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class DelegateDb extends Model
 {
   	use HasFactory;
-	protected $fillable = ['address','passphrase','network'];
+	protected $fillable = ['address','passphrase','network','sched_active'];
 }
