@@ -91,7 +91,7 @@ class Transactions
 	}
 
 
-	public function getFee()
+	public function getFee($network)
 	{	
 		$fee = '';
 		// get fees from api
@@ -100,7 +100,7 @@ class Transactions
 		if ($data = $res->getBody()->getContents()) 
 		{
 			$data = json_decode($data);
-			switch ($this->network) {
+			switch ($network) {
 				case "edge" : 
 					$fee = $data->data->edge->transfer->min;
 					break;
@@ -108,10 +108,10 @@ class Transactions
 					$fee = $data->data->infi->transfer->min;
 					break;
 				default:
-					echo "\n network provide is not infi or edge \n";
+					echo "\n network provided is not infi or edge \n";
 			}
 		}	
-		return fee;
+		return $fee;
 	}
 
     public function initScheduler() 
@@ -137,7 +137,7 @@ class Transactions
 			// delegate rank is between 1 and 25 and balance as required
 
             // get fee
-            $fee = (int)$this->getFee();
+            $fee = (int)$this->getFee($delegate->network);
 			echo "\n fee : $fee \n";
 			
             // calculate voters amount
@@ -145,6 +145,7 @@ class Transactions
 			
 			
 			Network::set(new MainnetExt());
+
 
 			// Generate transaction
 			if ($voter_list)
