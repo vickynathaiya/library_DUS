@@ -47,12 +47,6 @@ class Voters
 				foreach ($list_voters as $voter) {
 					$voter_balance = (int)$voter->balance;
 				
-					if ($delegateAddress != $voter->address){
-						echo "\n voter_balance : $voter_balance \n";
-						echo "\n delegateAddress : $delegateAddress \n";
-						echo VoterMinBalance;
-					}
-
 					if (($delegateAddress != $voter->address) && ($voter_balance >= VoterMinBalance)) 
 					{
 						$this->eligibleVoters[] = array(
@@ -80,13 +74,11 @@ class Voters
 		foreach ($this->eligibleVoters as $voter) {
 			$totalVotersBalance = $totalVotersBalance + $voter['balance'];
 		}
-		echo "\n total voter balance : $totalVotersBalance \n";
 
 		//perform portion for each voter
 		foreach ($this->eligibleVoters as $i => $voter) {
 			$portion = ($voter['balance'] * 100) / $totalVotersBalance;
 			$this->eligibleVoters[$i]['portion'] = $portion;
-			echo "\n portion :  $portion \n";
 		}
 		return $this;
 	}

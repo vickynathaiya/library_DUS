@@ -148,13 +148,11 @@ class Transactions
 			Network::set(new MainnetExt());
 
 			// Generate transaction
-			var_dump($votersList->eligibleVoters);
 			if ($votersList->eligibleVoters)
 			{
 				$generated = MultiPaymentBuilder::new();
 				foreach ($votersList->eligibleVoters as $voter) {
 					$amount = ($voter['portion'] * $delegate->balance) / 100;
-					echo "\n amount = $amount \n";
 					$generated = $generated->add($voter['address'], (int)$amount);
 				}
 				$generated = $generated->withFee($this->fee);
@@ -189,9 +187,6 @@ class Transactions
 				if ($data)
 				{
 					$data = json_decode($data);
-					echo "\n**********************\n";
-					var_dump($data);
-					echo "\n**********************\n";
 					//treating data errors
 					if (isset($data->errors))
 					{
