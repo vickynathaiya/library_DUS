@@ -54,7 +54,7 @@ class Delegate
 		//get the registered sender address,network and passphrase 
 			
 		$this->network = $network;
-		$this->passphrase = $delegatePassphrase;
+		$this->passphrase = $passphrase;
 
 		$peers = $this->getPeers($network);
 		if ($peers) {
