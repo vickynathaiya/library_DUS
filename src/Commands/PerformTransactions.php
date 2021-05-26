@@ -102,9 +102,9 @@ class PerformTransactions extends Command
             echo "\n error while building transactions \n";
             return false;
         }
-        $this->info("transaction initialized successfully \n");
+        $this->info("transaction initialized successfully");
         echo "\n ready to run the folowing transactions : \n";
-        echo json_encode($transacrions->transactions);
+        echo json_encode($transactions->transactions);
         echo "\n";
 
         if (!$disabled) {
