@@ -149,7 +149,7 @@ class Transactions
 			Network::set(new MainnetExt());
 
 			// Generate transaction
-			if ($voter_list)
+			if ($eligibleVoters)
 			{
 				$generated = MultiPaymentBuilder::new();
 				foreach ($eligibleVoters as $voter) {
