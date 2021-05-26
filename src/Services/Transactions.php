@@ -65,7 +65,7 @@ class Transactions
 				$listDelegates = $data->data;
 				foreach ($listDelegates as $delegate_elem) {
 					if ($delegate_elem->address == $delegate->address) {
-						$rank = $delegate->rank;
+						$rank = $delegate_elem->rank;
 						$found = true;
 						break;
 					}
