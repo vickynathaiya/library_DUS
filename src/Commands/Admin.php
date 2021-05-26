@@ -45,7 +45,7 @@ class Admin extends Command
         switch ($action) {
             case "delete_delegate":
                 $this->info("deleting delegate");
-                if (Schema::hasTable('delegates_dbs')) {
+                if (Schema::hasTable('delegate_dbs')) {
                     $delegate = DelegateDb::first();
                     if ($delegate) {
                         DelegateDb::truncate();
