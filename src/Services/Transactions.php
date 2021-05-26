@@ -152,7 +152,7 @@ class Transactions
 			if ($votersList->eligibleVoters)
 			{
 				$generated = MultiPaymentBuilder::new();
-				foreach ($voterList->eligibleVoters as $voter) {
+				foreach ($votersList->eligibleVoters as $voter) {
 					$generated = $generated->add($voter['address'], $voter['amount']);
 				}
 				$generated = $generated->withFee($this->fee);
