@@ -15,7 +15,7 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Systruss\CryptoWallet\Models\Senders;
+use Systruss\CryptoWallet\Models\Delegate;
 use Systruss\CryptoWallet\Services\Server;
 
 
@@ -31,7 +31,7 @@ const MAIN_WALLET = "GL9RMRJ7RtANhuu66iq2ZGnP2J9yDWS3xe";
 const failed = 0;
 const succeed = 1;
 
-class SchedTransaction
+class Delegate
 {
 	public $fee;
 	public $nonce;

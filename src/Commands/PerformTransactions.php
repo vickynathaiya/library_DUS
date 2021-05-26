@@ -14,9 +14,9 @@ use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
 use Systruss\CryptoWallet\Services\Networks\MainnetExt;
-use Systruss\CryptoWallet\Models\Voters;
-use Systruss\CryptoWallet\Models\Delegate;
-use Systruss\CryptoWallet\Models\Transactions;
+use Systruss\CryptoWallet\Services\Voters;
+use Systruss\CryptoWallet\Services\Delegate;
+use Systruss\CryptoWallet\Services\Transactions;
 use Systruss\CryptoWallet\Services\SchedTransaction;
 
 
