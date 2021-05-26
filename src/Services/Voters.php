@@ -47,10 +47,12 @@ class Voters
 				foreach ($list_voters as $voter) {
 					if ($delegateAddress != $voter->address && $voter->balance >= VoterMinBalance) 
 					{
-						$this->eligibleVoters['address'] = $voter->address;
-						$this->eligibleVoters['balance'] = $voter->balance;
-						$this->eligibleVoters['portion'] = 0;
-						$this->eligibleVoters['amount'] = 0;
+						$this->initEligibleVoters[] = (object)array(
+						'address' => $voter->address,
+						'balance' => $voter->balance,
+						'portion' => 0,
+						'amount' => 0,
+						);
 					}
 				}
 			}
