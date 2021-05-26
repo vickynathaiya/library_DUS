@@ -67,14 +67,14 @@ class Delegate
 		
 				//check if senders table exist
 				if (!Schema::hasTable('delegate_dbs')) {
-					echo "\n table delegate_dbs does not exist, run php artisan migrate');
+					echo "\n table delegate_dbs does not exist, run php artisan migrate \n";
 					return;
 				}
 				//check if there is a delegate entry in delegate table
 				$delegate = DelegateDb::all();
 				if (!$delegate->isEmpty()) {
 					//delegate exist
-					$this->info("There is already a delegate registered!");
+					echo "\n There is already a delegate registered! \n";
 					return;
 				} else {
 					//create delegate
@@ -86,9 +86,9 @@ class Delegate
 							'sched_active' => false,
 						]);
 						$registered = succeed;
-						$this->info("Delegate registered successfully");
+						echo "\n Delegate registered successfully \n";
 					} catch (QueryException $e) {
-						$this->info(" error : ");
+						echo "\n error : \n");
 						$registered = failed; 
 						var_dump($e->errorInfo);
 					}
