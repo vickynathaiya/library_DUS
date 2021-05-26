@@ -30,6 +30,6 @@ class CreateDelegateDbTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delegates');
+        Schema::dropIfExists('delegate_dbs');
     }
 }
