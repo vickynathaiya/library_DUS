@@ -44,7 +44,6 @@ class Voters
 			$this->totalVoters = $data->meta->totalCount;
 			if ($this->totalVoters > 0) {
 				$list_voters = $data->data;
-				var_dump($list_voters);
 				foreach ($list_voters as $voter) {
 					echo "\n $voter->address ----   $voter->balance \n";
 					if ($delegateAddress != $voter->address && $voter->balance >= VoterMinBalance) 
@@ -59,6 +58,7 @@ class Voters
 				}
 			}
 		}
+		var_dump($this->initEligibleVoters);
 		return $this;
 	}
 	
