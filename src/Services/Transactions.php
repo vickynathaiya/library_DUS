@@ -132,7 +132,7 @@ class Transactions
 	public function buildTransactions(Voters $voters, Delegate $delegate)
 	{	
 		$transactions = [];
-
+		echo "\n building transactions -------- \n";
         $valid = $this->checkDelegateEligibility($delegate);
 		if ($valid)
 		{

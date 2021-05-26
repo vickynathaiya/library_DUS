@@ -93,7 +93,6 @@ class PerformTransactions extends Command
 		}
         $this->info("voters initialized successfully \n ");
         echo "\n Elegible voters \n";
-        var_dump($voters->eligibleVoters);
 
         //build transactions
         echo "\n initializing transactions \n";
@@ -101,7 +100,7 @@ class PerformTransactions extends Command
         $success = $transactions->buildTransactions($voters,$delegate);
         if (!$success) {
             echo "\n error while building transactions \n";
-            return flase;
+            return false;
         }
         $this->info("transaction initialized successfully \n");
         echo "\n ready to run the folowing transactions : \n";

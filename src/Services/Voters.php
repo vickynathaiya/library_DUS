@@ -80,7 +80,7 @@ class Voters
 		$totalVotersBalance = 0;
 		var_dump($this->eligibleVoters);
 		foreach ($this->eligibleVoters as $voter) {
-			$totalVotersBalance = $totalVotersBalance + $voter['balance'];
+			$totalVotersBalance = $totalVotersBalance + $voter->balance;
 		}
 
 		//perform portion for each voter
