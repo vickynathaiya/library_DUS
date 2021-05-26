@@ -216,7 +216,7 @@ class Delegate
 		$this->peer_ip = $ip_add;
 		$this->peer_port = $port;
  		$this->nonce = $nonce;
-		$this->balance = $balance;
+		$this->balance = (int)$balance;
 		echo "\n checkDelegateValidity -- delegate balance : $this->balance \n";
 		echo "api url : $api_url \n"; 
 		
