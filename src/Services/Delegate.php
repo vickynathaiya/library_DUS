@@ -139,7 +139,7 @@ class Delegate
 		return $peers;
 	}
 
-	public function checkDelegateValidity($peers,$passphrase)
+	public function checkDelegateValidity()
 	{
 		// check if walet valid
 		//
