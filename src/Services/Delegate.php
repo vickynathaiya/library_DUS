@@ -47,6 +47,8 @@ class Delegate
 			
 		$this->network = $network;
 		$this->passphrase = $passphrase;
+		$main_net = MainnetExt::new();
+		$this->address = Address::fromPassphrase($this->passphrase,$main_net);
 
 		
 		$valid = $this->checkDelegateValidity();
@@ -71,7 +73,7 @@ class Delegate
 				//create delegate
 				try {
 					$delegate = DelegateDb::create([
-						'address' => $address,
+						'address' => $this->address,
 						'passphrase' => $passphrase,
 						'network' => $network,
 						'sched_active' => false,
@@ -106,7 +108,7 @@ class Delegate
 			//sender exist
 			echo "\n delegate exist \n";
 			$this->network = $delegate->network;
-			$this->passphrase = $delegate->passphrase;
+			$this->passphrase = $delegate->passphrase;			
 			$this->address = $delegate->address;
 			$this->sched_active = $delegate->sched_active;
 		} else {
