@@ -104,7 +104,7 @@ class PerformTransactions extends Command
         }
         $this->info("transaction initialized successfully");
         echo "\n ready to run the folowing transactions : \n";
-        echo json_encode($transactions->transactions);
+        echo json_encode($transactions->transaction, JSON_PRETTY_PRINT);
         echo "\n";
 
         if (!$disabled) {
