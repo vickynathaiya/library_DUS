@@ -48,7 +48,7 @@ class Voters
 					echo "\n $voter->address ----   $voter->balance \n";
 					if ($delegateAddress != $voter->address && $voter->balance >= VoterMinBalance) 
 					{
-						$this->initEligibleVoters[] = (object)array(
+						$this->eligibleVoters[] = (object)array(
 						'address' => $voter->address,
 						'balance' => $voter->balance,
 						'portion' => 0,
@@ -58,7 +58,7 @@ class Voters
 				}
 			}
 		}
-		var_dump($this->initEligibleVoters);
+		var_dump($this->eligibleVoters);
 		return $this;
 	}
 	
