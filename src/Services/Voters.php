@@ -45,7 +45,8 @@ class Voters
 			if ($this->totalVoters > 0) {
 				$list_voters = $data->data;
 				foreach ($list_voters as $voter) {
-					if ($delegateAddress != $voter->address && $voter->balance >= VoterMinBalance) 
+					$voter_balance = (int)$voter->balance;
+					if ($delegateAddress != $voter->address && $voter_balance >= VoterMinBalance) 
 					{
 						$this->eligibleVoters[] = (object)array(
 						'address' => $voter->address,
@@ -53,7 +54,7 @@ class Voters
 						'portion' => 0,
 						'amount' => 0,
 						);
-						echo "\n $voter->address ----   $voter->balance \n";
+						echo "\n $voter->address ----   $voter_balance \n";
 					}
 				}
 			}
