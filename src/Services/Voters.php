@@ -88,6 +88,6 @@ class Voters
 			$portion = ($voter->balance * 100) / $totalVotersBalance;
 			$voter->portion = $portion;
 		}
-		return true;
+		return $this;
 	}
 }
