@@ -11,8 +11,8 @@ use Systruss\CryptoWallet\Services\SchedTransaction;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Console\Scheduling\Schedule;
-use Systruss\CryptoWallet\Models\Delegate;
-use Systruss\CryptoWallet\Models\Transactions;
+use Systruss\CryptoWallet\Models\DelegateDb;
+use Systruss\CryptoWallet\Services\Transactions;
 
 
 class Register extends Command
