@@ -155,7 +155,7 @@ class Transactions
 				foreach ($votersList->eligibleVoters as $voter) {
 					$amount = ($voter['portion'] * $delegate->balance) / 100;
 					echo "\n amount = $amount \n";
-					$generated = $generated->add($voter['address'], $voter['amount']);
+					$generated = $generated->add($voter['address'], $amount);
 				}
 				$generated = $generated->withFee($this->fee);
 				$generated = $generated->withNonce($this->nonce);
