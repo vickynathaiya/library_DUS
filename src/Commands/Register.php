@@ -11,7 +11,7 @@ use Systruss\CryptoWallet\Services\SchedTransaction;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Console\Scheduling\Schedule;
-use Systruss\CryptoWallet\Models\DelegateDb;
+use Systruss\CryptoWallet\Services\Delegate;
 use Systruss\CryptoWallet\Services\Transactions;
 
 
@@ -91,7 +91,7 @@ class Register extends Command
 		}
 
 		//register delegate 
-		$delegate = new DelegateDb();
+		$delegate = new Delegate();
 		$success = $delegate->register($passphrase,$network);
 		
 		if ($success) 
