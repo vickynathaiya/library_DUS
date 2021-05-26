@@ -51,50 +51,47 @@ class Delegate
 		$this->network = $network;
 		$this->passphrase = $passphrase;
 
-		$peers = $this->getPeers($network);
-		if ($peers) {
-			$valid = $this->checkDelegateValidity($peers,$passphrase);
-			if ($valid) 
-			{
-				// insert delegate into DB table
-				$main_net = new MainnetExt;
-				$address = Address::fromPassphrase($passphrase,$main_net);
 		
-				//check if senders table exist
-				if (!Schema::hasTable('delegate_dbs')) {
-					echo "\n table delegate_dbs does not exist, run php artisan migrate \n";
-					return;
+		$valid = $this->checkDelegateValidity();
+		if ($valid) 
+		{
+			// insert delegate into DB table
+			$main_net = new MainnetExt;
+			$address = Address::fromPassphrase($passphrase,$main_net);
+	
+			//check if senders table exist
+			if (!Schema::hasTable('delegate_dbs')) {
+				echo "\n table delegate_dbs does not exist, run php artisan migrate \n";
+				return;
+			}
+			//check if there is a delegate entry in delegate table
+			$delegate = DelegateDb::all();
+			if (!$delegate->isEmpty()) {
+				//delegate exist
+				echo "\n There is already a delegate registered! \n";
+				return;
+			} else {
+				//create delegate
+				try {
+					$delegate = DelegateDb::create([
+						'address' => $address,
+						'passphrase' => $passphrase,
+						'network' => $network,
+						'sched_active' => false,
+					]);
+					$registered = succeed;
+					echo "\n Delegate registered successfully \n";
+				} catch (QueryException $e) {
+					echo "\n error : \n";
+					$registered = failed; 
+					var_dump($e->errorInfo);
+					return false;
 				}
-				//check if there is a delegate entry in delegate table
-				$delegate = DelegateDb::all();
-				if (!$delegate->isEmpty()) {
-					//delegate exist
-					echo "\n There is already a delegate registered! \n";
-					return;
-				} else {
-					//create delegate
-					try {
-						$delegate = DelegateDb::create([
-							'address' => $address,
-							'passphrase' => $passphrase,
-							'network' => $network,
-							'sched_active' => false,
-						]);
-						$registered = succeed;
-						echo "\n Delegate registered successfully \n";
-					} catch (QueryException $e) {
-						echo "\n error : \n";
-						$registered = failed; 
-						var_dump($e->errorInfo);
-					}
-				}
-				return true;
-			}else{
+			}
+			return true;
+		} else {
 				echo "\n delegate not valid \n";
 				return false;
-			}
-		}else{
-			return false;
 		}
 	}
 
@@ -158,6 +155,7 @@ class Delegate
 		// 
 		// Check if peers are set
 		// 
+		$peers = $this->getPeers($this->network);
 		if (!$peers) {
 			echo "\n checkDelegateValidity : no peers found \n";
 			return failed;
@@ -168,7 +166,7 @@ class Delegate
 		
 		// Generate wallet address from passphrase
 		$main_net = MainnetExt::new();
-		$wallet_address = Address::fromPassphrase($passphrase,$main_net);
+		$wallet_address = Address::fromPassphrase($this->passphrase,$main_net);
 
 		foreach ($peer_list as $peer) 
 		{
@@ -187,11 +185,11 @@ class Delegate
 					$isDelegate = $data->data->isDelegate; 
 					$isResigned = $data->data->isResigned; 
 					$nonce = $data->data->nonce + 1; 
-					$this->balance = $data->data->balance; 
+					$balance = $data->data->balance; 
 					if ($isDelegate == 1) {
 						if ($isResigned == 1) {
-							break;
 							$valid = false;
+							break;
 						}
 					} else {
 						$valid = false;
@@ -215,12 +213,13 @@ class Delegate
 			}
 		}
 		
-		$this->wallet_valid = $valid;
+		$this->valid = $valid;
 		$this->peer_ip = $ip_add;
 		$this->peer_port = $port;
  		$this->nonce = $nonce;
 		$this->balance = $balance;
+		echo "\n checkDelegateValidity -- delegate balance : $this->balance \n"
 		
-		return $valid;
+		return $delegate;
 	}
 }

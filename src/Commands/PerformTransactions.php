@@ -68,11 +68,8 @@ class PerformTransactions extends Command
             return false;
         }
 
-        //check if scheduler is active
-        // if (!$delegate->sched_active) {
-        //    $this->info("Scheduler is not yet active, enable it : php artisan crypto:admin start_sched");
-        //    return false;
-        // }
+        //check delegate validity
+        $delegate = $delegate->checkDelegateValidity();
 
 		// Check Delegate  Vailidity
         echo "\n checking delegate elegibility \n";
