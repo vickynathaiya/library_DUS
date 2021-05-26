@@ -139,8 +139,8 @@ class Transactions
 			// delegate rank is between 1 and 25 and balance as required
 
             // get fee
-            $fee = $this->getFee($delegate->network);
-			echo "\n fee : $fee \n";
+            $this->fee = $this->getFee($delegate->network);
+			echo "\n fee : $this->fee \n";
 			
             // calculate voters amount
 			$votersList = $voters->calculatePortion($delegate->balance);
