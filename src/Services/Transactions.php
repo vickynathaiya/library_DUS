@@ -146,7 +146,6 @@ class Transactions
 			
 			Network::set(new MainnetExt());
 
-
 			// Generate transaction
 			if ($voter_list)
 			{
