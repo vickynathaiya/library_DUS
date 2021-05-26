@@ -18,9 +18,6 @@ use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
 use Systruss\CryptoWallet\Models\DelegateDb;
 use Systruss\CryptoWallet\Services\Server;
 
-
-const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";
-const api_voters_url = "https://api.infinitysolutions.io/api/delegates/024844fa4b301ae6f9c514c963c18540630f1755dcca02ea9e91bae4b11d3dd1f1/voters";
 const api_delegates_url ="https://api.hedge.infinitysolutions.io/api/delegates";
 
 const FEE = 101000;
