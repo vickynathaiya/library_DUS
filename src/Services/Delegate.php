@@ -18,9 +18,6 @@ use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
 use Systruss\CryptoWallet\Models\DelegateDb;
 use Systruss\CryptoWallet\Services\Server;
 
-const api_delegates_url ="https://api.hedge.infinitysolutions.io/api/delegates";
-
-const FEE = 101000;
 const VoterMinBalance = 1000000;
 const DelegateMinBalance = 1000000;
 const minBalance = 1000000;
