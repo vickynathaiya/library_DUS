@@ -187,7 +187,7 @@ class Delegate
 					$isDelegate = $data->data->isDelegate; 
 					$isResigned = $data->data->isResigned; 
 					$nonce = $data->data->nonce + 1; 
-					$balance = $data->data->balance; 
+					$this->balance = $data->data->balance; 
 					if ($isDelegate == 1) {
 						if ($isResigned == 1) {
 							break;
