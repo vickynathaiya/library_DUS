@@ -55,12 +55,12 @@ class Voters
 
 					if (($delegateAddress != $voter->address) && ($voter_balance >= VoterMinBalance)) 
 					{
-						$this->eligibleVoters[] = (object)array(
+						$this->eligibleVoters[] = json_encode(array(
 						'address' => $voter->address,
 						'balance' => $voter->balance,
 						'portion' => 0,
 						'amount' => 0,
-						);
+						));
 						echo "\n $voter->address ----   $voter_balance \n";
 					}
 				}
