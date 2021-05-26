@@ -1,15 +1,15 @@
 <?php
 
-namespace Systruss\SchedTransactions\Providers;
+namespace Systruss\CryproWallet\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Systruss\SchedTransactions\Commands\ScheduleJob;
-use Systruss\SchedTransactions\Commands\Register;
-use Systruss\SchedTransactions\Commands\Admin;
-use Systruss\SchedTransactions\Commands\Cron;
+use Systruss\CryproWallet\Commands\ScheduleJob;
+use Systruss\CryproWallet\Commands\Register;
+use Systruss\CryproWallet\Commands\Admin;
+use Systruss\CryproWallet\Commands\Cron;
 
 
-class SchedTransactionsServiceProvider extends ServiceProvider
+class CryproWalletServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -31,6 +31,7 @@ class SchedTransactionsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ScheduleJob::class,
+                SendTransactions::class,
                 Register::class,
                 Admin::class,
                 Cron::class,

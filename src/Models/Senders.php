@@ -1,6 +1,6 @@
 <?php
 
-namespace Systruss\SchedTransactions\Models;
+namespace Systruss\CryproWallet\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

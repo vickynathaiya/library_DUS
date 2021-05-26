@@ -1,12 +1,12 @@
 <?php
 
-namespace Systruss\SchedTransactions\Services;
+namespace Systruss\CryproWallet\Services;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use Systruss\SchedTransactions\Services\Networks\MainnetExt;
+use Systruss\CryproWallet\Services\Networks\MainnetExt;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use GuzzleHttp\Client;
@@ -15,8 +15,8 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Systruss\SchedTransactions\Models\Senders;
-use Systruss\SchedTransactions\Services\Server;
+use Systruss\CryproWallet\Models\Senders;
+use Systruss\CryproWallet\Services\Server;
 
 const api_voters_url = "https://api.infinitysolutions.io/api/delegates/024844fa4b301ae6f9c514c963c18540630f1755dcca02ea9e91bae4b11d3dd1f1/voters";
 
