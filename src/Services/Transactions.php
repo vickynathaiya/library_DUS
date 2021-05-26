@@ -23,6 +23,9 @@ use Systruss\CryptoWallet\Services\Server;
 
 const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";
 const api_delegates_url ="https://api.hedge.infinitysolutions.io/api/delegates";
+const MinDelegateBalance = 1000000;
+const MinDelegateRank = 1;
+const MaxDelegateRank = 25;
 
 class Transactions
 {
@@ -46,7 +49,7 @@ class Transactions
 	{
 		$found = false;
 		// check if delegate balance is grater than the minimum required
-		if ($delegate->balance < min_balance) {
+		if ($delegate->balance < MinDelegateBalance) {
 			echo "\n insufficient balance \n";
 			return false;
 		}
@@ -67,7 +70,7 @@ class Transactions
 					}
 				}
 				if ($found) {
-					if ($rank >= min_rank && $rank <= max_rank){
+					if ($rank >= MinDelegateRank && $rank <= MaxDelegateRank){
 						return true;
 					}else{
 						return false;
