@@ -151,10 +151,10 @@ class Transactions
 			var_dump($votersList->eligibleVoters);
 			if ($votersList->eligibleVoters)
 			{
-				$amount = ($voter['portion'] * $delegate->balance) / 100;
-				echo "\n amount = $amount \n";
 				$generated = MultiPaymentBuilder::new();
 				foreach ($votersList->eligibleVoters as $voter) {
+					$amount = ($voter['portion'] * $delegate->balance) / 100;
+					echo "\n amount = $amount \n";
 					$generated = $generated->add($voter['address'], $voter['amount']);
 				}
 				$generated = $generated->withFee($this->fee);
