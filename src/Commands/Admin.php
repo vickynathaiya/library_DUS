@@ -46,10 +46,10 @@ class Admin extends Command
             case "delete_delegate":
                 $this->info("deleting delegate");
                 if (Schema::hasTable('delegates_dbs')) {
-                    $delegate = delegates::first();
+                    $delegate = DelegateDb::first();
                     if ($delegate) {
-                        delegates::truncate();
-                        $this->info("delegate table deleted"); 
+                        DelegateDb::truncate();
+                        $this->info("delegate deleted"); 
                     } else {
                         $this->info("no delegate in DB");                        
                     }
