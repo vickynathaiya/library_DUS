@@ -47,12 +47,12 @@ class Voters
 				foreach ($list_voters as $voter) {
 					$voter_balance = (int)$voter->balance;
 				
-					if ($voter_balance >= VoterMinBalance){
+					if ($delegateAddress != $voter->address){
 						echo "\n voter_balance : $voter_balance \n";
 						echo "\n delegateAddress : $delegateAddress \n";
 						echo VoterMinBalance;
 					}
-					
+
 					if (($delegateAddress != $voter->address) && ($voter_balance >= VoterMinBalance)) 
 					{
 						$this->eligibleVoters[] = (object)array(
