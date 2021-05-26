@@ -18,10 +18,7 @@ use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
 use Systruss\CryptoWallet\Models\DelegateDb;
 use Systruss\CryptoWallet\Services\Server;
 
-const VoterMinBalance = 1000000;
-const DelegateMinBalance = 1000000;
-const minBalance = 1000000;
-const MAIN_WALLET = "GL9RMRJ7RtANhuu66iq2ZGnP2J9yDWS3xe";
+
 const failed = 0;
 const succeed = 1;
 
