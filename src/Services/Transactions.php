@@ -143,20 +143,16 @@ class Transactions
 			echo "\n fee : $fee \n";
 			
             // calculate voters amount
-			echo "\n --------------------- \n";
-			var_dump($voters->eligibleVoters);
-			echo "\n --------------------- \n";
-            $eligibleVoters = $voters->calculatePortion($delegate->balance);
-			
+			$votersList = $voters->calculatePortion($delegate->balance);
 			
 			Network::set(new MainnetExt());
 
 			// Generate transaction
-			var_dump($eligibleVoters);
-			if ($eligibleVoters)
+			var_dump($votersList->eligibileVoters);
+			if ($voterList->eligibleVoters)
 			{
 				$generated = MultiPaymentBuilder::new();
-				foreach ($eligibleVoters as $voter) {
+				foreach ($voterList->eligibleVoters as $voter) {
 					$generated = $generated->add($voter['address'], $voter['amount']);
 				}
 				$generated = $generated->withFee($this->fee);
