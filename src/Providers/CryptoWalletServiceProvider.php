@@ -7,6 +7,7 @@ use Systruss\CryptoWallet\Commands\ScheduleJob;
 use Systruss\CryptoWallet\Commands\Register;
 use Systruss\CryptoWallet\Commands\Admin;
 use Systruss\CryptoWallet\Commands\Cron;
+use Systruss\CryptoWallet\Commands\PerformTransactions;
 
 
 class CryptoWalletServiceProvider extends ServiceProvider
@@ -31,7 +32,7 @@ class CryptoWalletServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ScheduleJob::class,
-                SendTransactions::class,
+                PerformTransactions::class,
                 Register::class,
                 Admin::class,
                 Cron::class,
