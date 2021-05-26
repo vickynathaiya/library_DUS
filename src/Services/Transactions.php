@@ -148,7 +148,7 @@ class Transactions
 			Network::set(new MainnetExt());
 
 			// Generate transaction
-			var_dump($votersList->eligibileVoters);
+			var_dump($votersList->eligibleVoters);
 			if ($voterList->eligibleVoters)
 			{
 				$generated = MultiPaymentBuilder::new();
