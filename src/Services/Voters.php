@@ -83,9 +83,10 @@ class Voters
 		echo "\n total voter balance : $totalVotersBalance \n";
 
 		//perform portion for each voter
-		foreach ($this->eligibleVoters as $voter) {
+		foreach ($this->eligibleVoters as $i => $voter) {
 			$portion = ($voter['balance'] * 100) / $totalVotersBalance;
-			$voter['portion'] = $portion;
+			$this->initEligibleVoters[$i]['portion'] = $portion;
+			echo
 		}
 		return $this;
 	}
