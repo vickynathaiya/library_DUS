@@ -157,7 +157,7 @@ class Transactions
 				}
 				$generated = $generated->withFee($this->fee);
 				$generated = $generated->withNonce($this->nonce);
-				$generated = $generated->sign($this->delegatePassphrase);
+				$generated = $generated->sign($delegate->passphrase);
 				$this->transactions = [ 'transactions' => [$generated->transaction->data] ];
                 $this->peer_ip = $delegate->peer_ip;
                 $this->peer_port = $delegate->peer_port;
