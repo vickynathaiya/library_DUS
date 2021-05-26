@@ -218,7 +218,8 @@ class Delegate
 		$this->peer_port = $port;
  		$this->nonce = $nonce;
 		$this->balance = $balance;
-		echo "\n checkDelegateValidity -- delegate balance : $this->balance \n"
+		echo "\n checkDelegateValidity -- delegate balance : $this->balance \n";
+		echo "api url : $api_url \n"; 
 		
 		return $delegate;
 	}
