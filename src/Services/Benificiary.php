@@ -49,16 +49,19 @@ class Benificiary
 			switch ($delegate_network) {
 				case "infi":
 					$list_infi = $data->data->infi;
+					var_dump($list_infi);
 					foreach ($list_infi as $delegate_settings) {
 						echo "\n ------- benifiary address : $delegate_settings->beneficaryAddress \n";
-						var_dump($delegate_settings);
+						
 					}
 					break;
 				case "edge":
 					$list_edge = $data->data->edge;
+					var_dump($list_edge);
 					foreach ($list_edge as $delegate_settings) {
+				
 						echo "\n test ---- $delegate_settings->beneficaryAddress \n";
-						var_dump($delegate_settings);
+					
 					}
 					break;
 				default:
