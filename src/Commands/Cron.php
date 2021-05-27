@@ -50,7 +50,7 @@ class Cron extends Command
     protected function append_cronjob($command){
         if(is_string($command)&&!empty($command)&&$this->cronjob_exists($command)===FALSE){
             //add job to crontab
-            $output = shell_exec("crontab -l | { cat; echo "$command"; } |crontab -");
+            $output = shell_exec("crontab -l | { cat; echo '$command'; } |crontab -");
         }
         return $output;
     }
