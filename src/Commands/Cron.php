@@ -71,7 +71,7 @@ class Cron extends Command
      */
     public function handle()
     {
-        $command = "* * * * * cd /var/www/html/laravelprod && php artisan schedule:run >> /dev/null 2>&1"
+        $command = "* * * * * cd /var/www/html/laravelprod && php artisan schedule:run >> /dev/null 2>&1";
         $action = $this->argument('action');
         switch ($action) {
             case "add_cron":
