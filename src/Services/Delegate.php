@@ -185,10 +185,11 @@ class Delegate
 					$isDelegate = $data->data->isDelegate; 
 					$isResigned = $data->data->isResigned; 
 					$nonce = $data->data->nonce + 1; 
-					$balance = $data->data->balance; 
+					$balance = $data->data->balance;
 					if ($isDelegate == 1) {
 						if ($isResigned == 0) {
 							$valid = true;
+							echo "\n isDelegate = $isDelegate   -- isResigned = $isResigned \n";
 							break;
 						}
 					} 					
