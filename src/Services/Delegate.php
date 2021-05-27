@@ -1,12 +1,12 @@
 <?php
 
-namespace Systruss\CryptoWallet\Services;
+namespace Systruss\SchedTransactions\Services;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use Systruss\CryptoWallet\Services\Networks\MainnetExt;
+use Systruss\SchedTransactions\Services\Networks\MainnetExt;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use GuzzleHttp\Client;
@@ -15,8 +15,8 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Systruss\CryptoWallet\Models\DelegateDb;
-use Systruss\CryptoWallet\Services\Server;
+use Systruss\SchedTransactions\Models\DelegateDb;
+use Systruss\SchedTransactions\Services\Server;
 
 
 const failed = 0;

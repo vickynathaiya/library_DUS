@@ -1,12 +1,12 @@
 <?php
 
-namespace Systruss\CryptoWallet\Services;
+namespace Systruss\SchedTransactions\Services;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use Systruss\CryptoWallet\Services\Networks\MainnetExt;
+use Systruss\SchedTransactions\Services\Networks\MainnetExt;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use GuzzleHttp\Client;
@@ -15,8 +15,8 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Systruss\CryptoWallet\Models\Senders;
-use Systruss\CryptoWallet\Services\Server;
+use Systruss\SchedTransactions\Models\Senders;
+use Systruss\SchedTransactions\Services\Server;
 
 
 const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";

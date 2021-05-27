@@ -1,5 +1,5 @@
 {
-    "name": "systruss/cryptowallet",
+    "name": "systruss/schedtransactions",
     "description": "transactions Scheduler",
     "license": "MIT",
     "authors": [
@@ -10,13 +10,13 @@
     ],
     "autoload": {
         "psr-4": {
-            "Systruss\\CryptoWallet\\": "src/"
+            "Systruss\\SchedTransactions\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Systruss\\CryptoWallet\\Providers\\CryptoWalletServiceProvider"
+                "Systruss\\SchedTransactions\\Providers\\SchedTransactionsServiceProvider"
             ]
         }
     },

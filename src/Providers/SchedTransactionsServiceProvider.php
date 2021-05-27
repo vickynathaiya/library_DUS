@@ -1,17 +1,17 @@
 <?php
 
-namespace Systruss\CryptoWallet\Providers;
+namespace Systruss\SchedTransactions\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
-use Systruss\CryptoWallet\Commands\ScheduleJob;
-use Systruss\CryptoWallet\Commands\Register;
-use Systruss\CryptoWallet\Commands\Admin;
-use Systruss\CryptoWallet\Commands\Cron;
-use Systruss\CryptoWallet\Commands\PerformTransactions;
+use Systruss\SchedTransactions\Commands\ScheduleJob;
+use Systruss\SchedTransactions\Commands\Register;
+use Systruss\SchedTransactions\Commands\Admin;
+use Systruss\SchedTransactions\Commands\Cron;
+use Systruss\SchedTransactions\Commands\PerformTransactions;
 
 
-class CryptoWalletServiceProvider extends ServiceProvider
+class SchedTransactionsServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

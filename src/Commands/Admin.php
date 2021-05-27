@@ -1,10 +1,10 @@
 <?php
 
-namespace Systruss\CryptoWallet\Commands;
+namespace Systruss\SchedTransactions\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use Systruss\CryptoWallet\Models\DelegateDb;
+use Systruss\SchedTransactions\Models\DelegateDb;
 
 class Admin extends Command
 {

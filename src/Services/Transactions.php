@@ -1,12 +1,12 @@
 <?php
 
-namespace Systruss\CryptoWallet\Services;
+namespace Systruss\SchedTransactions\Services;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use Systruss\CryptoWallet\Services\Networks\MainnetExt;
+use Systruss\SchedTransactions\Services\Networks\MainnetExt;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Console\Scheduling\Schedule;
@@ -16,9 +16,9 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Systruss\CryptoWallet\Services\Voters;
-use Systruss\CryptoWallet\Services\Delegate;
-use Systruss\CryptoWallet\Services\Server;
+use Systruss\SchedTransactions\Services\Voters;
+use Systruss\SchedTransactions\Services\Delegate;
+use Systruss\SchedTransactions\Services\Server;
 
 
 const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";
@@ -132,7 +132,6 @@ class Transactions
 	public function buildTransactions(Voters $voters, Delegate $delegate)
 	{	
 		$transactions = [];
-		echo "\n building transactions -------- \n";
         $valid = $this->checkDelegateEligibility($delegate);
 		if ($valid)
 		{
@@ -140,7 +139,6 @@ class Transactions
 
             // get fee
             $this->fee = $this->getFee($delegate->network);
-			echo "\n fee : $this->fee \n";
 			
             // calculate voters amount
 			$votersList = $voters->calculatePortion($delegate->balance);

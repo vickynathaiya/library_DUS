@@ -1,18 +1,18 @@
 <?php
 
-namespace Systruss\CryptoWallet\Commands;
+namespace Systruss\SchedTransactions\Commands;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use Systruss\CryptoWallet\Services\Networks\MainnetExt;
-use Systruss\CryptoWallet\Services\SchedTransaction;
+use Systruss\SchedTransactions\Services\Networks\MainnetExt;
+use Systruss\SchedTransactions\Services\SchedTransaction;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Console\Scheduling\Schedule;
-use Systruss\CryptoWallet\Services\Delegate;
-use Systruss\CryptoWallet\Services\Transactions;
+use Systruss\SchedTransactions\Services\Delegate;
+use Systruss\SchedTransactions\Services\Transactions;
 
 
 class Register extends Command

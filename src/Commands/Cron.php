@@ -1,10 +1,10 @@
 <?php
 
-namespace Systruss\CryptoWallet\Commands;
+namespace Systruss\SchedTransactions\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use Systruss\CryptoWallet\Models\Senders;
+use Systruss\SchedTransactions\Models\Senders;
 
 class Cron extends Command
 {

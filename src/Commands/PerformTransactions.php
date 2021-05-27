@@ -1,6 +1,6 @@
 <?php
 
-namespace Systruss\CryptoWallet\Commands;
+namespace Systruss\SchedTransactions\Commands;
 
 use Illuminate\Console\Command;
 
@@ -13,11 +13,11 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Systruss\CryptoWallet\Services\Networks\MainnetExt;
-use Systruss\CryptoWallet\Services\Voters;
-use Systruss\CryptoWallet\Services\Delegate;
-use Systruss\CryptoWallet\Services\Transactions;
-use Systruss\CryptoWallet\Services\SchedTransaction;
+use Systruss\SchedTransactions\Services\Networks\MainnetExt;
+use Systruss\SchedTransactions\Services\Voters;
+use Systruss\SchedTransactions\Services\Delegate;
+use Systruss\SchedTransactions\Services\Transactions;
+use Systruss\SchedTransactions\Services\SchedTransaction;
 
 
 // https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json
