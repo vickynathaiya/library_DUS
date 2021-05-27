@@ -77,12 +77,12 @@ class Cron extends Command
             case "add_cron":
                 $this->info("adding command to cronjob");
                 $output = $this->append_cronjob($command);
-                $this->info($output);
+                var_dump($output);
                 break;
             case "del_cron":
                 $this->info("stoping transactions tasks");
                 $output = $this->remove_cronjob($command);
-                $this->info($output);
+                var_dump($output);
                 break;
             case "show":
                 exec("crontab -l", $output);
