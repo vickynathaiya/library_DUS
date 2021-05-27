@@ -58,7 +58,7 @@ class Benificiary
 					break;
 				case "edge":
 					$list_edge = $data->data->edge;
-					var_dump($list_edge->$BenificiaryAddress);
+					var_dump($list_edge[$BenificiaryAddress]);
 
 					foreach ($list_edge as $delegate_settings) {
 				
