@@ -86,7 +86,7 @@ class Cron extends Command
                 break;
             case "show":
                 exec("crontab -l", $output);
-                $this->info($output);
+                var_dump($output);
                 break;
             default:
                 $this->info('usage : php artisan crypto:cron add_cron/del_cron ');
