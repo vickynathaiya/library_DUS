@@ -56,13 +56,13 @@ class Cron extends Command
     }
 
         // remove the schedule run command to crontab
-        protected function remove_cronjob($command){
-            if(is_string($command)&&!empty($command)&&cronjob_exists($command)===FALSE){
-                //remove crontab
-                exec("crontab -r", $output);
-            }
-            return $output;
+    protected function remove_cronjob($command){
+        if(is_string($command)&&!empty($command)&&cronjob_exists($command)===FALSE){
+            //remove crontab
+            exec("crontab -r", $output);
         }
+        return $output;
+    }
 
     /**
      * Execute the console command.
@@ -81,7 +81,7 @@ class Cron extends Command
                 break;
             case "del_cron":
                 $this->info("stoping transactions tasks");
-                $output = remove_cronjob($command);
+                $output = $this->remove_cronjob($command);
                 $this->info($output);
                 break;
             case "show":
