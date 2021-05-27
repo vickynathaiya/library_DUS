@@ -18,6 +18,7 @@ use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
 use Systruss\SchedTransactions\Services\Voters;
 use Systruss\SchedTransactions\Services\Delegate;
+use Systruss\SchedTransactions\Services\Benificiary;
 use Systruss\SchedTransactions\Services\Server;
 
 
@@ -93,9 +94,10 @@ class Transactions
 	}
 
 
-	public function getFee($network)
+	public function getFee($network,$totalVoters)
 	{	
 		$fee = '';
+		$totalFee = 0;
 		// get fees from api
 		$client = new Client();
 		$res = $client->get(api_fee_url);
@@ -112,8 +114,18 @@ class Transactions
 				default:
 					echo "\n network provided is not infi or edge \n";
 			}
+			// total fee = rounded(number of voters + 1  / 300) * minimum fee according network
+			if ($totalVoters > 0) 
+			{
+				$totalVoters = $totalVoters +1; //add benificiary
+				$FeeQuotient =  floor($totalVoters/300)+1;
+				$totalFee = $FeeQuotient * $fee;
+			} else 
+			{
+				echo "\n total voters is 0 !!!\n";
+			}
 		}	
-		return $fee;
+		return $totalFee;
 	}
 
     public function initScheduler() 
@@ -129,7 +141,7 @@ class Transactions
 
 
 
-	public function buildTransactions(Voters $voters, Delegate $delegate)
+	public function buildTransactions(Voters $voters, Delegate $delegate, Benificiary $benificiary)
 	{	
 		$transactions = [];
         $valid = $this->checkDelegateEligibility($delegate);
@@ -138,11 +150,18 @@ class Transactions
 			// delegate rank is between 1 and 25 and balance as required
 
             // get fee
-            $this->fee = $this->getFee($delegate->network);
-			
+            $totalFee = $this->getFee($delegate->network, $voters->totalVoters);
+
+			// get Benificiary address and amount
+			$benificiaryAddress = $benificiary->address;
+			$tmp = ($delegate->balance - $totalFee) * $benificiary->rate; 
+			$benificiaryAmount = $tmp / 100; 
+						
             // calculate voters amount
-			$votersList = $voters->calculatePortion($delegate->balance);
-			
+			// to be distributed = balance - (total fee + benificiary)
+			$amountToBeDistributed = $delegate->balance - ($totalFee + $benificiaryAmount);
+			$votersList = $voters->calculatePortion($amountToBeDistributed);
+
 			Network::set(new MainnetExt());
 
 			// Generate transaction
@@ -153,6 +172,8 @@ class Transactions
 					$amount = ($voter['portion'] * $delegate->balance) / 100;
 					$generated = $generated->add($voter['address'], (int)$amount);
 				}
+				// add benificiary
+				$generated = $generated->add($benificiaryAddress,$benificiaryAmount);
 				$generated = $generated->withFee($this->fee);
 				$generated = $generated->withNonce($this->nonce);
 				$generated = $generated->sign($delegate->passphrase);

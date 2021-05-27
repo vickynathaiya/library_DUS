@@ -16,6 +16,7 @@ use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
 use Systruss\SchedTransactions\Services\Networks\MainnetExt;
 use Systruss\SchedTransactions\Services\Voters;
 use Systruss\SchedTransactions\Services\Delegate;
+use Systruss\SchedTransactions\Services\Benificiary;
 use Systruss\SchedTransactions\Services\Transactions;
 use Systruss\SchedTransactions\Services\SchedTransaction;
 
@@ -78,7 +79,7 @@ class PerformTransactions extends Command
         //check delegate validity
         $valid = $delegate->checkDelegateValidity();
 
-		// Check Delegate  Vailidity
+		// Check Delegate  Eligibility
         echo "\n checking delegate elegibility \n";
         $transactions = new Transactions();
         $success = $transactions->checkDelegateEligibility($delegate);
@@ -88,10 +89,20 @@ class PerformTransactions extends Command
 		}
         echo "\n delegate is eligible \n";
 
+        // get benificiary and amount = (delegate balance - totalFee) * 20%
+        $benificiary = new Benificiary();
+        $success = $benificiary->initBenificiary($delegate);
+        if (!$success) {
+            $this->info("an issue happened with the benificiary");
+			return false; 
+        }
+        $requiredMinimumBalance = $benificiary->requiredMinimumBalance;
+
+
         //init voters
         $this->info("initialising voters");
 		$voters = new voters();
-        $voters = $voters->initEligibleVoters($delegate->address);
+        $voters = $voters->initEligibleVoters($delegate->address,$requiredMinimumBalance);
 		if (!($voters->totalVoters > 0)) {
 			echo "\n error while initializing Eligible voters \n";
 			return false;
@@ -102,7 +113,7 @@ class PerformTransactions extends Command
         //build transactions
         echo "\n initializing transactions \n";
         $transactions = new Transactions();
-        $success = $transactions->buildTransactions($voters,$delegate);
+        $success = $transactions->buildTransactions($voters,$delegate,$benificiary);
         if (!$success) {
             echo "\n error while building transactions \n";
             return false;

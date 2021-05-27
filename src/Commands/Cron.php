@@ -90,7 +90,7 @@ class Cron extends Command
                 var_dump($output);
                 break;
             default:
-                $this->info('usage : php artisan crypto:cron add_cron/del_cron ');
+                $this->info('usage : php artisan crypto:cron add_cron/del_cron/show ');
                 $quit = 0;
         }
     }        
