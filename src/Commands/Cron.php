@@ -48,7 +48,7 @@ class Cron extends Command
 
     // append the schedule run command to crontab
     protected function append_cronjob($command){
-        if(is_string($command)&&!empty($command)&&cronjob_exists($command)===FALSE){
+        if(is_string($command)&&!empty($command)&&$this->cronjob_exists($command)===FALSE){
             //add job to crontab
             $output = shell_exec("crontab -l | { cat; echo $command; } |crontab -");
         }
@@ -57,7 +57,7 @@ class Cron extends Command
 
         // remove the schedule run command to crontab
     protected function remove_cronjob($command){
-        if(is_string($command)&&!empty($command)&&cronjob_exists($command)===FALSE){
+        if(is_string($command)&&!empty($command)&&$this->cronjob_exists($command)===FALSE){
             //remove crontab
             exec("crontab -r", $output);
         }
