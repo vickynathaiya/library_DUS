@@ -59,7 +59,7 @@ class Cron extends Command
         // remove the schedule run command to crontab
     protected function remove_cronjob($command){
         $output = [];
-        if(is_string($command)&&!empty($command)&&$this->cronjob_exists($command)===true){
+        if(is_string($command)&&!empty($command)&&$this->cronjob_exists($command)===TRUE){
             //remove crontab
             exec("crontab -r", $output);
         }
