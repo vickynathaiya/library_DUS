@@ -145,7 +145,7 @@ class Delegate
 		// go through the peers and check the wallet
 		//
 
-		$valid = 0;
+		$valid = false;
 		$isDelegate = 0;
 		$isResigned = 1;
 		$nonce = 0;
@@ -186,18 +186,11 @@ class Delegate
 					$nonce = $data->data->nonce + 1; 
 					$balance = $data->data->balance; 
 					if ($isDelegate == 1) {
-						if ($isResigned == 1) {
-							$valid = false;
+						if ($isResigned == 0) {
+							$valid = true;
 							break;
 						}
-					} else {
-						$valid = false;
-						break;
-
-					}
-					// here isDelegate is True and isResigned is False
-					$valid = true;
-					break;
+					} 					
 				}
 			} catch (ClientException $e) {
 				if ($e->hasResponse()) 

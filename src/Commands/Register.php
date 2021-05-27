@@ -96,7 +96,7 @@ class Register extends Command
 		
 		if ($success) 
 		{
-			$this->info("Delegate registered Successfuly");
+			$this->info("Wallet registered Successfuly");
 
 			//initializing scheduler
 			// $transactions = new Transactions();
