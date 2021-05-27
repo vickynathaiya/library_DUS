@@ -50,6 +50,7 @@ class Benificiary
 				case "infi":
 					$list_infi = $data->data->infi;
 					foreach ($list_infi as $delegate_settings) {
+						echo "\n ------- benifiary address : $delegate_settings->beneficaryAddress \n";
 						var_dump($delegate_settings);
 					}
 					break;
