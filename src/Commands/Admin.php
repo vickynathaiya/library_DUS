@@ -86,7 +86,7 @@ class Admin extends Command
                         $delegate = DelegateDb::first();
                         if ($delegate) {
                             $delegate->sched_active = true;
-                            $delgate->save();
+                            $delegate->save();
                         } else {
                             $this->info("no delegate in DB, scheduler cannot be activated");                        
                         }
