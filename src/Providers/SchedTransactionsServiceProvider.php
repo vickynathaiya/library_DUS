@@ -45,7 +45,7 @@ class SchedTransactionsServiceProvider extends ServiceProvider
             $logFile = "logs/schedule_job.log";
             $schedule = app(Schedule::class);
             $schedule->command('crypto:perform_transactions')
-                            ->hourly()
+                            ->everyMinute()
                             ->sendOutputTo(storage_path($logFile));
         });
 
