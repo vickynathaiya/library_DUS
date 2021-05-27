@@ -33,7 +33,7 @@ class Benificiary
 	public $rate;
 	public $amount;
 
-	public function initBenificiary(Delegate $delegate, $totalFee) 
+	public function initBenificiary(Delegate $delegate) 
 	{
 		$found = false;
 		// get delegate address and network
