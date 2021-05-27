@@ -76,7 +76,7 @@ class PerformTransactions extends Command
             return;
         }
         //check delegate validity
-        $delegate = $delegate->checkDelegateValidity();
+        $valid = $delegate->checkDelegateValidity();
 
 		// Check Delegate  Vailidity
         echo "\n checking delegate elegibility \n";
