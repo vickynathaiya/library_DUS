@@ -81,7 +81,7 @@ class Admin extends Command
                     $this->info("no delegate table exist");
                 }                
                 break;
-                case "activate_sched":
+                case "enable_sched":
                     if (Schema::hasTable('delegate_dbs')) {
                         $delegate = DelegateDb::first();
                         if ($delegate) {
@@ -94,8 +94,21 @@ class Admin extends Command
                         $this->info("no delegate table exist, scheduler cannot be activated");
                     }                
                     break;
+                    case "disable_sched":
+                        if (Schema::hasTable('delegate_dbs')) {
+                            $delegate = DelegateDb::first();
+                            if ($delegate) {
+                                $delegate->sched_active = false;
+                                $delegate->save();
+                            } else {
+                                $this->info("no delegate in DB, scheduler cannot be disabled");                        
+                            }
+                        } else {
+                            $this->info("no delegate table exist, scheduler cannot be disabled");
+                        }                
+                        break;
             default:
-                $this->info('usage : php artisan crypto:admin delete_delegate/delete_table/show_delegate/activate_sched ');
+                $this->info('usage : php artisan crypto:admin delete_delegate/delete_table/show_delegate/enable_sched/disable_sched ');
                 $quit = 0;
             }
         return 0;
