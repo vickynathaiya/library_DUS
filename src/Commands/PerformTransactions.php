@@ -59,6 +59,8 @@ class PerformTransactions extends Command
     {
         $disabled = 1;
 		
+        $this->info("starting a new transaction");
+
 		//Initialise Delegate
 		$delegate = new Delegate();
         $success = $delegate->initFromDB();
