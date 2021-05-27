@@ -97,14 +97,6 @@ class Register extends Command
 		if ($success) 
 		{
 			$this->info("Wallet registered Successfuly");
-
-			//initializing scheduler
-			// $transactions = new Transactions();
-			// $success = $transactions->initScheduler();
-			if (!$success) {
-				$this->info("error while initialising scheduler");
-				return false;
-			}
 			return true;
 		} else {
 			$this->info("error while registering delegate");
