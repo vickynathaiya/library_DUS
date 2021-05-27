@@ -71,7 +71,7 @@ class PerformTransactions extends Command
         }
 
         // check if scheduler is active
-        if (!$delegate->active) {
+        if (!$delegate->sched_active) {
             echo "\n Scheduler is not active \n";
             return;
         }
