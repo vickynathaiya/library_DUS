@@ -46,7 +46,7 @@ class SchedTransactionsServiceProvider extends ServiceProvider
             $schedule = app(Schedule::class);
             $schedule->command('crypto:perform_transactions')
                             ->everyMinute()
-                            ->sendOutputTo(storage_path($logFile));
+                            ->appendOutputTo(storage_path($logFile));
         });
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
