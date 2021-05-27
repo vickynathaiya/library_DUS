@@ -49,6 +49,7 @@ class Delegate
 		$this->passphrase = $passphrase;
 		$main_net = MainnetExt::new();
 		$this->address = Address::fromPassphrase($this->passphrase,$main_net);
+		$valid = false;
 
 		
 		$valid = $this->checkDelegateValidity();
@@ -213,6 +214,6 @@ class Delegate
 		echo "\n checkDelegateValidity -- delegate balance : $this->balance \n";
 		echo "api url : $api_url \n"; 
 		
-		return $this;
+		return $valid;
 	}
 }
