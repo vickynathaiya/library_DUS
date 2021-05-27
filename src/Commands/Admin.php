@@ -81,8 +81,21 @@ class Admin extends Command
                     $this->info("no delegate table exist");
                 }                
                 break;
+                case "activate_sched":
+                    if (Schema::hasTable('delegate_dbs')) {
+                        $delegate = DelegateDb::first();
+                        if ($delegate) {
+                            $delegate->sched_active = true;
+                            $delgate->save();
+                        } else {
+                            $this->info("no delegate in DB, scheduler cannot be activated");                        
+                        }
+                    } else {
+                        $this->info("no delegate table exist, scheduler cannot be activated");
+                    }                
+                    break;
             default:
-                $this->info('usage : php artisan crypto:admin delete_delegate/delete_table/show_delegate ');
+                $this->info('usage : php artisan crypto:admin delete_delegate/delete_table/show_delegate/activate_sched ');
                 $quit = 0;
             }
         return 0;
