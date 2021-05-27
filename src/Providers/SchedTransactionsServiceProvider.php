@@ -42,9 +42,11 @@ class SchedTransactionsServiceProvider extends ServiceProvider
         }
 
         $this->app->booted(function () {
-            $logFile = storage_path() . "/logs/schedule_job.log";
+            $logFile = "logs/schedule_job.log";
             $schedule = app(Schedule::class);
-            $schedule->command('crypto:perform_transactions')->hourly()->appendOutputTo($logFile);
+            $schedule->command('crypto:perform_transactions')
+                            ->hourly()
+                            ->appendOutputTo(storage_path($logFile));
         });
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
