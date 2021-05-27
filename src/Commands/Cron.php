@@ -48,6 +48,7 @@ class Cron extends Command
 
     // append the schedule run command to crontab
     protected function append_cronjob($command){
+        $output = [];
         if(is_string($command)&&!empty($command)&&$this->cronjob_exists($command)===FALSE){
             //add job to crontab
             $output = shell_exec("crontab -l | { cat; echo '$command'; } |crontab -");
