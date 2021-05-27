@@ -56,6 +56,7 @@ class Benificiary
 				case "edge":
 					$list_edge = $data->data->edge;
 					foreach ($list_edge as $delegate_settings) {
+						echo "\n test ---- $delegate_settings->beneficaryAddress \n";
 						var_dump($delegate_settings);
 					}
 					break;
