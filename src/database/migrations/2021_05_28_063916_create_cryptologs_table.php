@@ -16,6 +16,8 @@ class CreateCryptologsTable extends Migration
         Schema::create('crypto_logs', function (Blueprint $table) {
             $table->id();
             $table->string('transactions');
+            $table->string('delegate_address');
+            $table->string('beneficiary_address');
             $table->integer('delegate_balance');
             $table->integer('totalVotersclear');
             $table->integer('fee');

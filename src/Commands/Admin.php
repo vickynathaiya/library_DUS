@@ -73,6 +73,9 @@ class Admin extends Command
                     if ($cryptoLogs) {
                         foreach ($cryptoLogs as $log) {
                             $this->info("--------------------------");
+                            echo "Transactions performed at : $log->created_at";
+                            echo "\n delegate address : $log->delegate_address";
+                            echo "\n benificiary address : $log->benificiary_address";
                             echo "\n transactions id : $log->transactions";
                             echo "\n Amount to be distributed : $log->amount";
                             echo "\n total voters : $log->totalVoters";
