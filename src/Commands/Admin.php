@@ -5,6 +5,7 @@ namespace Systruss\SchedTransactions\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Systruss\SchedTransactions\Models\DelegateDb;
+use Systruss\SchedTransactions\Models\CryptoLog;
 
 class Admin extends Command
 {
@@ -66,6 +67,28 @@ class Admin extends Command
                     $this->info("nothing to delete");
                 }     
                 break;
+            case "show_logs":
+                if (Schema::hasTable('crypto_logs')) {
+                    $cryptoLogs = CryptoLog::all();
+                    if ($cryptoLogs) {
+                        foreach ($cryptoLogs as $log) {
+                            $this->info("--------------------------");
+                            echo "\n transactions id : $log->transactions";
+                            echo "\n Amount to be distributed : $log->amount";
+                            echo "\n total voters : $log->totalVoters";
+                            echo "\n delegate balance : $log->delegate_balance";
+                            echo "\n fee : $log->fee";
+                            echo "\n rate : $log->rate";
+                            echo "\n hourCount : $log->hourCount";
+                            echo "\n succeed : $log->succeed \n";
+                        }
+                    } else {
+                        $this->info("no logs in DB");                        
+                    }
+                } else {
+                    $this->info("no log entries in table exist");
+                }                
+                break;
             case "show_delegate":
                 if (Schema::hasTable('delegate_dbs')) {
                     $delegate = DelegateDb::first();
@@ -81,32 +104,32 @@ class Admin extends Command
                     $this->info("no delegate table exist");
                 }                
                 break;
-                case "enable_sched":
-                    if (Schema::hasTable('delegate_dbs')) {
-                        $delegate = DelegateDb::first();
-                        if ($delegate) {
-                            $delegate->sched_active = true;
-                            $delegate->save();
-                        } else {
-                            $this->info("no delegate in DB, scheduler cannot be activated");                        
-                        }
+            case "enable_sched":
+                if (Schema::hasTable('delegate_dbs')) {
+                    $delegate = DelegateDb::first();
+                    if ($delegate) {
+                        $delegate->sched_active = true;
+                        $delegate->save();
                     } else {
-                        $this->info("no delegate table exist, scheduler cannot be activated");
-                    }                
-                    break;
-                    case "disable_sched":
-                        if (Schema::hasTable('delegate_dbs')) {
-                            $delegate = DelegateDb::first();
-                            if ($delegate) {
-                                $delegate->sched_active = false;
-                                $delegate->save();
-                            } else {
-                                $this->info("no delegate in DB, scheduler cannot be disabled");                        
-                            }
-                        } else {
-                            $this->info("no delegate table exist, scheduler cannot be disabled");
-                        }                
-                        break;
+                        $this->info("no delegate in DB, scheduler cannot be activated");                        
+                    }
+                } else {
+                    $this->info("no delegate table exist, scheduler cannot be activated");
+                }                
+                break;
+            case "disable_sched":
+                if (Schema::hasTable('delegate_dbs')) {
+                    $delegate = DelegateDb::first();
+                    if ($delegate) {
+                        $delegate->sched_active = false;
+                        $delegate->save();
+                    } else {
+                        $this->info("no delegate in DB, scheduler cannot be disabled");                        
+                    }
+                } else {
+                    $this->info("no delegate table exist, scheduler cannot be disabled");
+                }                
+                break;
             default:
                 $this->info('usage : php artisan crypto:admin delete_delegate/delete_table/show_delegate/enable_sched/disable_sched ');
                 $quit = 0;
