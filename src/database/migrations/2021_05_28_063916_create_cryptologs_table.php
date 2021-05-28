@@ -19,7 +19,7 @@ class CreateCryptologsTable extends Migration
             $table->string('delegate_address');
             $table->string('beneficiary_address');
             $table->integer('delegate_balance');
-            $table->integer('totalVotersclear');
+            $table->integer('totalVoters');
             $table->integer('fee');
             $table->decimal('rate');
             $table->integer('amount');
