@@ -13,7 +13,7 @@ class CreateCryptologsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cryptologs', function (Blueprint $table) {
+        Schema::create('crypto_logs', function (Blueprint $table) {
             $table->id();
             $table->string('transactions');
             $table->integer('delegate_balance');

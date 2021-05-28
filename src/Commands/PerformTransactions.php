@@ -81,11 +81,13 @@ class PerformTransactions extends Command
 
         // scheduler active , check counter last transactions
         $latest_transactions = CryptoLog::orderBy('id','DESC')->first();
-        if (($latest_transactions->succeed) && ($latest_transactions->hourCount < 24)) {
-            $latest_transactions->hourCount = $latest_transactions->hourCount + 1;
-            $latest_transactions->save();
-            $this->info("Next Transactions in $latest_transactions->hourCount hours");
-            return;
+        if ($latest_transactions) {
+            if (($latest_transactions->succeed) && ($latest_transactions->hourCount < 24)) {
+                $latest_transactions->hourCount = $latest_transactions->hourCount + 1;
+                $latest_transactions->save();
+                $this->info("Next Transactions in $latest_transactions->hourCount hours");
+                return;
+            }
         }
  
         //check delegate validity
