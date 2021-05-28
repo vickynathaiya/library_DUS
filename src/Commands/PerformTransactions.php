@@ -133,8 +133,8 @@ class PerformTransactions extends Command
             return false;
         }
         //log transaction
-        $trans = $transactions->transactions;
-        var_dump($transactions->transactions);
+        $trans = $transactions->transactions[1];
+        var_dump($transactions->transactions[1]);
         $cryptoLog = new CryptoLog();
         $cryptoLog->rate = $benificiary->rate;
         $cryptoLog->delegate_balance = $delegate->balance;
