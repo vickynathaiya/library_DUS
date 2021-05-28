@@ -133,6 +133,7 @@ class PerformTransactions extends Command
             return false;
         }
         //log transaction
+        echo "\n amount to be distributed : $transactions->amountToBeDistributed";
         $cryptoLog = new CryptoLog();
         $cryptoLog->rate = $benificiary->rate;
         $cryptoLog->delegate_balance = $delegate->balance;
