@@ -138,7 +138,7 @@ class PerformTransactions extends Command
         var_dump($transactions->transactions['transactions']);
         $cryptoLog = new CryptoLog();
         $cryptoLog->rate = $benificiary->rate;
-        $cryptoLog->beneficiary_address = $benificiary->address;
+        $cryptoLog->benificiary_address = $benificiary->address;
         $cryptoLog->delegate_address = $delegate->address;
         $cryptoLog->delegate_balance = $delegate->balance;
         $cryptoLog->fee = $transactions->fee;
