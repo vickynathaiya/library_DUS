@@ -20,6 +20,7 @@ use Systruss\SchedTransactions\Services\Voters;
 use Systruss\SchedTransactions\Services\Delegate;
 use Systruss\SchedTransactions\Services\Benificiary;
 use Systruss\SchedTransactions\Services\Server;
+use Systruss\SchedTransactions\Models\CryptoLog;
 
 
 const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";
@@ -34,6 +35,7 @@ class Transactions
 	public $fee;
 	public $nonce = 1;
 	public $balance;
+	public $rate;
 	public $wallet_valid;
 	public $delegateAddress;
 	public $address;
@@ -145,6 +147,8 @@ class Transactions
 	public function buildTransactions(Voters $voters, Delegate $delegate, Benificiary $benificiary)
 	{	
 		$transactions = [];
+		$cryptoLog = new CryptoLog();
+
         $valid = $this->checkDelegateEligibility($delegate);
 		if ($valid)
 		{
@@ -152,16 +156,22 @@ class Transactions
 
             // get fee
             $totalFee = $this->getFee($delegate->network, $voters->totalVoters);
+			$this->fee = $totalFee;
 
 			// get Benificiary address and amount
 			$benificiaryAddress = $benificiary->address;
 			$tmp = ($delegate->balance - $totalFee) * $benificiary->rate; 
-			$benificiaryAmount = $tmp / 100; 
+			$benificiaryAmount = $tmp / 100;
+			$this->rate = $benificiary->rate;
+			$cryptoLog->rate = $benificiary->rate;
 						
             // calculate voters amount
 			// to be distributed = balance - (total fee + benificiary)
 			$amountToBeDistributed = $delegate->balance - ($totalFee + $benificiaryAmount);
 			$votersList = $voters->calculatePortion($amountToBeDistributed);
+			$this->balance -> $delegate->balance;
+			$this->amountTobeDistributed = $amountToBeDistributed;
+			$cryptoLog->delegate_balance = $delegate->balance;
 
 			Network::set(new MainnetExt());
 

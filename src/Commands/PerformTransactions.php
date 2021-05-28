@@ -19,6 +19,7 @@ use Systruss\SchedTransactions\Services\Delegate;
 use Systruss\SchedTransactions\Services\Benificiary;
 use Systruss\SchedTransactions\Services\Transactions;
 use Systruss\SchedTransactions\Services\SchedTransaction;
+use Systruss\SchedTransactions\Models\CryptoLog;
 
 
 // https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json
@@ -59,6 +60,7 @@ class PerformTransactions extends Command
     public function handle()
     {
         $disabled = 1;
+        
 		
         $this->info("starting a new transaction");
 
@@ -76,6 +78,16 @@ class PerformTransactions extends Command
             echo "\n Scheduler is not active \n";
             return;
         }
+
+        // scheduler active , check counter last transactions
+        $latest_transactions = CryptoLog::orderBy('id','DESC')->first();
+        if (($latest_transactions->succeed) && ($latest_transactions->hourCount < 24)) {
+            $latest_transactions->hourCount = $latest_transactions->hourCount + 1;
+            $latest_transactions->save();
+            $this->info("Next Transactions in $latest_transactions->hourCount hours");
+            return;
+        }
+ 
         //check delegate validity
         $valid = $delegate->checkDelegateValidity();
 
@@ -118,10 +130,28 @@ class PerformTransactions extends Command
             echo "\n error while building transactions \n";
             return false;
         }
+        //log transaction
+        $cryptoLog = new CryptoLog();
+        $cryptoLog->rate = $benificiary->rate;
+        $cryptoLog->delegate_balance = $delegate->balance;
+        $cryptoLog->fee = $transactions->fee;
+        $cryptoLog->amount = $transactions->amount;
+        $cryptoLog->totalVoters = $voters->totalVoters;
+        $cryptoLog->transactions = $transactions->transactions;
+        $cryptoLog->hourCount = 0;
+        $cryptoLog->succeed = false;
+
         $this->info("transaction initialized successfully");
         echo "\n ready to run the folowing transactions : \n";
         echo json_encode($transactions->transactions, JSON_PRETTY_PRINT);
         echo "\n";
+
+        //for simulation transactions status
+        $succeed = 1;
+        if ($succeed) {
+            $cryptoLog->succeed = true;
+            $cryptoLog->save();
+        }
 
         if (!$disabled) {
             //perform transactions
