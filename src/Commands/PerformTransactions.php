@@ -133,7 +133,8 @@ class PerformTransactions extends Command
             return false;
         }
         //log transaction
-        $trans_id = json_decode($transactions->transactions);
+        $trans = json_encode($transactions->transactions);
+        var_dump($trans);
         $cryptoLog = new CryptoLog();
         $cryptoLog->rate = $benificiary->rate;
         $cryptoLog->delegate_balance = $delegate->balance;
