@@ -51,19 +51,18 @@ class Benificiary
 				case "infi":
 					$list_infi = $data->data->infi;
 					var_dump($list_infi);
-					foreach ($list_infi as $delegate_settings) {
-						echo "\n ------- benifiary address : $delegate_settings->beneficaryAddress \n";
-						
+					foreach ($list_infi as $address => $settings) {
+						echo "\n ------- benifiary address : $address \n";
+						var_dump($settings);
 					}
 					break;
 				case "edge":
 					$list_edge = $data->data->edge;
-					var_dump($list_edge[$BenificiaryAddress]);
+					var_dump($list_edge->$BenificiaryAddress);
 
-					foreach ($list_edge as $delegate_settings) {
-				
-						echo "\n test ---- $delegate_settings->beneficaryAddress \n";
-					
+					foreach ($list_edge as $address => $settings) {
+						echo "\n ------- benifiary address : $address \n";
+						var_dump($settings);
 					}
 					break;
 				default:
