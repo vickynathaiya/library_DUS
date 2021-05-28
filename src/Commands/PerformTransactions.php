@@ -127,13 +127,13 @@ class PerformTransactions extends Command
         //build transactions
         echo "\n initializing transactions \n";
         $transactions = new Transactions();
-        $success = $transactions->buildTransactions($voters,$delegate,$benificiary);
+        $transactions = $transactions->buildTransactions($voters,$delegate,$benificiary);
         if (!$success) {
             echo "\n error while building transactions \n";
             return false;
         }
         //log transaction
-        echo "\n amount to be distributed : $transactions->amountToBeDistributed";
+        echo "\n amount to be distributed : $transactions->amountToBeDistributed \n";
         $cryptoLog = new CryptoLog();
         $cryptoLog->rate = $benificiary->rate;
         $cryptoLog->delegate_balance = $delegate->balance;

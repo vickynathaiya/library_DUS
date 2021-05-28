@@ -37,6 +37,7 @@ class Transactions
 	public $balance;
 	public $rate;
 	public $wallet_valid;
+	public $buildSucceed;
 	public $delegateAddress;
 	public $address;
 	public $amountToBeDistributed;
@@ -175,7 +176,7 @@ class Transactions
 			
 
 			Network::set(new MainnetExt());
-
+			$this->buildSucceed = false;
 			// Generate transaction
 			if ($votersList->eligibleVoters)
 			{
@@ -192,13 +193,14 @@ class Transactions
 				$this->transactions = [ 'transactions' => [$generated->transaction->data] ];
                 $this->peer_ip = $delegate->peer_ip;
                 $this->peer_port = $delegate->peer_port;
+				$this->buildSucceed = true;
 			} else {
 				// there is no voters
-				return false;	
+				$this->buildSucceed = false;	
 			}
 		} else {
 			//invalid sender
-			return false;
+			$this->buildSucceed = false;
 		}
 		return $this;
 	}
