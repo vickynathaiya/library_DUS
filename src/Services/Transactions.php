@@ -39,7 +39,7 @@ class Transactions
 	public $wallet_valid;
 	public $delegateAddress;
 	public $address;
-	public $amount;
+	public $amountToBeDistributed;
 	public $delegatePassphrase;
 	public $network;
 	public $voters;

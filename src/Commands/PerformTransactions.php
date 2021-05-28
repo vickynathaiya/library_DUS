@@ -137,7 +137,7 @@ class PerformTransactions extends Command
         $cryptoLog->rate = $benificiary->rate;
         $cryptoLog->delegate_balance = $delegate->balance;
         $cryptoLog->fee = $transactions->fee;
-        $cryptoLog->amount = $transactions->amount;
+        $cryptoLog->amount = $transactions->amountToBeDistributed;
         $cryptoLog->totalVoters = $voters->totalVoters;
         $cryptoLog->transactions = json_encode($transactions->transactions);
         $cryptoLog->hourCount = 0;
