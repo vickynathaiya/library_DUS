@@ -26,14 +26,14 @@ const minBalance = 100000;
 const DelegateAddress = "GeocWzPKN1kLWN4xCr4KWr75EBnkRS4ds1";
 		
 
-class Benificiary 
+class Beneficary 
 {
 	public $address;
 	public $requiredMinimumBalance; //required minimum balance for voters
 	public $rate;
 	public $amount;
 	
-	public function initBenificiary(Delegate $delegate) 
+	public function initBeneficary(Delegate $delegate) 
 	{
 		$found = false;
 		// get delegate address and network

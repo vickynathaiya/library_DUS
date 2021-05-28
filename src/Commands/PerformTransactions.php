@@ -16,7 +16,7 @@ use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
 use Systruss\SchedTransactions\Services\Networks\MainnetExt;
 use Systruss\SchedTransactions\Services\Voters;
 use Systruss\SchedTransactions\Services\Delegate;
-use Systruss\SchedTransactions\Services\Benificiary;
+use Systruss\SchedTransactions\Services\Beneficary;
 use Systruss\SchedTransactions\Services\Transactions;
 use Systruss\SchedTransactions\Services\SchedTransaction;
 use Systruss\SchedTransactions\Models\CryptoLog;
@@ -104,14 +104,14 @@ class PerformTransactions extends Command
 		}
         echo "\n delegate is eligible \n";
 
-        // get benificiary and amount = (delegate balance - totalFee) * 20%
-        $benificiary = new Benificiary();
-        $success = $benificiary->initBenificiary($delegate);
+        // get beneficary and amount = (delegate balance - totalFee) * 20%
+        $beneficary = new Beneficary();
+        $success = $beneficary->initBeneficary($delegate);
         if (!$success) {
-            $this->info("an issue happened with the benificiary");
+            $this->info("an issue happened with the beneficary");
 			return false; 
         }
-        $requiredMinimumBalance = $benificiary->requiredMinimumBalance;
+        $requiredMinimumBalance = $beneficary->requiredMinimumBalance;
 
 
         //init voters
@@ -128,7 +128,7 @@ class PerformTransactions extends Command
         //build transactions
         echo "\n initializing transactions \n";
         $transactions = new Transactions();
-        $transactions = $transactions->buildTransactions($voters,$delegate,$benificiary);
+        $transactions = $transactions->buildTransactions($voters,$delegate,$beneficary);
         if (!$transactions->buildSucceed) {
             echo "\n error while building transactions \n";
             return false;
@@ -137,8 +137,8 @@ class PerformTransactions extends Command
         $trans = $transactions->transactions['transactions'];
         var_dump($transactions->transactions['transactions']);
         $cryptoLog = new CryptoLog();
-        $cryptoLog->rate = $benificiary->rate;
-        $cryptoLog->benificiary_address = $benificiary->address;
+        $cryptoLog->rate = $beneficary->rate;
+        $cryptoLog->beneficary_address = $beneficary->address;
         $cryptoLog->delegate_address = $delegate->address;
         $cryptoLog->delegate_balance = $delegate->balance;
         $cryptoLog->fee = $transactions->fee;
