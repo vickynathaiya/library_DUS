@@ -141,7 +141,7 @@ class PerformTransactions extends Command
         $cryptoLog->fee = $transactions->fee;
         $cryptoLog->amount = $transactions->amountToBeDistributed;
         $cryptoLog->totalVoters = $voters->totalVoters;
-        $cryptoLog->transactions = $trans['id'];
+        $cryptoLog->transactions = $trans[0]['id'];
         $cryptoLog->hourCount = 0;
         $cryptoLog->succeed = false;
 
