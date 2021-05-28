@@ -170,6 +170,7 @@ class Transactions
 			$amountToBeDistributed = $delegate->balance - ($totalFee + $benificiaryAmount);
 			$votersList = $voters->calculatePortion($amountToBeDistributed);
 			$this->balance = $delegate->balance;
+			echo "\n amount to be distributed : $amountToBeDistributed";
 			$this->amountTobeDistributed = $amountToBeDistributed;
 			
 
