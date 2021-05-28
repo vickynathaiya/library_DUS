@@ -32,7 +32,7 @@ class Benificiary
 	public $requiredMinimumBalance; //required minimum balance for voters
 	public $rate;
 	public $amount;
-	public $BenificiaryAddress = "GeocWzPKN1kLWN4xCr4KWr75EBnkRS4ds1";
+	public $DelegateAddress = "GeocWzPKN1kLWN4xCr4KWr75EBnkRS4ds1";
 
 	public function initBenificiary(Delegate $delegate) 
 	{
@@ -51,18 +51,28 @@ class Benificiary
 				case "infi":
 					$list_infi = $data->data->infi;
 					var_dump($list_infi);
-					foreach ($list_infi as $address => $settings) {
-						echo "\n ------- benifiary address : $address \n";
-						var_dump($settings);
+					foreach ($list_infi as $delegate_address => $settings) {
+						if ($delegate_address == $DelegateAddress) {
+							$this->address = $settings->beneficaryAddress;
+							$this->rate = $settings->confidenceRate;
+							$this->requiredMinimumBalance = $settings->requiredMinimumBalance;
+							$found = true;
+							break;
+						}
 					}
 					break;
 				case "edge":
 					$list_edge = $data->data->edge;
 					var_dump($list_edge);
 
-					foreach ($list_edge as $address => $settings) {
-						echo "\n ------- benifiary address : $address \n";
-						var_dump($settings);
+					foreach ($list_edge as $delegate_address => $settings) {
+						if ($delegate_address == $DelegateAddress) {
+							$this->address = $settings->beneficaryAddress;
+							$this->rate = $settings->confidenceRate;
+							$this->requiredMinimumBalance = $settings->requiredMinimumBalance;
+							$found = true;
+							break;
+						}
 					}
 					break;
 				default:
@@ -71,6 +81,6 @@ class Benificiary
 			} 
 		}
 
-		return true;
+		return $found;
 	}
 }
