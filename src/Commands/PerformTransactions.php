@@ -128,7 +128,7 @@ class PerformTransactions extends Command
         echo "\n initializing transactions \n";
         $transactions = new Transactions();
         $transactions = $transactions->buildTransactions($voters,$delegate,$benificiary);
-        if (!$success) {
+        if (!$transactions->buildSucceed) {
             echo "\n error while building transactions \n";
             return false;
         }
