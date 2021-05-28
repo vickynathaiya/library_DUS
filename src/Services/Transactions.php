@@ -174,7 +174,7 @@ class Transactions
 					$generated = $generated->add($voter['address'], (int)$amount);
 				}
 				// add benificiary
-				$generated = $generated->add($benificiaryAddress,$benificiaryAmount);
+				$generated = $generated->add($benificiaryAddress,floor($benificiaryAmount));
 				$generated = $generated->withFee($totalFee);
 				$generated = $generated->withNonce(nonce);
 				$generated = $generated->sign($delegate->passphrase);
