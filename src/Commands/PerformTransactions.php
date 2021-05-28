@@ -85,7 +85,8 @@ class PerformTransactions extends Command
             if (($latest_transactions->succeed) && ($latest_transactions->hourCount < 24)) {
                 $latest_transactions->hourCount = $latest_transactions->hourCount + 1;
                 $latest_transactions->save();
-                $this->info("Next Transactions in $latest_transactions->hourCount hours");
+                $next_transactions = 24 - $latest_transactions->hourCount;
+                $this->info("Next Transactions in $next_transactions hours");
                 return;
             }
         }

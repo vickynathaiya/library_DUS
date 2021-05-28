@@ -67,7 +67,7 @@ class Benificiary
 					foreach ($list_edge as $delegate_address => $settings) {
 						if ($delegate_address == DelegateAddress) {
 							$this->address = $settings->beneficaryAddress;
-							$this->rate = $settings->confidenceRate;
+							$this->rate = $settings->beneficaryRate;
 							$this->requiredMinimumBalance = $settings->requiredMinimumBalance;
 							$found = true;
 							break;
