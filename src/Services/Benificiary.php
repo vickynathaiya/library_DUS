@@ -23,7 +23,7 @@ const api_settings_delegate_url = "https://raw.githubusercontent.com/InfinitySof
 const VoterMinBalance = 100000;
 const DelegateMinBalance = 100000;
 const minBalance = 100000;
-
+const DelegateAddress = "GeocWzPKN1kLWN4xCr4KWr75EBnkRS4ds1";
 		
 
 class Benificiary 
@@ -32,8 +32,7 @@ class Benificiary
 	public $requiredMinimumBalance; //required minimum balance for voters
 	public $rate;
 	public $amount;
-	public $DelegateAddress = "GeocWzPKN1kLWN4xCr4KWr75EBnkRS4ds1";
-
+	
 	public function initBenificiary(Delegate $delegate) 
 	{
 		$found = false;
@@ -52,7 +51,7 @@ class Benificiary
 					$list_infi = $data->data->infi;
 					var_dump($list_infi);
 					foreach ($list_infi as $delegate_address => $settings) {
-						if ($delegate_address == $DelegateAddress) {
+						if ($delegate_address == DelegateAddress) {
 							$this->address = $settings->beneficaryAddress;
 							$this->rate = $settings->confidenceRate;
 							$this->requiredMinimumBalance = $settings->requiredMinimumBalance;
@@ -66,7 +65,7 @@ class Benificiary
 					var_dump($list_edge);
 
 					foreach ($list_edge as $delegate_address => $settings) {
-						if ($delegate_address == $DelegateAddress) {
+						if ($delegate_address == DelegateAddress) {
 							$this->address = $settings->beneficaryAddress;
 							$this->rate = $settings->confidenceRate;
 							$this->requiredMinimumBalance = $settings->requiredMinimumBalance;
