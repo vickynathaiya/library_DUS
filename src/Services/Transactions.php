@@ -27,6 +27,7 @@ const api_delegates_url ="https://api.hedge.infinitysolutions.io/api/delegates";
 const MinDelegateBalance = 100000;
 const MinDelegateRank = 1;
 const MaxDelegateRank = 25;
+const nonce = 1;
 
 class Transactions
 {
@@ -175,7 +176,7 @@ class Transactions
 				// add benificiary
 				$generated = $generated->add($benificiaryAddress,$benificiaryAmount);
 				$generated = $generated->withFee($totalFee);
-				$generated = $generated->withNonce($nonce);
+				$generated = $generated->withNonce(nonce);
 				$generated = $generated->sign($delegate->passphrase);
 				$this->transactions = [ 'transactions' => [$generated->transaction->data] ];
                 $this->peer_ip = $delegate->peer_ip;
