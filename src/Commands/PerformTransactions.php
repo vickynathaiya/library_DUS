@@ -133,14 +133,14 @@ class PerformTransactions extends Command
             return false;
         }
         //log transaction
-        echo "\n amount to be distributed : $transactions->amountToBeDistributed \n";
+        $trans_id = json_decode($transactions->transactions);
         $cryptoLog = new CryptoLog();
         $cryptoLog->rate = $benificiary->rate;
         $cryptoLog->delegate_balance = $delegate->balance;
         $cryptoLog->fee = $transactions->fee;
         $cryptoLog->amount = $transactions->amountToBeDistributed;
         $cryptoLog->totalVoters = $voters->totalVoters;
-        $cryptoLog->transactions = $transactions->transactions->id;
+        $cryptoLog->transactions = $trans->id;
         $cryptoLog->hourCount = 0;
         $cryptoLog->succeed = false;
 
