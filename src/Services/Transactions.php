@@ -174,8 +174,8 @@ class Transactions
 				}
 				// add benificiary
 				$generated = $generated->add($benificiaryAddress,$benificiaryAmount);
-				$generated = $generated->withFee($this->fee);
-				$generated = $generated->withNonce($this->nonce);
+				$generated = $generated->withFee($totalFee);
+				$generated = $generated->withNonce($nonce);
 				$generated = $generated->sign($delegate->passphrase);
 				$this->transactions = [ 'transactions' => [$generated->transaction->data] ];
                 $this->peer_ip = $delegate->peer_ip;
