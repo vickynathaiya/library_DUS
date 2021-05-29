@@ -43,19 +43,28 @@ If the chosen delegate excludes the accounts which have a too low balance, the D
 Install Delegate Ubuntu Server 
 
 1 - install Laravel and create a project
+```bash
 # composer create-project laravel/laravel <project name>
+```
 
 2 - Update the .env file to point it to you Database server.
 
 3 - add the folowings packages :
+```bash
 # composer require arkecosystem/crypto
 # composer require systruss/schedtransactions
+```
 
 4 - Run artisan migrate to create the tables in Database.
-# php artisan migrate
 
+```bash
+# php artisan migrate
+```
 5 - register wallet
+
+```bash
 # php artisan crypto:register
+```
 
 Choice your blockchain "infinity" or "hedge"
 Enter your network: 
@@ -76,18 +85,27 @@ Enter your wallet delegate:
 ```
 
 6 - update the ubuntu system crontab
-# php artisan crypto:cron add_cron
 
-7 - restart cron : 
+```bash
+# php artisan crypto:cron add_cron
+```
+
+7 - restart cron :
+```bash 
     Open a shell command in a terminal and run :
     sudo systemctl restart cron
+```
 
 8 - enable scheduler
+```bash
 # php artisan crypto:admin enable_sched
+```
 
 9 - To monitor your application you can use the followings :
+```bash
     a - check scheduler logs : storage/logs/schedule_job.log
     b - php artisan crypto:admin show_logs
+```
 
 </details>
 
