@@ -47,9 +47,9 @@ Install Delegate Ubuntu Server
 # composer create-project laravel/laravel <project name>
 ```
 
-2 - Update the .env file to point it to you Database server.
+2 - Update the .env file to point to you Database server.
 
-3 - add the folowings packages :
+3 - Add the folowings packages :
 ```bash
 # composer require arkecosystem/crypto
 # composer require systruss/schedtransactions
@@ -60,7 +60,7 @@ Install Delegate Ubuntu Server
 ```bash
 # php artisan migrate
 ```
-5 - register wallet
+5 - Register wallet
 
 ```bash
 # php artisan crypto:register
@@ -84,19 +84,19 @@ Enter your wallet delegate:
 "this is my secret passphrase"
 ```
 
-6 - update the ubuntu system crontab
+6 - Update the ubuntu system crontab
 
 ```bash
 # php artisan crypto:cron add_cron
 ```
 
-7 - restart cron :
+7 - Restart cron :
 ```bash 
     Open a shell command in a terminal and run :
     sudo systemctl restart cron
 ```
 
-8 - enable scheduler
+8 - Enable scheduler
 ```bash
 # php artisan crypto:admin enable_sched
 ```
