@@ -46,6 +46,7 @@ class Transactions
 	public $transactions;
 	public $api_delegates_url;
 	public $publicKey;
+	public $errMesg;
 
 	public function getFee($network,$totalVoters)
 	{	
@@ -107,8 +108,8 @@ class Transactions
             // get fee
             $totalFee = $this->getFee($delegate->network, $voters->totalVoters);
 			if ($totalFee > $delegate->balance) {
-				echo "\n Fee greater than delegate available balance \n";
 				$this->buildSucceed = false;
+				$this->errMesg = "buildTransactions : warning : Fee greater than delegate available balance";
 				return $this;
 			}
 			$this->fee = $totalFee;

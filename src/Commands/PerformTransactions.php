@@ -132,7 +132,7 @@ class PerformTransactions extends Command
         $transactions = new Transactions();
         $transactions = $transactions->buildTransactions($voters,$delegate,$beneficary);
         if (!$transactions->buildSucceed) {
-            echo "\n error while building transactions \n";
+            echo "\n $transactions->errMesg \n";
             return false;
         }
         //log transaction
