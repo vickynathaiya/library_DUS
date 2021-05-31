@@ -23,6 +23,9 @@ const failed = 0;
 const succeed = 1;
 const api_delegates_edge_url ="https://api.hedge.infinitysolutions.io/api/delegates";
 const api_delegates_infi_url ="https://api.infinitysolutions.io/api/delegates";
+const MinDelegateBalance = 100000;
+const MinDelegateRank = 1;
+const MaxDelegateRank = 25;
 
 class Delegate
 {

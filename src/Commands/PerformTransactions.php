@@ -119,7 +119,7 @@ class PerformTransactions extends Command
         //init voters
         $this->info("initialising voters");
 		$voters = new voters();
-        $voters = $voters->initEligibleVoters($delegate,$requiredMinimumBalance);
+        $voters = $voters->initEligibleVoters($requiredMinimumBalance);
 		if (!($voters->totalVoters > 0)) {
 			echo "\n error while initializing Eligible voters \n";
 			return false;
