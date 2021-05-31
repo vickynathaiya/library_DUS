@@ -92,6 +92,13 @@ class Admin extends Command
                     $this->info("no log entries in table exist");
                 }                
                 break;
+            case "clear_logs":
+                if (Schema::hasTable('crypto_logs')) {
+                    $cryptoLogs = CryptoLog::truncate();
+                } else {
+                    $this->info("log table not prsent, did you forget to run migrate ?");
+                }                
+                break;
             case "show_delegate":
                 if (Schema::hasTable('delegate_dbs')) {
                     $delegate = DelegateDb::first();
