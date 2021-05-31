@@ -262,8 +262,8 @@ class Delegate
 					}
 				}
 				if ($found) {
-					echo "\n delegate rank : $rank \n";					
-					if ($rank >= MinDelegateRank && $rank <= MaxDelegateRank){
+					echo "\n delegate rank : $this->rank \n";					
+					if ($this->rank >= MinDelegateRank && $this->rank <= MaxDelegateRank){
 						return true;
 					}else{
 						return false;
