@@ -99,7 +99,7 @@ class Transactions
 		$transactions = [];
 		
 
-        $valid = $this->checkDelegateEligibility($delegate);
+        $valid = $delegate->checkDelegateEligibility();
 		if ($valid)
 		{
 			// delegate rank is between 1 and 25 and balance as required
