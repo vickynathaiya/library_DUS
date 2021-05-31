@@ -63,7 +63,7 @@ class PerformTransactions extends Command
         
 		$this->info("---------------------------------------------");
         echo date('d-m-y h:i:s');
-        echo "\n";
+        echo "   ";
         $this->info("starting a new transaction");
 
 
