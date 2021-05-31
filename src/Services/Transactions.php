@@ -24,9 +24,6 @@ use Systruss\SchedTransactions\Services\Server;
 
 
 const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";
-const MinDelegateBalance = 100000;
-const MinDelegateRank = 1;
-const MaxDelegateRank = 25;
 const nonce = 1;
 
 class Transactions
