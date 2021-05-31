@@ -36,7 +36,7 @@ class Cron extends Command
     // check if shedule run command already exist in crontab
     protected function cronjob_exists($command){
         $cronjob_exists=false;
-        exec('crontab -l', $crontab);
+        exec('crontab -l', $crontab,$result);
         if(isset($crontab)&&is_array($crontab)){
             $crontab = array_flip($crontab);
             if(isset($crontab[$command])){
@@ -75,7 +75,6 @@ class Cron extends Command
     {
         $base_path = base_path();
         $command = "* * * * * cd $base_path && php artisan schedule:run >> /dev/null 2>&1";
-        echo "\n cron tab entry added : $command \n";
         $action = $this->argument('action');
         switch ($action) {
             case "add_cron":
