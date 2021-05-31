@@ -106,6 +106,11 @@ class Transactions
 
             // get fee
             $totalFee = $this->getFee($delegate->network, $voters->totalVoters);
+			if ($totalFee > $delegate->balance) {
+				echo "\n Fee greater than delegate available balance \n";
+				$this->buildSucceed = false;
+				return $this;
+			}
 			$this->fee = $totalFee;
 
 			// get Beneficary address and amount
