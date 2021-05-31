@@ -15,7 +15,7 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Systruss\SchedTransactions\Models\Delegate;
+use Systruss\SchedTransactions\Services\Delegate;
 use Systruss\SchedTransactions\Services\Server;
 
 const base_url_infi = "https://api.infinitysolutions.io";
@@ -33,7 +33,6 @@ class Voters
 
 	public function initEligibleVoters(Delegate $delegate,$minVoterBalance) 
 	{
-		
 		$eligibleVoters = [];
 		$this->totalVoters = 0;
 		$delegateAddress = $delegate->address;
