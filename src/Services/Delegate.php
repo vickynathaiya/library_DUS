@@ -21,6 +21,8 @@ use Systruss\SchedTransactions\Services\Server;
 
 const failed = 0;
 const succeed = 1;
+const api_delegates_edge_url ="https://api.hedge.infinitysolutions.io/api/delegates";
+const api_delegates_infi_url ="https://api.infinitysolutions.io/api/delegates";
 
 class Delegate
 {
@@ -39,6 +41,8 @@ class Delegate
 	public $peers;
 	public $sched_active;
 	public $transactions;
+	public $api_delegates_url;
+	public $publicKey;
 
 
 	public function register($passphrase,$network)
@@ -216,5 +220,62 @@ class Delegate
 		echo "api url : $api_url \n"; 
 		
 		return $valid;
+	}
+
+	public function checkDelegateEligibility() 
+	{
+		$found = false;
+		$api_delegates_url = api_delegates_edge_url;
+
+		// check if delegate balance is grater than the minimum required
+		echo "\n delegate balance : $this->balance \n";
+		if ($this->balance < MinDelegateBalance) {
+			echo "\n insufficient balance \n";
+			return false;
+		}
+		// get list of delegate
+		$delegate_network = $this->network;
+
+
+		if ($delegate_network == "infi") {
+			echo "\n delegate network : $delegate_network \n";
+			$api_delegates_url = api_delegates_infi_url;
+		}
+
+		$client = new Client();
+		$res = $client->get($api_delegates_url);
+		if ($data = $res->getBody()->getContents()) 
+		{
+			$data = json_decode($data);
+			$totalDelegates = $data->meta->totalCount;
+			if ($totalDelegates > 0) {
+				$listDelegates = $data->data;
+				foreach ($listDelegates as $delegate_elem) {
+					if ($delegate_elem->address == $this->address) {
+						$this->rank = (int)$delegate_elem->rank;
+						$this->publicKey = $delegate_elem->publicKey;
+						$found = true;
+						break;
+					}
+				}
+				if ($found) {
+					echo "\n delegate rank : $rank \n";					
+					if ($rank >= MinDelegateRank && $rank <= MaxDelegateRank){
+						return true;
+					}else{
+						return false;
+					}
+				} else {
+					echo "\n delegate not found !!! \n";
+					return false;
+				}
+			} else {
+				echo "\n  number of delegate 0 !!! \n";
+				return false;
+			} 			
+		} else {
+				echo "\n no data returned from the api delagate url !!! \n";
+				return false;
+			}
 	}
 }

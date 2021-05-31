@@ -50,6 +50,7 @@ class Transactions
 	public $peers;
 	public $transactions;
 	public $api_delegates_url;
+	public $publicKey;
 
 
     public function checkDelegateEligibility(Delegate $delegate) 
@@ -82,7 +83,8 @@ class Transactions
 				$listDelegates = $data->data;
 				foreach ($listDelegates as $delegate_elem) {
 					if ($delegate_elem->address == $delegate->address) {
-						$rank = (int)$delegate_elem->rank;
+						$this->rank = (int)$delegate_elem->rank;
+						$this->publicKey = $delegate_elem->publicKey;
 						$found = true;
 						break;
 					}

@@ -18,7 +18,10 @@ use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
 use Systruss\SchedTransactions\Models\Delegate;
 use Systruss\SchedTransactions\Services\Server;
 
-const api_voters_url = "https://api.infinitysolutions.io/api/delegates/024844fa4b301ae6f9c514c963c18540630f1755dcca02ea9e91bae4b11d3dd1f1/voters";
+const base_url_infi = "https://api.infinitysolutions.io";
+const base_url_edge = "https://api.edge.infinitysolutions.io";
+const api_voters_infi_url = "/api/delegates/024844fa4b301ae6f9c514c963c18540630f1755dcca02ea9e91bae4b11d3dd1f1/voters";
+const api_voters_edge_url = "/api/delegates/024844fa4b301ae6f9c514c963c18540630f1755dcca02ea9e91bae4b11d3dd1f1/voters";
 
 // const minVoterBalance = 100000;
 		
@@ -28,13 +31,23 @@ class Voters
 	public $eligibleVoters;
 	public $totalVoters;
 
-	public function initEligibleVoters($delegateAddress,$minVoterBalance) 
+	public function initEligibleVoters(Delegate $delegate,$minVoterBalance) 
 	{
+		
 		$eligibleVoters = [];
 		$this->totalVoters = 0;
+		$delegateAddress = $delegate->address;
+		$delegateNetwork = $delegate->netowrk;
+		$delegatePublicKey = $delegate->publicKey;
+		$api_voters_url = base_url_edge . "/api/delegates/" . $delegatePublicKey . "/voters";
+
 		// get fees from api
+		if ($delegateNetwork == "infi") {
+			$api_voters_url = base_url_infi . "/api/delegates/" . $delegatePublicKey . "/voters";
+		}
+
 		$client = new Client();
-		$res = $client->get(api_voters_url);
+		$res = $client->get($api_voters_url);
 		if ($data = $res->getBody()->getContents()) 
 		{
 			$data = json_decode($data);
