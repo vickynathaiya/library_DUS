@@ -62,7 +62,8 @@ class PerformTransactions extends Command
         $disabled = 1;
         
 		$this->info("---------------------------------------------");
-        echo "\n date('d-m-y h:i:s')  : ";
+        echo date('d-m-y h:i:s');
+        echo "\n";
         $this->info("starting a new transaction");
 
 
