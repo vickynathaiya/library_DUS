@@ -73,7 +73,9 @@ class Cron extends Command
      */
     public function handle()
     {
-        $command = "* * * * * cd /var/www/html/laravelprod && php artisan schedule:run >> /dev/null 2>&1";
+        $base_path = base_path();
+        $command = "* * * * * cd $base_path && php artisan schedule:run >> /dev/null 2>&1";
+        echo "\n cron tab entry added : $command \n";
         $action = $this->argument('action');
         switch ($action) {
             case "add_cron":
