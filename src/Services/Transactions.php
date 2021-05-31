@@ -24,7 +24,8 @@ use Systruss\SchedTransactions\Services\Server;
 
 
 const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";
-const api_delegates_url ="https://api.hedge.infinitysolutions.io/api/delegates";
+const api_delegates_edge_url ="https://api.hedge.infinitysolutions.io/api/delegates";
+const api_delegates_infi_url ="https://api.infinitysolutions.io/api/delegates";
 const MinDelegateBalance = 100000;
 const MinDelegateRank = 1;
 const MaxDelegateRank = 25;
@@ -48,11 +49,14 @@ class Transactions
 	public $peer_port;
 	public $peers;
 	public $transactions;
+	public $api_delegates_url;
 
 
     public function checkDelegateEligibility(Delegate $delegate) 
 	{
 		$found = false;
+		$api_delegates_url = api_delegates_edge_url;
+
 		// check if delegate balance is grater than the minimum required
 		echo "\n delegate balance : $delegate->balance \n";
 		if ($delegate->balance < MinDelegateBalance) {
@@ -60,8 +64,16 @@ class Transactions
 			return false;
 		}
 		// get list of delegate
+		$delegate_network = $delegate->network;
+
+
+		if ($delegate_network == "infi") {
+			echo "\n delegate network : $delegate_network \n";
+			$api_delegates_url = api_delegates_infi_url;
+		}
+
 		$client = new Client();
-		$res = $client->get(api_delegates_url);
+		$res = $client->get($api_delegates_url);
 		if ($data = $res->getBody()->getContents()) 
 		{
 			$data = json_decode($data);
