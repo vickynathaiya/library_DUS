@@ -141,7 +141,7 @@ class Admin extends Command
                 }                
                 break;
             default:
-                $this->info('usage : php artisan crypto:admin delete_delegate/delete_table/show_delegate/enable_sched/disable_sched ');
+                $this->info('usage : php artisan crypto:admin delete_delegate/delete_table/show_delegate/enable_sched/disable_sched/show_logs/clear_logs ');
                 $quit = 0;
             }
         return 0;
