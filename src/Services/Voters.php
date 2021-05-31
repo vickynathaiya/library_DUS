@@ -36,7 +36,7 @@ class Voters
 		$eligibleVoters = [];
 		$this->totalVoters = 0;
 		$delegateAddress = $delegate->address;
-		$delegateNetwork = $delegate->netowrk;
+		$delegateNetwork = $delegate->network;
 		$delegatePublicKey = $delegate->publicKey;
 		$api_voters_url = base_url_edge . "/api/delegates/" . $delegatePublicKey . "/voters";
 
