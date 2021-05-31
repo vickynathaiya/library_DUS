@@ -121,10 +121,10 @@ class Transactions
 			$data = json_decode($data);
 			switch ($network) {
 				case "edge" : 
-					$fee = $data->data->edge->transfer->min;
+					$fee = $data->data->edge->multiPayment->min;
 					break;
 				case "infi" : 
-					$fee = $data->data->infi->transfer->min;
+					$fee = $data->data->infi->multiPayment->min;
 					break;
 				default:
 					echo "\n network provided is not infi or edge \n";
