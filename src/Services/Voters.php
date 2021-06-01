@@ -45,6 +45,9 @@ class Voters
 			$api_voters_url = base_url_infi . "/api/delegates/" . $delegatePublicKey . "/voters";
 		}
 
+		echo "\n ------------------ \n";
+		echo "\n $api_voters_url \n";
+		echo "\n ------------------ \n";
 		$client = new Client();
 		$res = $client->get($api_voters_url);
 		if ($data = $res->getBody()->getContents()) 
