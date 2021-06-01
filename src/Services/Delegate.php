@@ -146,7 +146,7 @@ class Delegate
 			$peers = array('data' => $data->data, 'count' => $totalCount);
 			return $peers;
 		} 
-		catch (GuzzleHttp\Exception\ClientException $e) {
+		catch (RequestException $e) {
 			$response = $e->getResponse();
 			$responseBodyAsString = $response->getBody()->getContents();
 			echo "\n -------------------------------- \n";
