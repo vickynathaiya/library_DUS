@@ -56,7 +56,7 @@ class Voters
 				$list_voters = $data->data;
 				foreach ($list_voters as $voter) {
 					$voter_balance = (int)$voter->balance;
-					if (isset($voter['lockedBalance'])) {
+					if (isset($voter->lockedBalance)) {
 						$lockedBalance = $voter->lockedBalance;
 					} 
 
