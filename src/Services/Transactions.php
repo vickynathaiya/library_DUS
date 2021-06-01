@@ -137,7 +137,12 @@ class Transactions
 			{
 				$generated = MultiPaymentBuilder::new();
 				foreach ($votersList->eligibleVoters as $voter) {
+					echo "\n ----------------- \n";
+					echo "\n voter portion : $voter['portion']  \n";
+					echo "\n delegate balance : $delegate->balance \n";
 					$amount = ($voter['portion'] * $delegate->balance) / 100;
+					echo "\n amount : $amount \n";
+					echo "\n ----------------- \n";
 					$generated = $generated->add($voter['address'], (int)$amount);
 				}
 				// add beneficary
