@@ -136,14 +136,23 @@ class Delegate
 		$api_url = $main_net->peer($network);
 
 		$client = new Client();
-		$res = $client->get($api_url);
+		try {
+			$res = $client->get($api_url);
 
-		$data =  json_decode($res->getBody()->getContents());  
-	
-		// total number of peers
-		$totalCount = $data->meta->totalCount;
-		$peers = array('data' => $data->data, 'count' => $totalCount);
-		return $peers;
+			$data =  json_decode($res->getBody()->getContents());  
+		
+			// total number of peers
+			$totalCount = $data->meta->totalCount;
+			$peers = array('data' => $data->data, 'count' => $totalCount);
+			return $peers;
+		} 
+		catch (GuzzleHttp\Exception\ClientException $e) {
+			$response = $e->getResponse();
+			$responseBodyAsString = $response->getBody()->getContents();
+			echo "\n -------------------------------- \n";
+			var_dump($responseBodyAsString);
+			echo "\n -------------------------------- \n";
+		}
 	}
 
 	public function checkDelegateValidity()
