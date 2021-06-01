@@ -135,23 +135,35 @@ class Delegate
 		$main_net = MainnetExt::new();
 		$api_url = $main_net->peer($network) . "/test";
 
-		$client = new Client();
-		try {
-			$res = $client->get($api_url);
+		while ( 1 == 1)
+		{
+			$client = new Client();
+			try {
+				$res = $client->get($api_url);
 
-			$data =  json_decode($res->getBody()->getContents());  
-		
-			// total number of peers
-			$totalCount = $data->meta->totalCount;
-			$peers = array('data' => $data->data, 'count' => $totalCount);
-			return $peers;
-		} 
-		catch (RequestException $e) {
-			$response = $e->getResponse();
-			$responseBodyAsString = $response->getBody()->getContents();
-			echo "\n -------------------------------- \n";
-			var_dump($responseBodyAsString);
-			echo "\n -------------------------------- \n";
+				$data =  json_decode($res->getBody()->getContents());  
+			
+				// total number of peers
+				$totalCount = $data->meta->totalCount;
+				$peers = array('data' => $data->data, 'count' => $totalCount);
+
+				return $peers;
+				break;
+			} 
+			catch (RequestException $e) {
+				$response = $e->getResponse();
+				$responseBodyAsString = $response->getBody()->getContents();
+				$statusCode = $responseBodyAsString->statusCode;
+				$error = $responseBodyAsString->error;
+				$message = $responseBodyAsString->message;
+				echo "\n -------------------------------- \n";
+				var_dump($responseBodyAsString);
+				if ($statusCode == "429") {
+					echo "\n too meny requests retrying  in 5 sec	\n";
+					sleep (5);
+				}
+				echo "\n -------------------------------- \n";	
+			}
 		}
 	}
 
