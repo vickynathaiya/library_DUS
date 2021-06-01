@@ -35,6 +35,7 @@ class Voters
 	{
 		$eligibleVoters = [];
 		$this->totalVoters = 0;
+		$lockedBalance = 0;
 		$delegateAddress = $delegate->address;
 		$delegateNetwork = $delegate->network;
 		$delegatePublicKey = $delegate->publicKey;
@@ -45,9 +46,6 @@ class Voters
 			$api_voters_url = base_url_infi . "/api/delegates/" . $delegatePublicKey . "/voters";
 		}
 
-		echo "\n ------------------ \n";
-		echo "\n $api_voters_url \n";
-		echo "\n ------------------ \n";
 		$client = new Client();
 		$res = $client->get($api_voters_url);
 		if ($data = $res->getBody()->getContents()) 
@@ -58,12 +56,18 @@ class Voters
 				$list_voters = $data->data;
 				foreach ($list_voters as $voter) {
 					$voter_balance = (int)$voter->balance;
-				
-					if (($delegateAddress != $voter->address) && ($voter_balance >= $minVoterBalance)) 
+					if (isset($voter['lockedBalance'])) {
+						$lockedBalance = $voter->lockedBalance;
+					} 
+
+					$voter_total_balance = $voter_balance + $lockedBalance;
+
+					if (($delegateAddress != $voter->address) && ($voter_total_balance >= $minVoterBalance)) 
 					{
 						$this->eligibleVoters[] = array(
 						'address' => $voter->address,
 						'balance' => $voter->balance,
+						'lockedBalance' => $lockedBalance,
 						'portion' => 0,
 						'amount' => 0,
 						);
@@ -84,7 +88,7 @@ class Voters
 		$totalVotersBalance = 0;
 	
 		foreach ($this->eligibleVoters as $voter) {
-			$totalVotersBalance = $totalVotersBalance + $voter['balance'];
+			$totalVotersBalance = $totalVotersBalance + $voter['balance'] + $voter['lockedBalance'];
 		}
 
 		//perform portion for each voter
