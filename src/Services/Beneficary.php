@@ -30,6 +30,7 @@ class Beneficary
 {
 	public $address;
 	public $requiredMinimumBalance; //required minimum balance for voters
+	public $maintainMinimumBalance;
 	public $rate;
 	public $amount;
 	
@@ -55,6 +56,7 @@ class Beneficary
 							$this->address = $settings->beneficaryAddress;
 							$this->rate = $settings->beneficaryRate;
 							$this->requiredMinimumBalance = $settings->requiredMinimumBalance;
+							$this->maintainMinimumBalance = $settings->maintainMinimumBalance;
 							$found = true;
 							break;
 						}
