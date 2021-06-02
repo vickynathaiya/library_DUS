@@ -160,20 +160,12 @@ class Delegate
 					case "422": 
 						echo "\n $error \n";
 						$nb_attempts++;
-						if ($nb_attempts > 5) {
-							echo "\n unable to get peers, exiting \n";
-							break;
-						}
 						echo "\n Retryng in 5 seconds \n";
 						sleep(5);
 						break;
 					case "429":
 						echo "\n $error";
 						$nb_attempts++;
-						if ($nb_attempts > 5) {
-							echo "\n unable to get peers, exiting";
-							break;
-						}
 						echo "\n Retryng in 5 seconds \n";
 						sleep(5);
 						break;
@@ -182,6 +174,10 @@ class Delegate
 						echo "\n error : $error \n";
 						break;
 				}
+			}
+			if ($nb_attempts > 5) {
+				echo "\n unable to get peers, exiting";
+				break;
 			}	
 		}
 		return $peers;
