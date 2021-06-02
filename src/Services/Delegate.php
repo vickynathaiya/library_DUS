@@ -133,7 +133,7 @@ class Delegate
 	{
 		//return the list of peer corresponding to the network
 		$main_net = MainnetExt::new();
-		$api_url = $main_net->peer($network) . "/test";
+		$api_url = $main_net->peer($network);
 		$nb_attempts = 0;
 		$peers = [];
 
