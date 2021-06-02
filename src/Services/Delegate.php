@@ -156,17 +156,32 @@ class Delegate
 				$statusCode = $responseBodyAsString->statusCode;
 				$error = $responseBodyAsString->error;
 				$message = $responseBodyAsString->message;
-				echo "\n -------------------------------- \n";
-				if ($statusCode == "429") {
-					echo "\n too many requests retrying  in 5 sec	\n";
-					$nb_attempts++;
-					if ($nb_attempts > 5) {
-						echo "\n unable to get peers, exiting \n";
+				switch ($statusCode) {
+					case "422": 
+						echo "\n $error \n";
+						$nb_attempts++;
+						if ($nb_attempts > 5) {
+							echo "\n unable to get peers, exiting \n";
+							break;
+						}
+						echo "\n Retryng in 5 seconds \n";
+						sleep(5);
 						break;
-					}
-					sleep (5);
+					case "429":
+						echo "\n $error";
+						$nb_attempts++;
+						if ($nb_attempts > 5) {
+							echo "\n unable to get peers, exiting";
+							break;
+						}
+						echo "\n Retryng in 5 seconds \n";
+						sleep(5);
+						break;
+					default:
+						echo "\n $statusCode \n";
+						echo "\n error : $error \n";
+						break;
 				}
-				echo "\n -------------------------------- \n";
 			}	
 		}
 		return $peers;
