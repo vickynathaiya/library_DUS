@@ -21,9 +21,7 @@ use Systruss\SchedTransactions\Services\Transactions;
 use Systruss\SchedTransactions\Services\SchedTransaction;
 use Systruss\SchedTransactions\Models\CryptoLog;
 
-
-// https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json
-// https://api.infinitysolutions.io/api/delegates/024844fa4b301ae6f9c514c963c18540630f1755dcca02ea9e91bae4b11d3dd1f1/voters
+const SCHED_NB_HOURS = 6;
 
 
 class PerformTransactions extends Command
@@ -59,7 +57,7 @@ class PerformTransactions extends Command
      */
     public function handle()
     {
-        $disabled = 1;
+        $disabled = 0;
         
 		$this->info("---------------------------------------------");
         echo date('d-m-y h:i:s'); 
@@ -84,7 +82,7 @@ class PerformTransactions extends Command
         // scheduler active , check counter last transactions
         $latest_transactions = CryptoLog::orderBy('id','DESC')->first();
         if ($latest_transactions) {
-            if (($latest_transactions->succeed) && ($latest_transactions->hourCount < 24)) {
+            if (($latest_transactions->succeed) && ($latest_transactions->hourCount < SCHED_NB_HOURS)) {
                 $latest_transactions->hourCount = $latest_transactions->hourCount + 1;
                 $latest_transactions->save();
                 $next_transactions = 24 - $latest_transactions->hourCount;

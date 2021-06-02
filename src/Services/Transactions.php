@@ -164,8 +164,8 @@ class Transactions
 	{
 		if ($this->transactions) 
 		{
-            $peer_ip = $delegate->peer_ip;
-            $peer_port = $delegate->peer_port;
+            $peer_ip = $this->peer_ip;
+            $peer_port = $this->peer_port;
 			$response = [];
 			$api_url = "http://$peer_ip:$peer_port/api".'/transactions';
 		
@@ -186,8 +186,8 @@ class Transactions
 						$this->transaction_result = json_encode($response);
 						return false;
 					}
-					echo "(success) Return Funds to Main Wallet";
-					echo "Successfully returned the funds to the main wallet";
+					echo " \n (success) Return Funds to Main Wallet";
+					echo " \n Successfully returned the funds to the main wallet";
 					return true;
 				}
 			} catch (\Exception $e) {
