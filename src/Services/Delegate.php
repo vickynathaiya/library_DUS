@@ -158,20 +158,20 @@ class Delegate
 				$message = $responseBodyAsString->message;
 				switch ($statusCode) {
 					case "422": 
-						echo "\n $error \n";
+						echo "\n api peers $api_url  --  error : $error \n";
 						$nb_attempts++;
 						echo "\n Retryng in 5 seconds \n";
 						sleep(5);
 						break;
 					case "429":
-						echo "\n $error";
+						echo "\n api peers $api_url  --  error : $error";
 						$nb_attempts++;
 						echo "\n Retryng in 5 seconds \n";
 						sleep(5);
 						break;
 					default:
 						echo "\n $statusCode \n";
-						echo "\n error : $error \n";
+						echo "\n api peers $api_url  --  error : $error \n";
 						break;
 				}
 			}
