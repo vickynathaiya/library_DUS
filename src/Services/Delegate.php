@@ -152,7 +152,7 @@ class Delegate
 			} 
 			catch (RequestException $e) {
 				$response = $e->getResponse();
-				$responseBodyAsString = $response->getBody()->getContents();
+				$responseBodyAsString = json_decode($response->getBody()->getContents());
 				$statusCode = $responseBodyAsString->statusCode;
 				$error = $responseBodyAsString->error;
 				$message = $responseBodyAsString->message;
