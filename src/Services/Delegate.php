@@ -134,19 +134,19 @@ class Delegate
 		//return the list of peer corresponding to the network
 		$main_net = MainnetExt::new();
 		$api_url = $main_net->peer($network) . "/test";
+		$nb_attempts = 0;
+		$peers = [];
 
 		while ( 1 == 1)
 		{
 			$client = new Client();
 			try {
 				$res = $client->get($api_url);
-
 				$data =  json_decode($res->getBody()->getContents());  
 			
 				// total number of peers
 				$totalCount = $data->meta->totalCount;
 				$peers = array('data' => $data->data, 'count' => $totalCount);
-
 				return $peers;
 				break;
 			} 
@@ -157,14 +157,19 @@ class Delegate
 				$error = $responseBodyAsString->error;
 				$message = $responseBodyAsString->message;
 				echo "\n -------------------------------- \n";
-				var_dump($responseBodyAsString);
 				if ($statusCode == "429") {
-					echo "\n too meny requests retrying  in 5 sec	\n";
+					echo "\n too many requests retrying  in 5 sec	\n";
+					$nb_attempts++;
+					if ($nb_attempts > 5) {
+						echo "\n unable to get peers, exiting \n";
+						break;
+					}
 					sleep (5);
 				}
-				echo "\n -------------------------------- \n";	
-			}
+				echo "\n -------------------------------- \n";
+			}	
 		}
+		return $peers;
 	}
 
 	public function checkDelegateValidity()
