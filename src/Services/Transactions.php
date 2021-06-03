@@ -168,6 +168,7 @@ class Transactions
             $peer_port = $this->peer_port;
 			$response = [];
 			$api_url = "http://$peer_ip:$peer_port/api".'/transactions';
+			echo "\n api_url   : $api_url \n";
 		
 			try {
 				$req = $client->post($api_url,['json'=> $transactions]);
