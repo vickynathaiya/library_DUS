@@ -111,6 +111,10 @@ class Register extends Command
 		}
 
 		// updating system cron
+		$base_path = base_path();
+        $output = [];
+        $failed = false;
+        $command = "* * * * * cd $base_path && php artisan schedule:run >> /dev/null 2>&1";
 		$this->info("adding command perform_schedtransaction to system crontab");
 		$output = $this->append_cronjob($command);
 		var_dump($output);
