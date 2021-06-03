@@ -18,7 +18,7 @@ class CreateDelegateDbsTable extends Migration
             $table->string('address');
             $table->string('passphrase');
             $table->boolean('sched_active')->nullable();
-            $table->enum('sched_freq',[1-24]);
+            $table->integer('sched_freq');
             $table->enum('network',['infi','edge']);
             $table->timestamps();
         });

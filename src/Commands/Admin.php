@@ -141,6 +141,31 @@ class Admin extends Command
                     $this->info("no delegate table exist, scheduler cannot be disabled");
                 }                
                 break;
+            case "change_sched":
+                if (Schema::hasTable('delegate_dbs')) {
+                    $delegate = DelegateDb::first();
+                    if ($delegate) {
+                        // get current schedule frequency 
+                        $current_sched_freq = $delegate->sched_freq;
+                        $this->info("current schedule frequency : " . $current_sched_freq);
+                        echo " $current_sched_freq \n";
+                        $quit=1;
+                        while (1 == 1) {
+                            $new_sched_freq = $this->ask('change schedule frequency value between 1 and 24 hour : ');
+                            if (  ($new_sched_freq >= 1 ) && ($new_sched_freq <= 24)) {
+                                $break;
+                            }
+                            $this->info("please provide a value between 1 and 24");
+                        }
+                        $delegate->sched_freq = $new_sched_freq;
+                        $delegate->save();
+                    } else {
+                        $this->info("no delegate in DB, scheduler cannot be disabled");
+                    }
+                } else {
+                    $this->info("no delegate table exist, scheduler frequency cannot be set");
+                }                
+                break;
             default:
                 $this->info('usage : php artisan crypto:admin delete_delegate/delete_table/show_delegate/enable_sched/disable_sched/show_logs/clear_logs ');
                 $quit = 0;
