@@ -41,6 +41,19 @@ class Register extends Command
         parent::__construct();
     }
 
+	// check if shedule run command already exist in crontab
+	protected function cronjob_exists($command){
+		$cronjob_exists=false;
+		exec('crontab -l', $crontab,$result);
+		if(isset($crontab)&&is_array($crontab)){
+			$crontab = array_flip($crontab);
+			if(isset($crontab[$command])){
+				$cronjob_exists=true;
+			}
+		}
+		return $cronjob_exists;
+	}
+
 	// append the schedule run command to crontab
     protected function append_cronjob($command){
         $output = [];
