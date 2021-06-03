@@ -171,8 +171,10 @@ class Transactions
 			echo "\n api_url   : $api_url \n";
 		
 			try {
-				$req = $client->post($api_url,['json'=> $transactions]);
+				$req = $client->post($api_url,['json'=> $this->transactions]);
+				var_dump($req);
 				$data = $req->getBody()->getContents();
+				var_dump($data);
 				if ($data)
 				{
 					$data = json_decode($data);
