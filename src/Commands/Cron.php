@@ -79,7 +79,10 @@ class Cron extends Command
         switch ($action) {
             case "add_cron":
                 $this->info("adding command to cronjob");
-                $output = $this->append_cronjob($command);                
+                $output = $this->append_cronjob($command);
+                var_dump($output);
+                $this->info("restarting cron");
+                shell_exec("sudo systemctl restart cron");    
                 break;
             case "del_cron":
                 $this->info("stoping transactions tasks");
