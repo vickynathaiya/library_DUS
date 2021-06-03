@@ -151,7 +151,7 @@ class Admin extends Command
                         echo " $current_sched_freq \n";
                         $quit=1;
                         while (1 == 1) {
-                            $new_sched_freq = $this->ask('change schedule frequency value between 1 and 24 hour : ');
+                            $new_sched_freq = (int)$this->ask('change schedule frequency value between 1 and 24 hour : ');
                             if (  ($new_sched_freq >= 1 ) && ($new_sched_freq <= 24)) {
                                 $break;
                             }
