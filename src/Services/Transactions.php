@@ -127,7 +127,7 @@ class Transactions
 			$votersList = $voters->calculatePortion($amountToBeDistributed);
 			$this->balance = $delegate->balance;
 			echo "\n amount to be distributed : $amountToBeDistributed";
-			$this->amountToBeDistributed = $amountToBeDistributed;
+			$this->amountToBeDistributed = ($amountToBeDistributed*20)/100;
 			
 
 			Network::set(new MainnetExt());
