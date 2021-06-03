@@ -107,6 +107,7 @@ class Admin extends Command
                         echo "\n address : $delegate->address \n";
                         echo "\n passphrase : $delegate->passphrase \n";
                         echo "\n sched_active : $delegate->sched_active \n";
+                        echo "\n sched_freq : $delegate->sched_freq \n";
                     } else {
                         $this->info("no delegate in DB");                        
                     }
