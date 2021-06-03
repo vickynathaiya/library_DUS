@@ -84,24 +84,12 @@ Enter your wallet delegate:
 "this is my secret passphrase"
 ```
 
-6 - Update the ubuntu system crontab
-
-```bash
-# php artisan crypto:cron add_cron
-```
-
-7 - Restart cron :
-```bash 
-    Open a shell command in a terminal and run :
-    sudo systemctl restart cron
-```
-
-8 - Enable scheduler
+6 - Enable scheduler
 ```bash
 # php artisan crypto:admin enable_sched
 ```
 
-9 - To monitor your application you can use the followings :
+7 - To monitor your application you can use the followings :
 ```bash
     a - check scheduler logs : storage/logs/schedule_job.log
     b - php artisan crypto:admin show_logs
