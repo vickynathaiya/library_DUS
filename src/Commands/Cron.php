@@ -88,18 +88,7 @@ class Cron extends Command
                 if ($failed) {
                     var_dump($output);
                     return;
-                }
-                if (Schema::hasTable('delegate_dbs')) {
-                    $delegate = DelegateDb::first();
-                    if ($delegate) {
-                        $delegate->sched_active = true;
-                        $delegate->save();
-                    } else {
-                        $this->info("no delegate in DB, scheduler cannot be activated");                        
-                    }
-                } else {
-                    $this->info("no delegate table exist, scheduler cannot be activated");
-                }                
+                }               
                 break;
             case "del_cron":
                 $this->info("stoping transactions tasks");

@@ -41,6 +41,16 @@ class Register extends Command
         parent::__construct();
     }
 
+	// append the schedule run command to crontab
+    protected function append_cronjob($command){
+        $output = [];
+        if(is_string($command)&&!empty($command)&&$this->cronjob_exists($command)==FALSE){
+            //add job to crontab
+            $output = shell_exec("crontab -l | { cat; echo '$command'; } |crontab -");
+        }
+        return $output;
+    }
+
     /**
      * Execute the console command.
      *
@@ -94,13 +104,21 @@ class Register extends Command
 		$delegate = new Delegate();
 		$success = $delegate->register($passphrase,$network);
 		
-		if ($success) 
+		if (!$success) 
 		{
-			$this->info("Wallet registered Successfuly");
-			return true;
-		} else {
 			$this->info("error while registering delegate");
 			return false;
+		}
+
+		// updating system cron
+		$this->info("adding command perform_schedtransaction to system crontab");
+		$output = $this->append_cronjob($command);
+		var_dump($output);
+		$this->info("restarting cron");
+		exec("sudo systemctl restart cron",$output,$failed);
+		if ($failed) {
+			var_dump($output);
+			return;
 		}
 	}
 }
