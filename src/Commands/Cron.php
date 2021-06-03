@@ -4,7 +4,7 @@ namespace Systruss\SchedTransactions\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use Systruss\SchedTransactions\Models\Senders;
+use Systruss\SchedTransactions\Models\DelegateDb;
 
 class Cron extends Command
 {
@@ -74,6 +74,8 @@ class Cron extends Command
     public function handle()
     {
         $base_path = base_path();
+        $output = [];
+        $failed = false;
         $command = "* * * * * cd $base_path && php artisan schedule:run >> /dev/null 2>&1";
         $action = $this->argument('action');
         switch ($action) {
@@ -82,7 +84,22 @@ class Cron extends Command
                 $output = $this->append_cronjob($command);
                 var_dump($output);
                 $this->info("restarting cron");
-                shell_exec("sudo systemctl restart cron");    
+                exec("sudo systemctl restart cron",$output,$failed);
+                if ($failed) {
+                    var_dump($output);
+                    return;
+                }
+                if (Schema::hasTable('delegate_dbs')) {
+                    $delegate = DelegateDb::first();
+                    if ($delegate) {
+                        $delegate->sched_active = true;
+                        $delegate->save();
+                    } else {
+                        $this->info("no delegate in DB, scheduler cannot be activated");                        
+                    }
+                } else {
+                    $this->info("no delegate table exist, scheduler cannot be activated");
+                }                
                 break;
             case "del_cron":
                 $this->info("stoping transactions tasks");
