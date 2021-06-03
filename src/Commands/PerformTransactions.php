@@ -80,12 +80,13 @@ class PerformTransactions extends Command
         }
 
         // scheduler active , check counter last transactions
+        $sched_freq = $delegate->sched_freq;
         $latest_transactions = CryptoLog::orderBy('id','DESC')->first();
         if ($latest_transactions) {
-            if (($latest_transactions->succeed) && ($latest_transactions->hourCount < SCHED_NB_HOURS)) {
+            if (($latest_transactions->succeed) && ($latest_transactions->hourCount < $sched_freq)) {
                 $latest_transactions->hourCount = $latest_transactions->hourCount + 1;
                 $latest_transactions->save();
-                $next_transactions = 6 - $latest_transactions->hourCount;
+                $next_transactions =  $sched_freq - $latest_transactions->hourCount;
                 $this->info("Next Transactions in $next_transactions hours");
                 return;
             }
