@@ -193,7 +193,7 @@ class Transactions
 					echo " \n Successfully returned the funds to the main wallet";
 					return true;
 				}
-			} catch (\Exception $e) {
+			} catch (RequestException $e) {
 				echo "\n (Failed) Return Funds to Main Wallet. Unable to connect to the node. \n";
 				$response = $e->getResponse();
 				$responseBodyAsString = $response->getBody()->getContents();
