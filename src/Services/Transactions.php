@@ -195,7 +195,8 @@ class Transactions
 				}
 			} catch (\Exception $e) {
 				echo "\n (Failed) Return Funds to Main Wallet. Unable to connect to the node. \n";
-				//echo "\njson_encode($e->getMessage() . $e->getLine() . $e->getFile())\n";
+				var_dump($req);
+				echo "\n json_encode($e->getMessage() . $e->getLine() . $e->getFile()) \n";
 				return false;
 			}
 		} else {
