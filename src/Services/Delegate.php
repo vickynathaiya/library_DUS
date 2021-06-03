@@ -84,6 +84,7 @@ class Delegate
 						'address' => $this->address,
 						'passphrase' => $passphrase,
 						'network' => $network,
+						'sched_freq' => 24,
 						'sched_active' => false,
 					]);
 					$registered = succeed;
