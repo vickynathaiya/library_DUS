@@ -190,8 +190,9 @@ class Transactions
 						$this->transaction_result = json_encode($response);
 						return false;
 					}
-					echo " \n (success) Return Funds to Main Wallet";
-					echo " \n Successfully returned the funds to the main wallet";
+					//echo " \n (success) Return Funds to Main Wallet";
+					//echo " \n Successfully returned the funds to the main wallet";
+					echo "\n";
 					return true;
 				}
 			} catch (RequestException $e) {
