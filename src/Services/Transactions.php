@@ -123,7 +123,19 @@ class Transactions
 						
             // calculate voters amount
 			// to be distributed = balance - (total fee + beneficary)
-			$amountToBeDistributed = $delegate->balance - ($totalFee + $beneficaryAmount) - $beneficary->maintainMinimumBalance;
+			if ($delegate->balance > $beneficary->maintainMinimumBalance ) {
+				$remaining_balance = $delegate->balance - $beneficary->maintainMinimumBalance;
+				if ($remaining_balance > ($totalFee + $beneficaryAmount)) {
+					$amountToBeDistributed = $remaining_balance - ($totalFee + $beneficaryAmount);
+				} else {
+					echo "\n Fee plus Benificary Amoun greater than balane \n";
+					return false;
+				}
+			} else {
+				echo "\n maintain minimum balance granter than delegate balance \n";
+				return false;
+			}
+
 			$votersList = $voters->calculatePortion($amountToBeDistributed);
 			$this->balance = $delegate->balance;
 			echo "\n amount to be distributed : $amountToBeDistributed";
