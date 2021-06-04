@@ -50,7 +50,6 @@ class Beneficary
 			switch ($delegate_network) {
 				case "infi":
 					$list_infi = $data->data->infi;
-					var_dump($list_infi);
 					foreach ($list_infi as $delegate_address => $settings) {
 						if ($delegate_address == DelegateAddress) {
 							$this->address = $settings->beneficaryAddress;
@@ -64,7 +63,6 @@ class Beneficary
 					break;
 				case "edge":
 					$list_edge = $data->data->edge;
-					var_dump($list_edge);
 
 					foreach ($list_edge as $delegate_address => $settings) {
 						if ($delegate_address == DelegateAddress) {

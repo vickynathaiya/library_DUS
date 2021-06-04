@@ -93,7 +93,6 @@ class Delegate
 				} catch (QueryException $e) {
 					echo "\n error : \n";
 					$registered = failed; 
-					var_dump($e->errorInfo);
 					return false;
 				}
 			}

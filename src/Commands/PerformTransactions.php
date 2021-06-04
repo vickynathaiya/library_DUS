@@ -166,7 +166,6 @@ class PerformTransactions extends Command
             echo "\n performing the transactions \n";
             $success = $transactions->sendTransactions();
             if (!$success) {
-                var_dump($transactions->$transaction_result);
                 echo "\n error while sending transactions \n";
                 return 0;
             }
