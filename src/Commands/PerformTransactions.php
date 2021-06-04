@@ -57,7 +57,7 @@ class PerformTransactions extends Command
      */
     public function handle()
     {
-        $disabled = 0;
+        $disabled = 1;
         
 		$this->info("---------------------------------------------");
         echo date('d-m-y h:i:s'); 
@@ -75,7 +75,7 @@ class PerformTransactions extends Command
 
         // check if scheduler is active
         if (!$delegate->sched_active) {
-            echo "\n Scheduler is not active \n";
+            echo "\n Scheduler is not active, activate scheduler using : php artisan crypto:admin enable_sched \n";
             return;
         }
 
@@ -84,9 +84,9 @@ class PerformTransactions extends Command
         $latest_transactions = CryptoLog::orderBy('id','DESC')->first();
         if ($latest_transactions) {
             if (($latest_transactions->succeed) && ($latest_transactions->hourCount < $sched_freq)) {
+                $next_transactions =  $sched_freq - $latest_transactions->hourCount;
                 $latest_transactions->hourCount = $latest_transactions->hourCount + 1;
                 $latest_transactions->save();
-                $next_transactions =  $sched_freq - $latest_transactions->hourCount;
                 $this->info("Next Transactions in $next_transactions hours");
                 return;
             }
@@ -96,16 +96,17 @@ class PerformTransactions extends Command
         $valid = $delegate->checkDelegateValidity();
 
 		// Check Delegate  Eligibility
-        echo "\n checking delegate elegibility \n";
+        this->info(" ----------- checking delegate elegibility");
         // $transactions = new Transactions();
         $success = $delegate->checkDelegateEligibility();
 		if (!$success) {
-			$this->info("delegate is not yet eligble trying after an hour");
+			$this->info("(error) delegate is not yet eligble trying after an hour");
 			return false;
 		}
-        echo "\n delegate is eligible \n";
+        $this->info("(success) delegate is eligible");
 
         // get beneficary and amount = (delegate balance - totalFee) * 20%
+        $this->info(" ---------------- get benificiary info");
         $beneficary = new Beneficary();
         $success = $beneficary->initBeneficary($delegate);
         if (!$success) {
@@ -116,27 +117,26 @@ class PerformTransactions extends Command
 
 
         //init voters
-        $this->info("initialising voters");
+        $this->info(" ---------- initialising voters");
 		$voters = new voters();
         $voters = $voters->initEligibleVoters($delegate,$requiredMinimumBalance);
 		if (!($voters->totalVoters > 0)) {
-			echo "\n error while initializing Eligible voters \n";
+			echo "\n there is no Eligible voters \n";
 			return false;
 		}
         $this->info("voters initialized successfully \n ");
-        echo "\n Elegible voters \n";
+        $this->info("number of Elegible voters " . $voters->nbEligibleVoters);
 
         //build transactions
-        echo "\n initializing transactions \n";
+        $this->info(" ---------------- initializing transactions");
         $transactions = new Transactions();
         $transactions = $transactions->buildTransactions($voters,$delegate,$beneficary);
         if (!$transactions->buildSucceed) {
-            echo "\n $transactions->errMesg \n";
+            $this->info("(root) " . $transactions->errMesg);
             return false;
         }
         //log transaction
         $trans = $transactions->transactions['transactions'];
-        var_dump($transactions->transactions['transactions']);
         $cryptoLog = new CryptoLog();
         $cryptoLog->rate = $beneficary->rate;
         $cryptoLog->beneficary_address = $beneficary->address;
@@ -144,13 +144,13 @@ class PerformTransactions extends Command
         $cryptoLog->delegate_balance = $delegate->balance;
         $cryptoLog->fee = $transactions->fee;
         $cryptoLog->amount = $transactions->amountToBeDistributed;
-        $cryptoLog->totalVoters = $voters->totalVoters;
+        $cryptoLog->totalVoters = $voters->nbEligibleVoters;
         $cryptoLog->transactions = $trans[0]['id'];
         $cryptoLog->hourCount = 0;
         $cryptoLog->succeed = false;
 
         $this->info("transaction initialized successfully");
-        echo "\n ready to run the folowing transactions : \n";
+        $this->info("ready to run the folowing transactions ");
         echo json_encode($transactions->transactions, JSON_PRETTY_PRINT);
         echo "\n";
 

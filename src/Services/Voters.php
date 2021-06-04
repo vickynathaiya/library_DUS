@@ -30,6 +30,7 @@ class Voters
 {
 	public $eligibleVoters;
 	public $totalVoters;
+	public $nbEligibleVoters;
 
 	public function initEligibleVoters(Delegate $delegate,$minVoterBalance) 
 	{
@@ -71,7 +72,8 @@ class Voters
 						'portion' => 0,
 						'amount' => 0,
 						);
-					}				
+					}
+					$this->nbEligibleVoters = count($this->eligibleVoters);	
 				}
 			}
 		}
