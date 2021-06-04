@@ -128,12 +128,12 @@ class Transactions
 				if ($remaining_balance > ($totalFee + $beneficaryAmount)) {
 					$amountToBeDistributed = $remaining_balance - ($totalFee + $beneficaryAmount);
 				} else {
-					echo "\n Fee plus Benificary Amount greater than balane \n";
+					echo "\n (error) Fee plus Benificary Amount greater than delegate balance \n";
 					$this->buildSucceed = false;
 					return $this;
 				}
 			} else {
-				echo "\n maintain minimum balance greater than delegate balance \n";
+				echo "\n (error) maintain minimum balance greater than delegate balance \n";
 				$this->buildSucceed = false;
 				return $this;
 			}
@@ -188,9 +188,7 @@ class Transactions
 		
 			try {
 				$req = $client->post($api_url,['json'=> $this->transactions]);
-				var_dump($req);
 				$data = $req->getBody()->getContents();
-				var_dump($data);
 				if ($data)
 				{
 					$data = json_decode($data);
@@ -215,7 +213,6 @@ class Transactions
 				$response = $e->getResponse();
 				$responseBodyAsString = $response->getBody()->getContents();
 				//echo "\n json_encode($e->getMessage() . $e->getLine() . $e->getFile()) \n";
-				var_dump($responseBodyAsString);
 				return false;
 			}
 		} else {

@@ -132,7 +132,7 @@ class PerformTransactions extends Command
         $transactions = new Transactions();
         $transactions = $transactions->buildTransactions($voters,$delegate,$beneficary);
         if (!$transactions->buildSucceed) {
-            $this->info("(root) " . $transactions->errMesg);
+            $this->info("(error) " . $transactions->errMesg);
             return false;
         }
         //log transaction
