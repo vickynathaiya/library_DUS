@@ -129,12 +129,12 @@ class Transactions
 					$amountToBeDistributed = $remaining_balance - ($totalFee + $beneficaryAmount);
 				} else {
 					echo "\n Fee plus Benificary Amoun greater than balane \n";
-					$this->buildSucceed = false
+					$this->buildSucceed = false;
 					return $this;
 				}
 			} else {
 				echo "\n maintain minimum balance granter than delegate balance \n";
-				$this->buildSucceed = false
+				$this->buildSucceed = false;
 				return $this;
 			}
 
