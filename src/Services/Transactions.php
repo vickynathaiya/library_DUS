@@ -24,7 +24,6 @@ use Systruss\SchedTransactions\Services\Server;
 
 
 const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";
-const nonce = 1;
 
 class Transactions
 {
@@ -132,6 +131,7 @@ class Transactions
 
 			Network::set(new MainnetExt());
 			$this->buildSucceed = false;
+			$nonce = $delegate->nonce;
 			// Generate transaction
 			if ($votersList->eligibleVoters)
 			{
@@ -143,7 +143,7 @@ class Transactions
 				// add beneficary
 				$generated = $generated->add($beneficaryAddress,floor($beneficaryAmount));
 				$generated = $generated->withFee($totalFee);
-				$generated = $generated->withNonce(nonce);
+				$generated = $generated->withNonce($nonce);
 				$generated = $generated->sign($delegate->passphrase);
 				$this->transactions = [ 'transactions' => [$generated->transaction->data] ];
                 $this->peer_ip = $delegate->peer_ip;
