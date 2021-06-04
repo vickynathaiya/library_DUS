@@ -46,6 +46,7 @@ class Transactions
 	public $api_delegates_url;
 	public $publicKey;
 	public $errMesg;
+	public $transaction_result;
 
 	public function getFee($network,$totalVoters)
 	{	
