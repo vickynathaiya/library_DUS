@@ -167,6 +167,7 @@ class Transactions
             $peer_ip = $this->peer_ip;
             $peer_port = $this->peer_port;
 			$response = [];
+			$client = new Client();
 			$api_url = "http://$peer_ip:$peer_port/api".'/transactions';
 			echo "\n api_url   : $api_url \n";
 		
