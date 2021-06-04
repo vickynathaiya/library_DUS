@@ -96,7 +96,7 @@ class PerformTransactions extends Command
         $valid = $delegate->checkDelegateValidity();
 
 		// Check Delegate  Eligibility
-        this->info(" ----------- checking delegate elegibility");
+        $this->info(" ----------- checking delegate elegibility");
         // $transactions = new Transactions();
         $success = $delegate->checkDelegateEligibility();
 		if (!$success) {
