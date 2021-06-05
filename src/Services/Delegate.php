@@ -244,8 +244,6 @@ class Delegate
 						} else {
 							echo "\n delegate is Resigned \n";
 						}
-					} else {
-						echo "\n it is not yet a delegate \n";
 					}
 				}
 			} catch (ClientException $e) {
@@ -267,7 +265,9 @@ class Delegate
  		$this->nonce = $nonce;
 		$this->balance = (int)$balance;
 		echo "\n checkDelegateValidity -- delegate balance : $this->balance";
-		echo "\n isDelegate = $isDelegate   -- isResigned = $isResigned \n";
+		if (!$isDelegate) {
+			echo "\n it is not yet a delegate \n";
+		}
 		echo "api url : $api_url \n"; 
 		
 		return $valid;
