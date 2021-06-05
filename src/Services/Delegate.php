@@ -242,10 +242,10 @@ class Delegate
 							echo "\n isDelegate = $isDelegate   -- isResigned = $isResigned \n";
 							break;
 						} else {
-							$this->info("delegate is Resigned");
+							echo "\n delegate is Resigned \n";
 						}
 					} else {
-						$this->info(" it is not yet a delegate");
+						echo "\n it is not yet a delegate \n";
 					}
 				}
 			} catch (ClientException $e) {
