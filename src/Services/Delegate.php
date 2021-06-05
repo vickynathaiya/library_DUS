@@ -265,9 +265,10 @@ class Delegate
 		echo "\n checkDelegateValidity -- delegate balance : $this->balance";
 		if (!$isDelegate) {
 			echo "\n it is not yet a delegate \n";
-		}
-		if (!$isResigned) {
-			echo "\n delegate  is Resigned \n";
+		} else {
+			if (!$isResigned) {
+				echo "\n delegate  is Resigned \n";
+			}
 		}
 		echo "api url : $api_url \n"; 
 		
