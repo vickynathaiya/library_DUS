@@ -218,6 +218,10 @@ class Delegate
 		{
 			//build api url
 			$ip_add = $peer->ip;
+			if (!isset($peer->ports->{"@arkecosystem/core-wallet-api"})) {
+				echo "\n the field arkecosystem/core-wallet-api does not exist \n";
+				return false;
+			}
 			$port = $peer->ports->{"@arkecosystem/core-wallet-api"};
 			$api_url = "http://$ip_add:$port/api".'/wallets/'.$wallet_address;
 							
