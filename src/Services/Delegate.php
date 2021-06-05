@@ -239,10 +239,14 @@ class Delegate
 					if ($isDelegate == 1) {
 						if ($isResigned == 0) {
 							$valid = true;
-							// echo "\n isDelegate = $isDelegate   -- isResigned = $isResigned \n";
+							echo "\n isDelegate = $isDelegate   -- isResigned = $isResigned \n";
 							break;
+						} else {
+							$this->info("delegate is Resigned");
 						}
-					} 					
+					} else {
+						$this->info(" it is not yet a delegate");
+					}
 				}
 			} catch (ClientException $e) {
 				if ($e->hasResponse()) 
@@ -262,7 +266,8 @@ class Delegate
 		$this->peer_port = $port;
  		$this->nonce = $nonce;
 		$this->balance = (int)$balance;
-		echo "\n checkDelegateValidity -- delegate balance : $this->balance \n";
+		echo "\n checkDelegateValidity -- delegate balance : $this->balance";
+		echo "\n isDelegate = $isDelegate   -- isResigned = $isResigned \n";
 		echo "api url : $api_url \n"; 
 		
 		return $valid;
