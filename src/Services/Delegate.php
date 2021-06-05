@@ -86,7 +86,7 @@ class Delegate
 						'passphrase' => $passphrase,
 						'network' => $network,
 						'sched_freq' => 24,
-						'sched_active' => false,
+						'sched_active' => true,
 					]);
 					$registered = succeed;
 					echo "\n Delegate registered successfully \n";
