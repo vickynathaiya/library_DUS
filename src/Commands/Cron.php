@@ -82,13 +82,7 @@ class Cron extends Command
             case "add_cron":
                 $this->info("adding command to cronjob");
                 $output = $this->append_cronjob($command);
-                var_dump($output);
-                $this->info("restarting cron");
-                exec("sudo systemctl restart cron",$output,$failed);
-                if ($failed) {
-                    var_dump($output);
-                    return;
-                }               
+                var_dump($output);               
                 break;
             case "del_cron":
                 $this->info("stoping transactions tasks");
