@@ -81,8 +81,7 @@ class Cron extends Command
         switch ($action) {
             case "add_cron":
                 $this->info("adding command to cronjob");
-                $output = $this->append_cronjob($command);
-                var_dump($output);               
+                $output = $this->append_cronjob($command);               
                 break;
             case "del_cron":
                 $this->info("stoping transactions tasks");
