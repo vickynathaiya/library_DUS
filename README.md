@@ -42,25 +42,12 @@ If the chosen delegate excludes the accounts which have a too low balance, the D
 
 Install Delegate Ubuntu Server 
 
-1 - install Laravel and create a project
+1 - Use the installation script seup-server.sh that you can download from https://github.com/systruss/schedtransactions
 ```bash
-# composer create-project laravel/laravel <project name>
+# chmod 755 setup-server.sh
+# ./setup-server.sh
 ```
-
-2 - Update the .env file to point to you Database server.
-
-3 - Add the folowings packages :
-```bash
-# composer require arkecosystem/crypto
-# composer require systruss/schedtransactions
-```
-
-4 - Run artisan migrate to create the tables in Database.
-
-```bash
-# php artisan migrate
-```
-5 - Register wallet
+2 - Register wallet
 
 ```bash
 # php artisan crypto:register
@@ -84,12 +71,7 @@ Enter your wallet delegate:
 "this is my secret passphrase"
 ```
 
-6 - Enable scheduler
-```bash
-# php artisan crypto:admin enable_sched
-```
-
-7 - To monitor your application you can use the followings :
+3 - To monitor your application you can use the followings :
 ```bash
     a - check scheduler logs : storage/logs/schedule_job.log
     b - php artisan crypto:admin show_logs

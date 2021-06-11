@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Download and Install the Latest Updates for the OS
 apt-get update
@@ -14,9 +14,9 @@ LOGFILE='/tmp/logfile'
 MYSQLPASSWORD='khemraj'
 
 # Install MySQL Server in a Non-Interactive mode. Default root password will be "root"
-echo "mysql-server-5.7 mysql-server/root_password password root" | sudo debconf-set-selections
-echo "mysql-server-5.7 mysql-server/root_password_again password root" | sudo debconf-set-selections
-apt-get -y install mysql-server-5.7 mysql-client >> $LOGFILE 2>&1
+echo "mysql-server mysql-server/root_password password root" | sudo debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password root" | sudo debconf-set-selections
+apt-get -y install mysql-server mysql-client >> $LOGFILE 2>&1
 
 echo "-------------Initial DB setup ------------"
 mysql -u root -proot -e "UPDATE mysql.user SET authentication_string=PASSWORD('$MYSQLPASSWORD') WHERE User='root'"  >> $LOGFILE 2>&1
@@ -69,6 +69,11 @@ sed -i -e 's/DB_PASSWORD.*/DB_PASSWORD=laravel@dmin/g' .env
 
 echo "------------- update system crontab --------------------"
 sudo -u $username -H sh -c "cd ~/crypto; php artisan crypto:cron add_cron"
+
+
+echo "------------- artisan migrate --------------------"
+sudo -u $username -H sh -c "cd ~/crypto; php artisan migrate"
+
 
 echo "------------- restarting cron service --------------------"
 service cron restart
