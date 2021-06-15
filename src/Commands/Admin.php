@@ -1,11 +1,11 @@
 <?php
 
-namespace Systruss\SchedTransactions\Commands;
+namespace Vickynathaiya\Dus\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use Systruss\SchedTransactions\Models\DelegateDb;
-use Systruss\SchedTransactions\Models\CryptoLog;
+use Vickynathaiya\Dus\Models\DelegateDb;
+use Vickynathaiya\Dus\Models\CryptoLog;
 
 class Admin extends Command
 {

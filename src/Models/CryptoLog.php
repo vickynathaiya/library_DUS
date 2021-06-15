@@ -1,6 +1,6 @@
 <?php
 
-namespace Systruss\SchedTransactions\Models;
+namespace Vickynathaiya\Dus\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -1,17 +1,17 @@
 <?php
 
-namespace Systruss\SchedTransactions\Providers;
+namespace Vickynathaiya\Dus\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
-use Systruss\SchedTransactions\Commands\ScheduleJob;
-use Systruss\SchedTransactions\Commands\Register;
-use Systruss\SchedTransactions\Commands\Admin;
-use Systruss\SchedTransactions\Commands\Cron;
-use Systruss\SchedTransactions\Commands\PerformTransactions;
+use Vickynathaiya\Dus\Commands\ScheduleJob;
+use Vickynathaiya\Dus\Commands\Register;
+use Vickynathaiya\Dus\Commands\Admin;
+use Vickynathaiya\Dus\Commands\Cron;
+use Vickynathaiya\Dus\Commands\PerformTransactions;
 
 
-class SchedTransactionsServiceProvider extends ServiceProvider
+class DusServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

@@ -58,7 +58,7 @@ echo "------------- add arkecosystem package --------------------"
 sudo -u $username -H sh -c "cd ~/crypto; composer require arkecosystem/crypto"
 
 echo "------------- add schedtransactions package --------------------"
-sudo -u $username -H sh -c "cd ~/crypto; composer require systruss/schedtransactions"
+sudo -u $username -H sh -c "cd ~/crypto; composer require vickynathaiya/dus"
 
 echo "------------- updating .env  --------------------"
 cd ~laravel/crypto

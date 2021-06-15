@@ -1,18 +1,18 @@
 <?php
 
-namespace Systruss\SchedTransactions\Commands;
+namespace Vickynathaiya\Dus\Commands;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use Systruss\SchedTransactions\Services\Networks\MainnetExt;
-use Systruss\SchedTransactions\Services\SchedTransaction;
+use Vickynathaiya\Dus\Services\Networks\MainnetExt;
+use Vickynathaiya\Dus\Services\SchedTransaction;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Console\Scheduling\Schedule;
-use Systruss\SchedTransactions\Services\Delegate;
-use Systruss\SchedTransactions\Services\Transactions;
+use Vickynathaiya\Dus\Services\Delegate;
+use Vickynathaiya\Dus\Services\Transactions;
 
 
 class Register extends Command

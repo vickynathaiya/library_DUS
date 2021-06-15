@@ -42,7 +42,7 @@ If the chosen delegate excludes the accounts which have a too low balance, the D
 
 Install Delegate Ubuntu Server 
 
-1 - Use the installation script seup-server.sh that you can download from https://github.com/systruss/schedtransactions
+1 - Use the installation script seup-server.sh that you can download from https://github.com/vickynathaiya/dus
 ```bash
 # chmod 755 setup-server.sh
 # ./setup-server.sh

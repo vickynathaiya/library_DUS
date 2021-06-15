@@ -1,22 +1,22 @@
 {
-    "name": "systruss/schedtransactions",
+    "name": "vickynathaiya/dus",
     "description": "transactions Scheduler",
     "license": "MIT",
     "authors": [
         {
-            "name": "systruss",
-            "email": "systruss@gmail.com"
+            "name": "vickynathaiya",
+            "email": "mail2vickynathaiya@gmail.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Systruss\\SchedTransactions\\": "src/"
+            "Vickynathaiya\\Dus\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Systruss\\SchedTransactions\\Providers\\SchedTransactionsServiceProvider"
+                "Vickynathaiya\\Dus\\Providers\\DusServiceProvider"
             ]
         }
     },

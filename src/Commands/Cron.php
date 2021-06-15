@@ -1,10 +1,10 @@
 <?php
 
-namespace Systruss\SchedTransactions\Commands;
+namespace Vickynathaiya\Dus\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use Systruss\SchedTransactions\Models\DelegateDb;
+use Vickynathaiya\Dus\Models\DelegateDb;
 
 class Cron extends Command
 {

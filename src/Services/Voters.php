@@ -1,12 +1,12 @@
 <?php
 
-namespace Systruss\SchedTransactions\Services;
+namespace Vickynathaiya\Dus\Services;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use Systruss\SchedTransactions\Services\Networks\MainnetExt;
+use Vickynathaiya\Dus\Services\Networks\MainnetExt;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use GuzzleHttp\Client;
@@ -15,8 +15,8 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Systruss\SchedTransactions\Services\Delegate;
-use Systruss\SchedTransactions\Services\Server;
+use Vickynathaiya\Dus\Services\Delegate;
+use Vickynathaiya\Dus\Services\Server;
 
 const base_url_infi = "https://api.infinitysolutions.io";
 const base_url_edge = "https://api.edge.infinitysolutions.io";
