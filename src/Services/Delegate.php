@@ -266,7 +266,7 @@ class Delegate
 		if (!$isDelegate) {
 			echo "\n it is not yet a delegate \n";
 		} else {
-			if (!$isResigned) {
+			if ($isResigned) {
 				echo "\n delegate  is Resigned \n";
 			}
 		}
