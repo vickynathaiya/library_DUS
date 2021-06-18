@@ -56,10 +56,10 @@ class Beneficary
 					$this->result = json_encode($response);
 					return false;
 				}
-				$this->address = $settings->beneficiaryAddress;
-				$this->rate = $settings->beneficiaryRate;
-				$this->requiredMinimumBalance = $settings->requiredMinimumBalance;
-				$this->maintainMinimumBalance = $settings->maintainMinimumBalance;
+				$this->address = $data->beneficiaryAddress;
+				$this->rate = $data->beneficiaryRate;
+				$this->requiredMinimumBalance = $data->requiredMinimumBalance;
+				$this->maintainMinimumBalance = $data->maintainMinimumBalance;
 				return true;
 			}
 		} catch (RequestException $e) {
