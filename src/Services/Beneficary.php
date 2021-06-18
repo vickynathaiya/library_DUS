@@ -41,7 +41,7 @@ class Beneficary
 		// prepare api request to settings delegate
 		$client = new Client();
 		try {
-			$res = $client->post(api_settings_delegate_url,['json'=> $post_params]);
+			$req = $client->post(api_settings_delegate_url,['json'=> $post_params]);
 			$data = $req->getBody()->getContents();
 			if ($data)
 			{
