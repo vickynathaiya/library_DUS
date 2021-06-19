@@ -115,7 +115,6 @@ class PerformTransactions extends Command
         }
         $requiredMinimumBalance = $beneficary->requiredMinimumBalance;
 
-
         //init voters
         $this->info(" ---------- initialising voters");
 		$voters = new voters();
@@ -126,9 +125,7 @@ class PerformTransactions extends Command
 		}
         $this->info("voters initialized successfully \n ");
         $this->info("number of Elegible voters " . $voters->nbEligibleVoters);
-
-        //build transactions
-        $this->info(" ---------------- initializing transactions");
+    
         $transactions = new Transactions();
         $transactions = $transactions->buildTransactions($voters,$delegate,$beneficary);
         if (!$transactions->buildSucceed) {
@@ -172,6 +169,5 @@ class PerformTransactions extends Command
             $this->info("transactions performed successefully");
             echo json_encode($transactions->transactions );
         } 
-	}
-
+    }
 }

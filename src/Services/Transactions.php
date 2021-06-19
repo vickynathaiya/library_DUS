@@ -42,7 +42,7 @@ class Transactions
 	public $peer_ip;
 	public $peer_port;
 	public $peers;
-	public $transactions;
+	public $transactions = array();
 	public $api_delegates_url;
 	public $publicKey;
 	public $errMesg;
@@ -95,7 +95,7 @@ class Transactions
 
 
 
-	public function buildTransactions(Voters $voters, Delegate $delegate, Beneficary $beneficary)
+	public function buildTransactions(Voters $voters, Delegate $delegate, Beneficary $beneficary,$index, $multiPaymentLimit)
 	{	
 		$transactions = [];
 		
@@ -157,17 +157,27 @@ class Transactions
 			// Generate transaction
 			if ($votersList->eligibleVoters)
 			{
+				$indexVoter = 2;
+				$i = 1;
 				$generated = MultiPaymentBuilder::new();
 				foreach ($votersList->eligibleVoters as $voter) {
 					$amount = ($voter['portion'] * $amountToBeDistributed) / 100;
 					$generated = $generated->add($voter['address'], (int)$amount);
+					$indexVoter++;
+					if ($indexVoter > $multiPaymentLimit) {
+						// add beneficary
+						if ($i == 1) {
+							$generated = $generated->add($beneficaryAddress,floor($beneficaryAmount));
+						}
+						$generated = $generated->withFee($totalFee);
+						$generated = $generated->withNonce($nonce);
+						$generated = $generated->sign($delegate->passphrase);
+						$this->transactions[$i] = [ 'transactions' => [$generated->transaction->data] ];
+						$i++;
+						$indexVoter = 1;
+						$generated = MultiPaymentBuilder::new();
+					}
 				}
-				// add beneficary
-				$generated = $generated->add($beneficaryAddress,floor($beneficaryAmount));
-				$generated = $generated->withFee($totalFee);
-				$generated = $generated->withNonce($nonce);
-				$generated = $generated->sign($delegate->passphrase);
-				$this->transactions = [ 'transactions' => [$generated->transaction->data] ];
                 $this->peer_ip = $delegate->peer_ip;
                 $this->peer_port = $delegate->peer_port;
 				$this->buildSucceed = true;
@@ -184,17 +194,16 @@ class Transactions
 
 	public function sendTransactions()
 	{
-		if ($this->transactions) 
+
+		foreach ($this->transactions as $transaction) 
 		{
-            $peer_ip = $this->peer_ip;
-            $peer_port = $this->peer_port;
 			$response = [];
 			$client = new Client();
-			$api_url = "http://$peer_ip:$peer_port/api".'/transactions';
+			$api_url = "http://$this->peer_ip:$this->peer_port/api".'/transactions';
 			echo "\n api_url   : $api_url \n";
 		
 			try {
-				$req = $client->post($api_url,['json'=> $this->transactions]);
+				$req = $client->post($api_url,['json'=> $transaction]);
 				$data = $req->getBody()->getContents();
 				if ($data)
 				{
@@ -210,10 +219,7 @@ class Transactions
 						$this->transaction_result = json_encode($response);
 						return false;
 					}
-					//echo " \n (success) Return Funds to Main Wallet";
-					//echo " \n Successfully returned the funds to the main wallet";
-					echo "\n";
-					return true;
+
 				}
 			} catch (RequestException $e) {
 				echo "\n (Failed) Return Funds to Main Wallet. Unable to connect to the node. \n";
@@ -223,8 +229,12 @@ class Transactions
 				return false;
 			}
 		} else {
-			echo "\n transactions are not set \n";
+			echo "\n there are no transactions  \n";
 			return false;
 		}
+		//echo " \n (success) Return Funds to Main Wallet";
+		//echo " \n Successfully returned the funds to the main wallet";
+		echo "\n";
+		return true;
 	}	
 }
