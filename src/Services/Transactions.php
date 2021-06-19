@@ -42,7 +42,7 @@ class Transactions
 	public $peer_ip;
 	public $peer_port;
 	public $peers;
-	public $transactions = array();
+	public $transactions;
 	public $api_delegates_url;
 	public $publicKey;
 	public $errMesg;
