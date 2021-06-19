@@ -99,7 +99,7 @@ class Transactions
 	{	
 		$transactions = [];
 		
-
+		echo "\n ------------------- Building transactions  ----------- \n";
         $valid = $delegate->checkDelegateEligibility();
 		if ($valid)
 		{
@@ -107,6 +107,7 @@ class Transactions
 
             // get fee
             $totalFee = $this->getFee($delegate->network, $voters->totalVoters);
+			echo "\n totalFee   = $totalFee \n";
 			if ($totalFee > $delegate->balance) {
 				$this->buildSucceed = false;
 				$this->errMesg = "buildTransactions : warning : Fee greater than delegate available balance";
@@ -119,10 +120,14 @@ class Transactions
 			$tmp = ($delegate->balance - $totalFee) * $beneficary->rate; 
 			$beneficaryAmount = $tmp / 100;
 			$this->rate = $beneficary->rate;
+			echo "\n beneficiaryAmount = $beneficiaryAmount \n";
+			echo "\n beneficary rate = $this->rate \n";
 			
 						
             // calculate voters amount
 			// to be distributed = balance - (total fee + beneficary)
+			echo "\n Delegate balance = $delegate->balance \n";
+			echo "\n Beneficiary Mintain Mimimum Balance = $beneficary->maintainMinimumBalance \n";
 			if ($delegate->balance > $beneficary->maintainMinimumBalance ) {
 				$remaining_balance = $delegate->balance - $beneficary->maintainMinimumBalance;
 				if ($remaining_balance > ($totalFee + $beneficaryAmount)) {
