@@ -120,6 +120,7 @@ class Transactions
 			// balanceForVoter = balanceForDistribution - beneficaryAmount
 			// get Beneficary address and amount
 			$beneficaryAddress = $beneficary->address;
+			$multiPaymentLimit = $beneficary->multiPaymentLimit;
 			$this->rate = $beneficary->rate;
 									
             // calculate voters amount
@@ -195,6 +196,11 @@ class Transactions
 	public function sendTransactions()
 	{
 
+		if (!count($this->transactions)) {
+			echo "\n there is no transaction \n";
+			return false;
+		}
+
 		foreach ($this->transactions as $transaction) 
 		{
 			$response = [];
@@ -228,13 +234,10 @@ class Transactions
 				//echo "\n json_encode($e->getMessage() . $e->getLine() . $e->getFile()) \n";
 				return false;
 			}
-		} else {
-			echo "\n there are no transactions  \n";
-			return false;
-		}
+		} 
+
 		//echo " \n (success) Return Funds to Main Wallet";
-		//echo " \n Successfully returned the funds to the main wallet";
-		echo "\n";
+		echo " \n Transactions sent Successfully \n";
 		return true;
 	}	
 }
