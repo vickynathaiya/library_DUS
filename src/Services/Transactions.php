@@ -165,10 +165,6 @@ class Transactions
 					$generated = $generated->add($voter['address'], (int)$amount);
 					$indexVoter++;
 					if ($indexVoter > $multiPaymentLimit) {
-						// add beneficary
-						if ($i == 1) {
-							$generated = $generated->add($beneficaryAddress,floor($beneficaryAmount));
-						}
 						$generated = $generated->withFee($totalFee);
 						$generated = $generated->withNonce($nonce);
 						$generated = $generated->sign($delegate->passphrase);
@@ -177,6 +173,13 @@ class Transactions
 						$indexVoter = 1;
 						$generated = MultiPaymentBuilder::new();
 					}
+				}
+				if ($indexVoter > 1) {
+					$generated = $generated->add($beneficaryAddress,floor($beneficaryAmount));
+					$generated = $generated->withFee($totalFee);
+					$generated = $generated->withNonce($nonce);
+					$generated = $generated->sign($delegate->passphrase);
+					$this->transactions[$i] = [ 'transactions' => [$generated->transaction->data] ];
 				}
                 $this->peer_ip = $delegate->peer_ip;
                 $this->peer_port = $delegate->peer_port;
