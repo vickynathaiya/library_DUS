@@ -27,6 +27,7 @@ class Beneficary
 	public $address;
 	public $requiredMinimumBalance; //required minimum balance for voters
 	public $maintainMinimumBalance;
+	public $multiPaymentLimit;
 	public $rate;
 	public $amount;
 	public $result;
@@ -60,6 +61,7 @@ class Beneficary
 				$this->rate = $data->beneficiaryRate;
 				$this->requiredMinimumBalance = $data->requiredMinimumBalance;
 				$this->maintainMinimumBalance = $data->maintainMinimumBalance;
+				$this->multiPaymentLimit = $data->multiPaymentLimit;
 				return true;
 			}
 		} catch (RequestException $e) {

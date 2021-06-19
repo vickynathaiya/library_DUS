@@ -11,7 +11,7 @@ use Vickynathaiya\Dus\Commands\Cron;
 use Vickynathaiya\Dus\Commands\PerformTransactions;
 
 
-class DusServiceProvider extends ServiceProvider
+class SchedTransactionsServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

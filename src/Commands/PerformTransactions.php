@@ -57,7 +57,7 @@ class PerformTransactions extends Command
      */
     public function handle()
     {
-        $disabled = 0;
+        $disabled = 1;
         
 		$this->info("---------------------------------------------");
         echo date('d-m-y h:i:s'); 
@@ -115,7 +115,6 @@ class PerformTransactions extends Command
         }
         $requiredMinimumBalance = $beneficary->requiredMinimumBalance;
 
-
         //init voters
         $this->info(" ---------- initialising voters");
 		$voters = new voters();
@@ -126,9 +125,7 @@ class PerformTransactions extends Command
 		}
         $this->info("voters initialized successfully \n ");
         $this->info("number of Elegible voters " . $voters->nbEligibleVoters);
-
-        //build transactions
-        $this->info(" ---------------- initializing transactions");
+    
         $transactions = new Transactions();
         $transactions = $transactions->buildTransactions($voters,$delegate,$beneficary);
         if (!$transactions->buildSucceed) {
@@ -136,7 +133,6 @@ class PerformTransactions extends Command
             return false;
         }
         //log transaction
-        $trans = $transactions->transactions['transactions'];
         $cryptoLog = new CryptoLog();
         $cryptoLog->rate = $beneficary->rate;
         $cryptoLog->beneficary_address = $beneficary->address;
@@ -145,12 +141,13 @@ class PerformTransactions extends Command
         $cryptoLog->fee = $transactions->fee;
         $cryptoLog->amount = $transactions->amountToBeDistributed;
         $cryptoLog->totalVoters = $voters->nbEligibleVoters;
-        $cryptoLog->transactions = $trans[0]['id'];
+        $cryptoLog->transactions = 0;
         $cryptoLog->hourCount = 0;
         $cryptoLog->succeed = false;
 
         $this->info("transaction initialized successfully");
         $this->info("ready to run the folowing transactions ");
+        // var_dump($transactgit clone --mirror https://github.com/systruss/schedtransactions.gitions->transactions);
         echo json_encode($transactions->transactions, JSON_PRETTY_PRINT);
         echo "\n";
 
@@ -172,6 +169,5 @@ class PerformTransactions extends Command
             $this->info("transactions performed successefully");
             echo json_encode($transactions->transactions );
         } 
-	}
-
+    }
 }

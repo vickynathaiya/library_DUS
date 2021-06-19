@@ -97,9 +97,8 @@ class Transactions
 
 	public function buildTransactions(Voters $voters, Delegate $delegate, Beneficary $beneficary)
 	{	
-		$transactions = [];
 		
-
+		echo "\n ------------------- Building transactions  ----------- \n";
         $valid = $delegate->checkDelegateEligibility();
 		if ($valid)
 		{
@@ -107,6 +106,7 @@ class Transactions
 
             // get fee
             $totalFee = $this->getFee($delegate->network, $voters->totalVoters);
+			echo "\n totalFee   = $totalFee \n";
 			if ($totalFee > $delegate->balance) {
 				$this->buildSucceed = false;
 				$this->errMesg = "buildTransactions : warning : Fee greater than delegate available balance";
@@ -114,21 +114,31 @@ class Transactions
 			}
 			$this->fee = $totalFee;
 
+			// balanceForDistribution = delegateCurrentBalance - totalfee- maintainMInimumBalance
+			// beneficiaryAMount = balancefordistribution * beneficaryRate / 100
+			// balanceForVoter = balanceForDistribution - beneficaryAmount
 			// get Beneficary address and amount
 			$beneficaryAddress = $beneficary->address;
-			$tmp = ($delegate->balance - $totalFee) * $beneficary->rate; 
-			$beneficaryAmount = $tmp / 100;
+			$multiPaymentLimit = $beneficary->multiPaymentLimit;
 			$this->rate = $beneficary->rate;
-			
-						
+									
             // calculate voters amount
 			// to be distributed = balance - (total fee + beneficary)
+			echo "\n Delegate balance = $delegate->balance \n";
+			echo "\n Beneficiary Mintain Mimimum Balance = $beneficary->maintainMinimumBalance \n";
+			echo "\n beneficary rate = $this->rate \n";
 			if ($delegate->balance > $beneficary->maintainMinimumBalance ) {
-				$remaining_balance = $delegate->balance - $beneficary->maintainMinimumBalance;
-				if ($remaining_balance > ($totalFee + $beneficaryAmount)) {
-					$amountToBeDistributed = $remaining_balance - ($totalFee + $beneficaryAmount);
+				if ($delegate->balance > $totalFee ) {
+					$remaining_balance = $delegate->balance - ($totalFee + $beneficary->maintainMinimumBalance);
+					// Beneficiary Amount
+					$beneficaryAmount = ($remaining_balance * $beneficary->rate)/100; 
+					echo "\n beneficiaryAmount = $beneficaryAmount \n";
+					// Balance to be distributed to voters
+					$amountToBeDistributed = $remaining_balance - $beneficaryAmount;
+					$this->amountToBeDistributed = $amountToBeDistributed;
+					echo "\n amount to be distributed : $amountToBeDistributed";
 				} else {
-					echo "\n (error) Fee plus Benificary Amount greater than delegate balance \n";
+					echo "\n delegate balance less than fee, trying at next iteration in 1 hour \n";
 					$this->buildSucceed = false;
 					return $this;
 				}
@@ -140,27 +150,37 @@ class Transactions
 
 			$votersList = $voters->calculatePortion($amountToBeDistributed);
 			$this->balance = $delegate->balance;
-			echo "\n amount to be distributed : $amountToBeDistributed";
-			$this->amountToBeDistributed = ($amountToBeDistributed*20)/100;
 			
-
 			Network::set(new MainnetExt());
 			$this->buildSucceed = false;
 			$nonce = $delegate->nonce;
 			// Generate transaction
 			if ($votersList->eligibleVoters)
 			{
+				$indexVoter = 2;
+				$i = 1;
 				$generated = MultiPaymentBuilder::new();
 				foreach ($votersList->eligibleVoters as $voter) {
 					$amount = ($voter['portion'] * $amountToBeDistributed) / 100;
 					$generated = $generated->add($voter['address'], (int)$amount);
+					$indexVoter++;
+					if ($indexVoter > $multiPaymentLimit) {
+						$generated = $generated->withFee($totalFee);
+						$generated = $generated->withNonce($nonce);
+						$generated = $generated->sign($delegate->passphrase);
+						$this->transactions[$i] = [ 'transactions' => [$generated->transaction->data] ];
+						$i++;
+						$indexVoter = 1;
+						$generated = MultiPaymentBuilder::new();
+					}
 				}
-				// add beneficary
-				$generated = $generated->add($beneficaryAddress,floor($beneficaryAmount));
-				$generated = $generated->withFee($totalFee);
-				$generated = $generated->withNonce($nonce);
-				$generated = $generated->sign($delegate->passphrase);
-				$this->transactions = [ 'transactions' => [$generated->transaction->data] ];
+				if ($indexVoter > 1) {
+					$generated = $generated->add($beneficaryAddress,floor($beneficaryAmount));
+					$generated = $generated->withFee($totalFee);
+					$generated = $generated->withNonce($nonce);
+					$generated = $generated->sign($delegate->passphrase);
+					$this->transactions[$i] = [ 'transactions' => [$generated->transaction->data] ];
+				}
                 $this->peer_ip = $delegate->peer_ip;
                 $this->peer_port = $delegate->peer_port;
 				$this->buildSucceed = true;
@@ -177,17 +197,21 @@ class Transactions
 
 	public function sendTransactions()
 	{
-		if ($this->transactions) 
+
+		if (!count($this->transactions)) {
+			echo "\n there is no transaction \n";
+			return false;
+		}
+
+		foreach ($this->transactions as $transaction) 
 		{
-            $peer_ip = $this->peer_ip;
-            $peer_port = $this->peer_port;
 			$response = [];
 			$client = new Client();
-			$api_url = "http://$peer_ip:$peer_port/api".'/transactions';
+			$api_url = "http://$this->peer_ip:$this->peer_port/api".'/transactions';
 			echo "\n api_url   : $api_url \n";
 		
 			try {
-				$req = $client->post($api_url,['json'=> $this->transactions]);
+				$req = $client->post($api_url,['json'=> $transaction]);
 				$data = $req->getBody()->getContents();
 				if ($data)
 				{
@@ -203,10 +227,7 @@ class Transactions
 						$this->transaction_result = json_encode($response);
 						return false;
 					}
-					//echo " \n (success) Return Funds to Main Wallet";
-					//echo " \n Successfully returned the funds to the main wallet";
-					echo "\n";
-					return true;
+
 				}
 			} catch (RequestException $e) {
 				echo "\n (Failed) Return Funds to Main Wallet. Unable to connect to the node. \n";
@@ -215,9 +236,10 @@ class Transactions
 				//echo "\n json_encode($e->getMessage() . $e->getLine() . $e->getFile()) \n";
 				return false;
 			}
-		} else {
-			echo "\n transactions are not set \n";
-			return false;
-		}
+		} 
+
+		//echo " \n (success) Return Funds to Main Wallet";
+		echo " \n Transactions sent Successfully \n";
+		return true;
 	}	
 }
