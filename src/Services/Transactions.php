@@ -115,25 +115,29 @@ class Transactions
 			}
 			$this->fee = $totalFee;
 
+			// balanceForDistribution = delegateCurrentBalance - totalfee- maintainMInimumBalance
+			// beneficiaryAMount = balancefordistribution * beneficaryRate / 100
+			// balanceForVoter = balanceForDistribution - beneficaryAmount
 			// get Beneficary address and amount
 			$beneficaryAddress = $beneficary->address;
-			$tmp = ($delegate->balance - $totalFee) * $beneficary->rate; 
-			$beneficaryAmount = $tmp / 100;
 			$this->rate = $beneficary->rate;
-			echo "\n beneficiaryAmount = $beneficaryAmount \n";
-			echo "\n beneficary rate = $this->rate \n";
-			
-						
+									
             // calculate voters amount
 			// to be distributed = balance - (total fee + beneficary)
 			echo "\n Delegate balance = $delegate->balance \n";
 			echo "\n Beneficiary Mintain Mimimum Balance = $beneficary->maintainMinimumBalance \n";
+			echo "\n beneficary rate = $this->rate \n";
 			if ($delegate->balance > $beneficary->maintainMinimumBalance ) {
-				$remaining_balance = $delegate->balance - $beneficary->maintainMinimumBalance;
-				if ($remaining_balance > ($totalFee + $beneficaryAmount)) {
-					$amountToBeDistributed = $remaining_balance - ($totalFee + $beneficaryAmount);
+				if ($delegate->balance > $totalFee ) {
+					$remaining_balance = $delegate->balance - ($totalFee + $beneficary->maintainMinimumBalance);
+					// Beneficiary Amount
+					$beneficaryAmount = ($remaining_balance * $beneficary->rate)/100; 
+					echo "\n beneficiaryAmount = $beneficaryAmount \n";
+					// Balance to be distributed to voters
+					$amountToBeDistributed = $remaining_balance - $beneficaryAmount;
+					echo "\n amount to be distributed : $amountToBeDistributed";
 				} else {
-					echo "\n (error) Fee plus Benificary Amount greater than delegate balance \n";
+					echo "\n delegate balance less than fee, trying at next iteration in 1 hour \n";
 					$this->buildSucceed = false;
 					return $this;
 				}
@@ -145,10 +149,7 @@ class Transactions
 
 			$votersList = $voters->calculatePortion($amountToBeDistributed);
 			$this->balance = $delegate->balance;
-			echo "\n amount to be distributed : $amountToBeDistributed";
-			$this->amountToBeDistributed = ($amountToBeDistributed*20)/100;
 			
-
 			Network::set(new MainnetExt());
 			$this->buildSucceed = false;
 			$nonce = $delegate->nonce;
