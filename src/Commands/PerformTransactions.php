@@ -148,7 +148,7 @@ class PerformTransactions extends Command
         $this->info("transaction initialized successfully");
         $this->info("ready to run the folowing transactions ");
         var_dump($transactions->transactions);
-        echo json_encode($transactions->transactions), JSON_PRETTY_PRINT);
+        echo json_encode($transactions->transactions, JSON_PRETTY_PRINT);
         echo "\n";
 
         //for simulation transactions status
