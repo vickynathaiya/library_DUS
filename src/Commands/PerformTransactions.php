@@ -147,7 +147,11 @@ class PerformTransactions extends Command
 
         $this->info("transaction initialized successfully");
         $this->info("ready to run the folowing transactions ");
+<<<<<<< HEAD
         // var_dump($transactgit clone --mirror https://github.com/systruss/schedtransactions.gitions->transactions);
+=======
+        // var_dump($transactions->transactions);
+>>>>>>> b67e7f9bf8c0a2922f00d4c1ebebbadcf3fd5aeb
         echo json_encode($transactions->transactions, JSON_PRETTY_PRINT);
         echo "\n";
 
