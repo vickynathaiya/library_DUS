@@ -133,7 +133,6 @@ class PerformTransactions extends Command
             return false;
         }
         //log transaction
-        $trans = $transactions->transactions['transactions'];
         $cryptoLog = new CryptoLog();
         $cryptoLog->rate = $beneficary->rate;
         $cryptoLog->beneficary_address = $beneficary->address;
@@ -142,7 +141,7 @@ class PerformTransactions extends Command
         $cryptoLog->fee = $transactions->fee;
         $cryptoLog->amount = $transactions->amountToBeDistributed;
         $cryptoLog->totalVoters = $voters->nbEligibleVoters;
-        $cryptoLog->transactions = $trans[0]['id'];
+        $cryptoLog->transactions = 0;
         $cryptoLog->hourCount = 0;
         $cryptoLog->succeed = false;
 
