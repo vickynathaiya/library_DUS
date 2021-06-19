@@ -97,7 +97,6 @@ class Transactions
 
 	public function buildTransactions(Voters $voters, Delegate $delegate, Beneficary $beneficary)
 	{	
-		$transactions = [];
 		
 		echo "\n ------------------- Building transactions  ----------- \n";
         $valid = $delegate->checkDelegateEligibility();
