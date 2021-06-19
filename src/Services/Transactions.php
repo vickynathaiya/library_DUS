@@ -120,7 +120,7 @@ class Transactions
 			$tmp = ($delegate->balance - $totalFee) * $beneficary->rate; 
 			$beneficaryAmount = $tmp / 100;
 			$this->rate = $beneficary->rate;
-			echo "\n beneficiaryAmount = $beneficiaryAmount \n";
+			echo "\n beneficiaryAmount = $beneficaryAmount \n";
 			echo "\n beneficary rate = $this->rate \n";
 			
 						
