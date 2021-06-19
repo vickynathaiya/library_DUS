@@ -95,7 +95,7 @@ class Transactions
 
 
 
-	public function buildTransactions(Voters $voters, Delegate $delegate, Beneficary $beneficary,$index, $multiPaymentLimit)
+	public function buildTransactions(Voters $voters, Delegate $delegate, Beneficary $beneficary)
 	{	
 		$transactions = [];
 		
