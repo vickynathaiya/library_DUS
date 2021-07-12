@@ -19,7 +19,7 @@ echo "mysql-server mysql-server/root_password_again password root" | sudo debcon
 apt-get -y install mysql-server mysql-client >> $LOGFILE 2>&1
 
 echo "-------------Initial DB setup ------------"
-mysql -u root -proot -e "UPDATE mysql.user SET authentication_string=PASSWORD('$MYSQLPASSWORD') WHERE User='root'"  >> $LOGFILE 2>&1
+mysql -u root -proot -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQLPASSWORD'"  >> $LOGFILE 2>&1
 mysql -u root -proot -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"  >> $LOGFILE 2>&1
 mysql -u root -proot -e "DELETE FROM mysql.user WHERE User=''"  >> $LOGFILE 2>&1
 mysql -u root -proot -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"  >> $LOGFILE 2>&1
