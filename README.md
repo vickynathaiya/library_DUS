@@ -42,7 +42,10 @@ If the chosen delegate excludes the accounts which have a too low balance, the D
 
 Install Delegate Ubuntu Server 
 
-1 - Use the installation script seup-server.sh that you can download from https://github.com/vickynathaiya/dus
+1 - Use the installation script seup-server.sh that you can download from https://github.com/vickynathaiya/dus using :
+```bash
+#wget https://raw.githubusercontent.com/vickynathaiya/dus/main/setup-server.sh
+```
 
 ```bash
 Run the following commands as root :
