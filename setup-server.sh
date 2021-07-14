@@ -10,6 +10,11 @@ apt-get update
 # add-apt-repository ppa:ondrej/php
 # apt-get update
 
+if ((EUID != 0)); then
+    echo "Root Required for script ( $(basename $0) )"
+    exit
+fi
+
 LOGFILE='/tmp/logfile'
 MYSQLPASSWORD='khemraj'
 
