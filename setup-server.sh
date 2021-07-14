@@ -1,19 +1,11 @@
 #!/bin/bash
 
-# Download and Install the Latest Updates for the OS
-apt-get update
-# apt -y install software-properties-common
-# apt-get install -y language-pack-en-base
-# locale-gen en_US.UTF-8
-# export LC_ALL=en_US.UTF-8
-# export LANG=en_US.UTF-8
-# add-apt-repository ppa:ondrej/php
-# apt-get update
-
-if ((EUID != 0)); then
+if [ $(id -u) != "0" ]; then
     echo "Root Required for script ( $(basename $0) )"
     exit
 fi
+
+apt-get update
 
 LOGFILE='/tmp/logfile'
 MYSQLPASSWORD='khemraj'
