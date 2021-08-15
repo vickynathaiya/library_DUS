@@ -58,7 +58,7 @@ class ScheduleJob extends Command
      */
     public function handle()
     {
-        $disabled = 1;
+        $disabled = 0;
 		
 		//get wallet address and network from senders table
 		$delegate = new Delegate();
