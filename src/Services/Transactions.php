@@ -1,12 +1,12 @@
 <?php
 
-namespace Vickynathaiya\Dus\Services;
+namespace InfinitySoftwareLTD\Library_Dus\Services;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use Vickynathaiya\Dus\Services\Networks\MainnetExt;
+use InfinitySoftwareLTD\Library_Dus\Services\Networks\MainnetExt;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Console\Scheduling\Schedule;
@@ -16,10 +16,10 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Vickynathaiya\Dus\Services\Voters;
-use Vickynathaiya\Dus\Services\Delegate;
-use Vickynathaiya\Dus\Services\Beneficary;
-use Vickynathaiya\Dus\Services\Server;
+use InfinitySoftwareLTD\Library_Dus\Services\Voters;
+use InfinitySoftwareLTD\Library_Dus\Services\Delegate;
+use InfinitySoftwareLTD\Library_Dus\Services\Beneficary;
+use InfinitySoftwareLTD\Library_Dus\Services\Server;
 
 
 

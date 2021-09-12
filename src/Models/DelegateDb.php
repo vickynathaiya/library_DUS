@@ -1,6 +1,6 @@
 <?php
 
-namespace Vickynathaiya\Dus\Models;
+namespace InfinitySoftwareLTD\Library_Dus\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

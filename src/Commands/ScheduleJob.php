@@ -1,6 +1,6 @@
 <?php
 
-namespace Vickynathaiya\Dus\Commands;
+namespace InfinitySoftwareLTD\Library_Dus\Commands;
 
 use Illuminate\Console\Command;
 
@@ -13,9 +13,9 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Vickynathaiya\Dus\Services\Networks\MainnetExt;
-use Vickynathaiya\Dus\Models\Senders;
-use Vickynathaiya\Dus\Services\SchedTransaction;
+use InfinitySoftwareLTD\Library_Dus\Services\Networks\MainnetExt;
+use InfinitySoftwareLTD\Library_Dus\Models\Senders;
+use InfinitySoftwareLTD\Library_Dus\Services\SchedTransaction;
 
 
 // https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json

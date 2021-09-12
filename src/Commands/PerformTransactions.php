@@ -1,6 +1,6 @@
 <?php
 
-namespace Vickynathaiya\Dus\Commands;
+namespace InfinitySoftwareLTD\Library_Dus\Commands;
 
 use Illuminate\Console\Command;
 
@@ -13,13 +13,13 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Vickynathaiya\Dus\Services\Networks\MainnetExt;
-use Vickynathaiya\Dus\Services\Voters;
-use Vickynathaiya\Dus\Services\Delegate;
-use Vickynathaiya\Dus\Services\Beneficary;
-use Vickynathaiya\Dus\Services\Transactions;
-use Vickynathaiya\Dus\Services\SchedTransaction;
-use Vickynathaiya\Dus\Models\CryptoLog;
+use InfinitySoftwareLTD\Library_Dus\Services\Networks\MainnetExt;
+use InfinitySoftwareLTD\Library_Dus\Services\Voters;
+use InfinitySoftwareLTD\Library_Dus\Services\Delegate;
+use InfinitySoftwareLTD\Library_Dus\Services\Beneficary;
+use InfinitySoftwareLTD\Library_Dus\Services\Transactions;
+use InfinitySoftwareLTD\Library_Dus\Services\SchedTransaction;
+use InfinitySoftwareLTD\Library_Dus\Models\CryptoLog;
 
 const SCHED_NB_HOURS = 6;
 

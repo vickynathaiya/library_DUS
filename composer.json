@@ -1,5 +1,5 @@
 {
-    "name": "vickynathaiya/dus",
+    "name": "infinitysoftwareltd/library_dus",
     "description": "transactions Scheduler",
     "license": "MIT",
     "authors": [
@@ -10,13 +10,13 @@
     ],
     "autoload": {
         "psr-4": {
-            "Vickynathaiya\\Dus\\": "src/"
+            "InfinitySoftwareLTD\\Library_Dus\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Vickynathaiya\\Dus\\Providers\\DusServiceProvider"
+                "InfinitySoftwareLTD\\Library_Dus\\Providers\\Library_DusServiceProvider"
             ]
         }
     },

@@ -1,10 +1,10 @@
 <?php
 
-namespace Vickynathaiya\Dus\Commands;
+namespace InfinitySoftwareLTD\Library_Dus\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use Vickynathaiya\Dus\Models\DelegateDb;
+use InfinitySoftwareLTD\Library_Dus\Models\DelegateDb;
 
 class Cron extends Command
 {

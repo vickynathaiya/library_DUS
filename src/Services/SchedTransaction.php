@@ -1,12 +1,12 @@
 <?php
 
-namespace Vickynathaiya\Dus\Services;
+namespace InfinitySoftwareLTD\Library_Dus\Services;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use Vickynathaiya\Dus\Services\Networks\MainnetExt;
+use InfinitySoftwareLTD\Library_Dus\Services\Networks\MainnetExt;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use GuzzleHttp\Client;
@@ -15,8 +15,8 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use ArkEcosystem\Crypto\Transactions\Builder\TransferBuilder;
 use ArkEcosystem\Crypto\Transactions\Builder\MultiPaymentBuilder;
-use Vickynathaiya\Dus\Models\Senders;
-use Vickynathaiya\Dus\Services\Server;
+use InfinitySoftwareLTD\Library_Dus\Models\Senders;
+use InfinitySoftwareLTD\Library_Dus\Services\Server;
 
 
 const api_fee_url = "https://raw.githubusercontent.com/InfinitySoftwareLTD/common/main/fees/fee.json";

@@ -1,17 +1,17 @@
 <?php
 
-namespace Vickynathaiya\Dus\Providers;
+namespace InfinitySoftwareLTD\Library_Dus\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
-use Vickynathaiya\Dus\Commands\ScheduleJob;
-use Vickynathaiya\Dus\Commands\Register;
-use Vickynathaiya\Dus\Commands\Admin;
-use Vickynathaiya\Dus\Commands\Cron;
-use Vickynathaiya\Dus\Commands\PerformTransactions;
+use InfinitySoftwareLTD\Library_Dus\Commands\ScheduleJob;
+use InfinitySoftwareLTD\Library_Dus\Commands\Register;
+use InfinitySoftwareLTD\Library_Dus\Commands\Admin;
+use InfinitySoftwareLTD\Library_Dus\Commands\Cron;
+use InfinitySoftwareLTD\Library_Dus\Commands\PerformTransactions;
 
 
-class DusServiceProvider extends ServiceProvider
+class Library_DusServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

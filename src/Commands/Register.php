@@ -1,18 +1,18 @@
 <?php
 
-namespace Vickynathaiya\Dus\Commands;
+namespace InfinitySoftwareLTD\Library_Dus\Commands;
 
 use Illuminate\Console\Command;
 
 use ArkEcosystem\Crypto\Configuration\Network;
 use ArkEcosystem\Crypto\Identities\Address;
-use Vickynathaiya\Dus\Services\Networks\MainnetExt;
-use Vickynathaiya\Dus\Services\SchedTransaction;
+use InfinitySoftwareLTD\Library_Dus\Services\Networks\MainnetExt;
+use InfinitySoftwareLTD\Library_Dus\Services\SchedTransaction;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Console\Scheduling\Schedule;
-use Vickynathaiya\Dus\Services\Delegate;
-use Vickynathaiya\Dus\Services\Transactions;
+use InfinitySoftwareLTD\Library_Dus\Services\Delegate;
+use InfinitySoftwareLTD\Library_Dus\Services\Transactions;
 
 
 class Register extends Command
